@@ -6,9 +6,10 @@ CREATE TABLE `storys`(
     `pass_away_id` INT NOT NULL,
     `story` VARCHAR(255) NOT NULL
 );
-CREATE TABLE `passes_away`(
+CREATE TABLE `passed_away`(
     `pass_away_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `manager_id` INT NOT NULL,
+    `name` VARCHAR(255) NOT NULL,
     `date` DATE NOT NULL,
     `about` VARCHAR(255) NULL,
     `img` VARCHAR(255) NOT NULL,
@@ -40,7 +41,7 @@ CREATE TABLE `users`(
 );
 
 -- ALTER TABLE
---     `passes_away` ADD CONSTRAINT `passes_away_manager_id_foreign` FOREIGN KEY(`manager_id`) REFERENCES `managers`(`manager_id`);
+--     `passed_away` ADD CONSTRAINT `passed_away_manager_id_foreign` FOREIGN KEY(`manager_id`) REFERENCES `managers`(`manager_id`);
 -- ALTER TABLE
 --     `obligations` ADD CONSTRAINT `obligations_pass_away_id_foreign` FOREIGN KEY(`pass_away_id`) REFERENCES `passes_away`(`pass_away_id`);
 -- ALTER TABLE
