@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Filters from "../compnents/homeCompnent/Filters.jsx";
 import PassedAwayCards from "../compnents/homeCompnent/PassedAwayCards.jsx";
 
@@ -69,7 +70,7 @@ const passedAwayArray = [
         manager_id: 1,
         name: 'First person',
         date: '01-01-2020',
-        about: 'First person about',
+        about: 'First person about1',
         img: null,
         lonely: 1,
         soldier: 0,
@@ -81,7 +82,7 @@ const passedAwayArray = [
         manager_id: 2,
         name: 'Second person',
         date: '02-02-2019',
-        about: 'Second person about',
+        about: 'Second person about2',
         img: null,
         lonely: 0,
         soldier: 1,
@@ -93,7 +94,7 @@ const passedAwayArray = [
         manager_id: 3,
         name: 'Third person',
         date: '03-03-2012',
-        about: 'Third person about',
+        about: 'Third person about3',
         img: null,
         lonely: 1,
         soldier: 0,
@@ -105,7 +106,7 @@ const passedAwayArray = [
         manager_id: 4,
         name: 'Fourth person',
         date: '04-04-2022',
-        about: 'Fourth person about',
+        about: 'Fourth person about4',
         img: null,
         lonely: 0,
         soldier: 1,
@@ -117,7 +118,7 @@ const passedAwayArray = [
         manager_id: 5,
         name: 'Fifth person',
         date: '05-05-2022',
-        about: 'Fifth person about',
+        about: 'Fifth person about5',
         img: null,
         lonely: 1,
         soldier: 1,
@@ -129,7 +130,7 @@ const passedAwayArray = [
         manager_id: 1,
         name: 'First person',
         date: '01-01-2020',
-        about: 'First person about',
+        about: 'First person about6',
         img: null,
         lonely: 1,
         soldier: 0,
@@ -141,7 +142,7 @@ const passedAwayArray = [
         manager_id: 2,
         name: 'Second person',
         date: '02-02-2019',
-        about: 'Second person about',
+        about: 'Second person about7',
         img: null,
         lonely: 0,
         soldier: 1,
@@ -153,7 +154,7 @@ const passedAwayArray = [
         manager_id: 3,
         name: 'Third person',
         date: '03-03-2012',
-        about: 'Third person about',
+        about: 'Third person about8',
         img: null,
         lonely: 1,
         soldier: 0,
@@ -165,7 +166,7 @@ const passedAwayArray = [
         manager_id: 4,
         name: 'Fourth person',
         date: '04-04-2022',
-        about: 'Fourth person about',
+        about: 'Fourth person about9',
         img: null,
         lonely: 0,
         soldier: 1,
@@ -177,7 +178,7 @@ const passedAwayArray = [
         manager_id: 5,
         name: 'Fifth person',
         date: '05-05-2022',
-        about: 'Fifth person about',
+        about: 'Fifth person about0',
         img: null,
         lonely: 1,
         soldier: 1,
@@ -187,11 +188,20 @@ const passedAwayArray = [
 ];
 
 function Home() {
+    const [displayPassedAway, setDisplayPassedAway] = useState(passedAwayArray);
+    // const [SearchInput, setSearchInput] = useState("");
+
+    const handeleSearch = (searchValue) => {
+        console.log(searchValue);
+        const searchResult = passedAwayArray.filter(passed => passed.name.toLowerCase().includes(searchValue.toLowerCase()));
+        setDisplayPassedAway(searchResult);
+    }
+
     return (
         <div>
             <h1>Home</h1>
-            <Filters passedAwayArray={passedAwayArray} />
-            <PassedAwayCards passedAwayArray={passedAwayArray} />
+            <Filters passedAwayNames={passedAwayArray.map(passed => passed.name)} handeleSearch={handeleSearch} />
+            <PassedAwayCards passedAwayArray={displayPassedAway} />
         </div>
     );
 }

@@ -1,11 +1,12 @@
 import SearchInput from "../muiCompnent/SearchInput";
 import "./css/Filters.css"
 
-function Filters({ passedAwayArray }) {
+function Filters({ passedAwayNames, handeleSearch }) {
+
     return (
         <div className="FiltersContiner">
             <h1>Filters</h1>
-            <SearchInput />
+            <SearchInput names={passedAwayNames} handeleSearch={handeleSearch} />
         </div>
     );
 }
