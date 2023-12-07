@@ -6,11 +6,11 @@ import Autocomplete from '@mui/joy/Autocomplete';
 export default function SearchInput({ names, handeleSearch }) {
     
     return (
-        <Stack spacing={2} sx={{ width: 300 }}>
+        <Stack spacing={2} sx={{ width: 160 }}>
 
             <FormControl >
                 <Autocomplete
-                    placeholder="Search anything"
+                    placeholder="חיפוש נפטר"
                     type="search"
                     freeSolo
                     disableClearable
