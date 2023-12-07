@@ -15,9 +15,11 @@ function PassedAwayCards({ passedAwayArray }) {
                 justifyContent="flex-start">
                 {passedAwayArray.map(pass => {
                     return (
-                        <Grid key={pass.name + pass.about} lg='auto' >
-                            <UserCard passedAway={pass} />
-                        </Grid>
+                        <div className="userCard" key={pass.name + pass.about}>
+                            <Grid lg='auto' >
+                                <UserCard passedAway={pass} />
+                            </Grid>
+                        </div>
                     )
                 })}
             </Grid>
