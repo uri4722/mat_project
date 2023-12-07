@@ -4,7 +4,7 @@ import Stack from '@mui/joy/Stack';
 import Autocomplete from '@mui/joy/Autocomplete';
 
 export default function SearchInput({ names, handeleSearch }) {
-    console.log(handeleSearch);
+    
     return (
         <Stack spacing={2} sx={{ width: 300 }}>
 
