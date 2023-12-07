@@ -1,0 +1,48 @@
+.not-found {
+    text-align: center;
+    margin: 100px 20px;
+}
+
+.not-found h1 {
+    font-size: 48px;
+    margin-bottom: 30px;
+}
+
+.not-found p {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.not-found li {
+    margin: 10px 0;
+}
+
+.not-found button {
+    background-color: #628cf7;
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 50px;
+}
+
+.not-found button:hover {
+    background-color: #97b3f9;
+}
+
+@media (max-width: 600px) {
+
+    .not-found {
+        margin: 50px 10px;
+    }
+
+    .not-found h1 {
+        font-size: 36px;
+    }
+
+    .not-found p {
+        font-size: 16px;
+    }
+
+}

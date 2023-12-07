@@ -4,15 +4,17 @@ import './App.css';
 import NoPage from './pages/NoPage';
 import ManagerRegister from './pages/ManagerRegister';
 import Home from './pages/Home';
+import About from './pages/About';
 import LandingPage from './pages/LandingPage';
 
-function AppRoutes(props) {
+function AppRoutes() {
     return (
         <Routes>
 
             <Route index element={<LandingPage />} />
-            < Route path='Home' element={<Home />} />
-            < Route path='ManagerRegister' element={<ManagerRegister />} />
+            < Route path='home' element={<Home />} />
+            < Route path='managerRegister' element={<ManagerRegister />} />
+            < Route path='about' element={<About />} />
             <Route path="*" element={<NoPage />} />
         </Routes>
     );
