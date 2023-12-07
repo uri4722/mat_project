@@ -1,5 +1,5 @@
 import React from 'react';
-import video from '../assets/img/candel_video.mp4';
+import video from '../../assets/img/candel_video.mp4';
 import './css/BGvideo.css';
 
 function BGvideo() {

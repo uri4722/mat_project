@@ -1,0 +1,8 @@
+.header {
+    background-color: #fff;
+    height: 10vh;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}

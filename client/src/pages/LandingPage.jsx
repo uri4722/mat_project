@@ -1,10 +1,15 @@
-import BGvideo from "../compnents/BGvideo";
+import BGvideo from "../compnents/LandingPageCompnent/BGvideo";
+import Header from "../compnents/LandingPageCompnent/Header";
+import LandingPageContent from "../compnents/LandingPageCompnent/LandingPageContent";
 
 function LandingPage() {
     return (
         <div>
+            <Header />
             <BGvideo />
-            <div className="landingPageContent"></div>
+            <div className="landingPageContent">
+                <LandingPageContent />
+            </div>
         </div>
     );
 }
