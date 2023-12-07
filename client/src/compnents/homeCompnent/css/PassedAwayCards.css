@@ -1,12 +1,15 @@
 .continerListPassed {
     margin: auto;
     width: 80%;
-    border: 1px solid #beb8b8; 
-    background-color: #f2f2f2;
+}
+
+.userCard{
+    transition: transform 0.4s;
 }
 
 .userCard:hover{
     background-color: #e6e6e6;
     cursor: pointer;
+    transform: translate(-6px, -6px);
 
 }
