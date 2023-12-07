@@ -7,9 +7,8 @@ function LandingPage() {
         <div>
             <Header />
             <BGvideo />
-            <div className="landingPageContent">
-                <LandingPageContent />
-            </div>
+            <LandingPageContent />
+
         </div>
     );
 }

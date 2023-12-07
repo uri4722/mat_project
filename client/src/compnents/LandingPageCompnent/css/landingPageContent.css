@@ -1,0 +1,59 @@
+.landingPageContent {
+    margin: auto;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.todayDate {
+    background-color: black;
+    margin-top: 10px;
+    border-radius: 30px;
+    color: white;
+    padding: 0 60px;
+    width: fit-content;
+    height: auto;
+    font-size: xx-large;
+    text-align: center;
+}
+
+.contentContainer {
+    display: flex;
+    align-items: center;
+}
+
+.landingPageContentText {
+    text-align: center;
+}
+
+.landingPageContent button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 30%;
+    padding: 10px 20px;
+    margin: 10px 80px;
+    font-size: large;
+    font-weight: bold;
+    width: fit-content;
+    height: auto;
+    transition: transform 0.4s;
+}
+
+.landingPageContent button:hover {
+
+    cursor: pointer;
+}
+
+.landingPageContent .takeBtn {
+    margin-top: 10px;
+    border-radius: 30px;
+
+}
+
+.landingPageContent .takeBtn:hover {
+    background-color: rgb(210, 207, 207);
+    color: black;
+}
