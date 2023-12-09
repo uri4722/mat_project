@@ -3,6 +3,8 @@ import Filters from "../compnents/homeCompnent/Filters.jsx";
 import PassedAwayCards from "../compnents/homeCompnent/PassedAwayCards.jsx";
 import HeaderNav from "../compnents/navigtion/HeaderNav.jsx";
 
+import Hebcal from "hebcal";
+
 // רשימה זמנית דומה למה שיגיע מהדאטה בייס
 
 
@@ -13,7 +15,7 @@ function Home() {
             pass_away_id: 1,
             manager_id: 1,
             name: 'John Doe',
-            date: '01-01-2020',
+            date: new Date().toLocaleDateString("en-US"),
             about: 'John Doe about',
             img: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286",
             isLonely: 1,
@@ -233,7 +235,7 @@ function Home() {
             pass_away_id: 20,
             name: "פרופסור נחום אליעזר גלטנר",
             about: "מגדולי הרבנים והרופאים",
-            img: "https://upload.wikimedia.org/wikipedia/he/thumb/f/f6/Prof_Noah_Elyahu_Gutlerner.jpg/500px-Prof_Noah_Elyahu_Gutlerner.jpg",
+            img: null,
             date: "1996-02-10",
             age: 76,
             isLonely: false,
@@ -251,9 +253,25 @@ function Home() {
 
     const handeleSelect = (selectValue) => {
         if (selectValue === "") {
-            console.log(passedAwayArray);
             setDisplayPassedAway(passedAwayArray);
             return;
+        }
+        if (selectValue === "Yahrzeit") {
+            // צריך להמיר את התאריך לתאריך עברי
+            const HEtoday = new Hebcal.HDate();
+
+     
+            // ולבדוק אם היום הוא יום השנה
+            const selectResult = passedAwayArray.filter(passed => {
+                const HEdate = new Hebcal.HDate(new Date(passed.date));
+                
+                return HEdate.day === HEtoday.day && HEdate.month === HEtoday.month;
+            });
+            setDisplayPassedAway(selectResult);
+            return;
+
+            // לבדוק שוב אחרי שאני בונה שרת
+            // תלוי בשיטת התאריך בדאטה בייס
         }
         const selectResult = passedAwayArray.filter(passed => passed[selectValue]);
         setDisplayPassedAway(selectResult);

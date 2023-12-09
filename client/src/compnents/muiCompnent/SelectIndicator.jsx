@@ -17,6 +17,7 @@ export default function SelectIndicator({ handeleSelect }) {
             <Option value="isRabbi">רבנים</Option>
             <Option value="isLonely">גלמודים</Option>
             <Option value="isSoldier">חיילים</Option>
+            <Option value="Yahrzeit">יארצייט</Option>
             <Option value="">כולם</Option>
         </Select>
     );
