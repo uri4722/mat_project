@@ -5,7 +5,7 @@ function HeaderNav() {
 
     return (
         <div className="header-nav">
-            <nav className="login">
+            <nav className="loginNav">
                 <NavLink to={"/login"}> התחברות </NavLink>
             </nav>
             <nav className="navBtn">
