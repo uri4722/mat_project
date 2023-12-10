@@ -2,23 +2,23 @@ import * as React from 'react';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 
-export default function SelectIndicator({ handeleSelect }) {
+export default function SelectIndicator({ handeleSelect, op, opValues, placeholder }) {
 
     return (
         <Select
-            placeholder="בחר סוג נפטר"
+            placeholder={placeholder}
             sx={{
                 width: 160,
-                margin: "0 20px",
+                margin: "0 10px",
             }}
 
             onChange={(event, value) => handeleSelect(value)}
         >
-            <Option value="isRabbi">רבנים</Option>
-            <Option value="isLonely">גלמודים</Option>
-            <Option value="isSoldier">חיילים</Option>
-            <Option value="Yahrzeit">יארצייט</Option>
-            <Option value="">כולם</Option>
+            {op.map((option, index) => (
+                <Option key={option} value={opValues[index]}>
+                    {option}
+                </Option>
+            ))}
         </Select>
     );
 }

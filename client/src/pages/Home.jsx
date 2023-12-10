@@ -27,7 +27,7 @@ function Home() {
             pass_away_id: 2,
             manager_id: 2,
             name: 'Jane Smith',
-            date: '02-02-2019',
+            date: '12/10/2024',
             about: 'Jane Smith about',
             img: null,
             isLonely: 0,
@@ -39,7 +39,7 @@ function Home() {
             pass_away_id: 3,
             manager_id: 3,
             name: 'Bob Johnson',
-            date: '03-03-2012',
+            date: '07/11/2023',
             about: 'Bob Johnson about',
             img: null,
             isLonely: 1,
@@ -51,7 +51,7 @@ function Home() {
             pass_away_id: 4,
             manager_id: 4,
             name: 'Alice Williams',
-            date: '04-04-2022',
+            date: '14/09/2023',
             about: 'Alice Williams about',
             img: null,
             isLonely: 0,
@@ -260,11 +260,11 @@ function Home() {
             // צריך להמיר את התאריך לתאריך עברי
             const HEtoday = new Hebcal.HDate();
 
-     
+
             // ולבדוק אם היום הוא יום השנה
             const selectResult = passedAwayArray.filter(passed => {
                 const HEdate = new Hebcal.HDate(new Date(passed.date));
-                
+
                 return HEdate.day === HEtoday.day && HEdate.month === HEtoday.month;
             });
             setDisplayPassedAway(selectResult);
@@ -273,14 +273,44 @@ function Home() {
             // לבדוק שוב אחרי שאני בונה שרת
             // תלוי בשיטת התאריך בדאטה בייס
         }
+
         const selectResult = passedAwayArray.filter(passed => passed[selectValue]);
         setDisplayPassedAway(selectResult);
+    }
+    const handeleSort = (selectValue) => {
+        let newSort = passedAwayArray.map(obj => ({ ...obj }));
+        let compareFunction;
+        switch (selectValue) {
+        
+            case "A-Z":
+                compareFunction = (a, b) => a.name.localeCompare(b.name);
+                break;
+            case "Random":
+                compareFunction = () => Math.random() - 0.5;
+                break;
+            case "youngest":
+                compareFunction = (a, b) => a.age - b.age;
+                break;
+            case "Oldest":
+                compareFunction = (a, b) => b.age - a.age;
+                break;
+
+            default:
+                compareFunction = (a, b) => 0;
+        }
+        newSort.sort(compareFunction);
+        setDisplayPassedAway(newSort);
     }
 
     return (
         <div>
             <HeaderNav />
-            <Filters passedAwayNames={passedAwayArray.map(passed => passed.name)} handeleSearch={handeleSearch} handeleSelect={handeleSelect} />
+            <Filters
+                passedAwayNames={passedAwayArray.map(passed => passed.name)}
+                handeleSearch={handeleSearch}
+                handeleSelect={handeleSelect}
+                handeleSort={handeleSort}
+            />
             <PassedAwayCards passedAwayArray={displayPassedAway} />
         </div>
     );
