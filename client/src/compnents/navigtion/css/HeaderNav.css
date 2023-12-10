@@ -29,14 +29,18 @@ nav a:hover {
     align-items: center;
     background-color: #000000;
 }
+
 .navBtn {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-left: auto;
 }
+
 .logo {
     margin-left: auto;
 }
 
-
+.login {
+    margin-right: 0px;
+}
