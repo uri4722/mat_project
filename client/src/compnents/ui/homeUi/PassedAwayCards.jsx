@@ -1,10 +1,7 @@
-// import { useState } from "react";
-// import PassedDisplayDitals from "./PassedDisplayDitals";
-
 
 import Grid from '@mui/joy/Grid';
-import UserCard from '../muiCompnent/UserCard';
 import './css/PassedAwayCards.css'
+import UserCard from './UserCard';
 
 
 function PassedAwayCards({ passedAwayArray }) {

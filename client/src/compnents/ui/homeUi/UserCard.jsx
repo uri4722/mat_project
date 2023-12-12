@@ -6,7 +6,7 @@ import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 
-import candle from '../../assets/img/candle2.jpg'
+import candle from '../../../assets/img/candle.jpg'
 
 export default function UserCard({ passedAway }) {
     const { name, date, about, img, lonely, soldier, rabbi, age } = passedAway

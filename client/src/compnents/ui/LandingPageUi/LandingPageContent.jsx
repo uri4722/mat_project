@@ -1,13 +1,11 @@
 import "./css/landingPageContent.css"
-import Hebcal from "hebcal";
 
-function LandingPageContent() {
-    const day = new Hebcal.HDate().toString('h');
-    
+function LandingPageContent({ heToday }) {
+
     return (
         <div className="landingPageContent">
             <div className="todayDate">
-                היום {day} חל יום הפטירה
+                היום {heToday} חל יום הפטירה
             </div>
             <div className="contentContainer">
                 <button>{"<"}</button>

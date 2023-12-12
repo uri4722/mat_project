@@ -1,13 +1,17 @@
-import BGvideo from "../compnents/LandingPageCompnent/BGvideo";
-import Header from "../compnents/LandingPageCompnent/Header";
-import LandingPageContent from "../compnents/LandingPageCompnent/LandingPageContent";
+import Header from "../compnents/navigtion/Header";
+import BGvideo from "../compnents/ui/LandingPageUi/BGvideo";
+import LandingPageContent from "../compnents/ui/LandingPageUi/LandingPageContent";
+import Hebcal from "hebcal";
+
 
 function LandingPage() {
+    const heToday = new Hebcal.HDate().toString('h');
+
     return (
         <div>
             <Header />
             <BGvideo />
-            <LandingPageContent />
+            <LandingPageContent heToday={heToday} />
 
         </div>
     );

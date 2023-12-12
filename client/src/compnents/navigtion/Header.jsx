@@ -1,4 +1,4 @@
-import HeaderNav from '../navigtion/HeaderNav';
+import HeaderNav from './HeaderNav';
 import './css/Header.css';
 
 function Header() {

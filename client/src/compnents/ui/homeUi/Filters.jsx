@@ -1,5 +1,5 @@
-import SearchInput from "../muiCompnent/SearchInput";
-import SelectIndicator from "../muiCompnent/SelectIndicator";
+import SearchInput from "./SearchInput";
+import SelectIndicator from "./SelectIndicator";
 import "./css/Filters.css"
 
 function Filters({ passedAwayNames, handeleSearch, handeleSelect, handeleSort }) {
