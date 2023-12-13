@@ -4,6 +4,7 @@ CREATE TABLE `storys`(
     `story_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT NOT NULL,
     `pass_away_id` INT NOT NULL,
+    `title` VARCHAR(255) NOT NULL,
     `story` VARCHAR(255) NOT NULL
 );
 CREATE TABLE `passed_away`(

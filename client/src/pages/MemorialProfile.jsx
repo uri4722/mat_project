@@ -246,20 +246,21 @@ function MemorialProfile() {
     useEffect(() => {
         // Your code here
         const res = db.find(p => p.pass_away_id === Number(id));
-        res.mishnaiot = {
-            Zeraim: [{ name: "Berakhot", learn: false },
-            { name: "Peah", learn: false },
-            { name: "Demai", learn: false },
-            { name: "Kilayim", learn: false },
-            { name: "Sheviit", learn: false },
-            { name: "Terumot", learn: false },
-            { name: "Maasrot", learn: false },
-            { name: "Maaser Sheni", learn: false },
-            { name: "Hallah", learn: false },
-            { name: "Orlah", learn: false },
-            { name: "Bikkurim", learn: false }],
-
-            Moed: [{ name: "Shabbat", learn: false },
+        res.mishnaiot = [
+            [
+                { name: "ברכות", learn: true },
+                { name: "פאה", learn: true },
+                { name: "דמאי", learn: false },
+                { name: "כלאים", learn: false },
+                { name: "שביעית", learn: false },
+                { name: "תרומות", learn: false },
+                { name: "מעשרות", learn: false },
+                { name: "מעשר שני", learn: false },
+                { name: "חלה", learn: false },
+                { name: "ערלה", learn: false },
+                { name: "ביכורים", learn: false },
+            ],
+            [{ name: "Shabbat", learn: false },
             { name: "Eruvin", learn: false },
             { name: "Pesahim", learn: false },
             { name: "Shekalim", learn: false },
@@ -272,7 +273,7 @@ function MemorialProfile() {
             { name: "Moed Katan", learn: false },
             { name: "Hagigah", learn: false }],
 
-            Nashim: [{ name: "Yevamot", learn: false },
+            [{ name: "Yevamot", learn: false },
             { name: "Ketubot", learn: false },
             { name: "Nedarim", learn: false },
             { name: "Nazir", learn: false },
@@ -280,7 +281,7 @@ function MemorialProfile() {
             { name: "Gittin", learn: false },
             { name: "Kiddushin", learn: false }],
 
-            Nezikin: [{ name: "Bava Kamma", learn: false },
+            [{ name: "Bava Kamma", learn: false },
             { name: "Bava Metzia", learn: false },
             { name: "Bava Batra", learn: false },
             { name: "Sanhedrin", learn: false },
@@ -290,7 +291,7 @@ function MemorialProfile() {
             { name: "Avodah Zarah", learn: false },
             { name: "Avot", learn: false },
             { name: "Horayot", learn: false }],
-            Kodashim: [{ name: "Zevahim", learn: false },
+            [{ name: "Zevahim", learn: false },
             { name: "Menahot", learn: false },
             { name: "Hullin", learn: false },
             { name: "Bekhorot", learn: false },
@@ -302,7 +303,7 @@ function MemorialProfile() {
             { name: "Middot", learn: false },
             { name: "Kinnim", learn: false }],
 
-            Taharot: [{ name: "Kelaim", learn: false },
+            [{ name: "Kelaim", learn: false },
             { name: "Oholot", learn: false },
             { name: "Negaim", learn: false },
             { name: "Parah", learn: false },
@@ -314,8 +315,27 @@ function MemorialProfile() {
             { name: "Tevul Yom", learn: false },
             { name: "Yadayim", learn: false },
             { name: "Uktzin", learn: false }]
+        ]
 
-        }
+
+        res.storys = [
+            {
+                title: "הצדקה של ר' משה",
+                content: "פעם, ר' משה היה מסתובב ברחובות העיר ומחלק מטבעות לעניים. הוא היה אומר להם: 'אני מודה לכם שנותנים לי את הזכות לתרום לצדקה.'"
+            },
+            {
+                title: "החסד של ר' משה",
+                content: "ביום אחד, ר' משה ראה איש זקן שנכשל ברחוב. הוא עזר לו להתאושש, ואז הציע לו להכין לו ארוחה בביתו."
+            },
+            {
+                title: "התפילה של ר' משה",
+                content: "ר' משה היה מתפלל בכוונה גדולה. פעם, בעת שהיה מתפלל, הוא פתאום פתח את עיניו ואמר: 'אני מרגיש שכל תפילה שלי משנה את העולם לטובה.'"
+            },
+            {
+                title: "התורה של ר' משה",
+                content: "ר' משה היה אוהב את התורה. פעם, בעת שהיה לומד, הוא הפסיק, הסתכל בעיניים מבריקות ואמר: 'אין דבר יותר מרגש מללמוד תורה.'"
+            }
+        ];
         setProfile(res);
 
     }, [])
