@@ -1,8 +1,9 @@
 import "./css/managerRegister.css";
-import { useState } from "react";
+import {  useState } from "react";
 import Joi from 'joi';
 import Header from "../compnents/navigtion/Header";
 import ManagerRegisterUi from "../compnents/ui/LoginUi/ManagerRegisterUi";
+import { useNavigate } from "react-router-dom";
 
 
 export default function ManagerRegister() {
@@ -13,7 +14,9 @@ export default function ManagerRegister() {
         email: "",
         phone: ""
     });
-    const [error, setError] = useState("");
+    const [message, setMessage] = useState({ body: "", type: "" });
+    const navigate = useNavigate();
+
 
 
     const schema = Joi.object({
@@ -55,16 +58,20 @@ export default function ManagerRegister() {
 
         const { error } = schema.validate(user);
         if (error) {
-            setError(error.details[0].message);
+            setMessage({ body: error.details[0].message, type: "error" });
             return;
         }
         if (!error) {
 
             setUser({ name: "", password: "", verifyPassword: "", email: "", phone: "" });
+            setMessage({ body: "ההרשמה בוצעה בהצלחה", type: "success" });    
+            setTimeout(() => {
+                navigate("/");
+            }, 1600)
         }
-
-
     }
+
+
 
     return (<>
         <Header />
@@ -72,7 +79,8 @@ export default function ManagerRegister() {
             user={user}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
-            error={error} />
+            message={message}
+        />
     </>
     );
 }

@@ -1,11 +1,11 @@
 import { NavLink } from "react-router-dom";
 
-function ManagerRegisterUi({ user, handleChange, handleSubmit, error }) {
+function ManagerRegisterUi({ user, handleChange, handleSubmit, message }) {
 
     return <div className="register">
         <form onSubmit={handleSubmit}>
             <h1>הרשמה</h1>
-            {error && <div className="error">{error}</div>}
+            {message.type && <div className={message.type}>{message.body}</div>}
             <input type="text" placeholder="שם מלא" onChange={handleChange} name="name" value={user.name} />
             <input type="text" placeholder="כתובת מייל" onChange={handleChange} name="email" value={user.email} />
             <input type="password" placeholder="סיסמא" onChange={handleChange} name="password" value={user.password} />
@@ -19,5 +19,5 @@ function ManagerRegisterUi({ user, handleChange, handleSubmit, error }) {
     </div>
 }
 
-export default ManagerRegisterUi;   
+export default ManagerRegisterUi;
 

@@ -2,9 +2,12 @@
 import Grid from '@mui/joy/Grid';
 import './css/PassedAwayCards.css'
 import UserCard from './UserCard';
+import { NavLink } from 'react-router-dom';
 
 
 function PassedAwayCards({ passedAwayArray }) {
+
+
 
     return (
         <div className="continerListPassed">
@@ -14,7 +17,9 @@ function PassedAwayCards({ passedAwayArray }) {
                     return (
                         <div className="userCard" key={pass.name + pass.about}>
                             <Grid lg='auto' >
-                                <UserCard passedAway={pass} />
+                                < NavLink to={`/memorialProfile/${pass.pass_away_id}`}>
+                                    <UserCard passedAway={pass} />
+                                </NavLink>
                             </Grid>
                         </div>
                     )

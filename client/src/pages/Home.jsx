@@ -69,6 +69,8 @@ function Home() {
         setDisplayPassedAway(newSort);
     }
 
+    
+
     useEffect(() => {
 
         // צריך להוסיף קריאה לשרת כאן
@@ -323,7 +325,7 @@ function Home() {
                 handeleSelect={handeleSelect}
                 handeleSort={handeleSort}
             />
-            <PassedAwayCards passedAwayArray={displayPassedAway} />
+            <PassedAwayCards passedAwayArray={displayPassedAway}  />
         </>
     );
 }

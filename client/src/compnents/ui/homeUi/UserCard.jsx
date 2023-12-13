@@ -17,6 +17,7 @@ export default function UserCard({ passedAway }) {
                 position: 'relative',
                 overflow: { xs: 'auto', sm: 'initial' },
             }}
+
         >
             < Card
                 orientation="horizontal"
@@ -62,14 +63,7 @@ export default function UserCard({ passedAway }) {
                             <Typography fontWeight="lg">{age}</Typography>
                         </div>
                     </Sheet>
-                    {/* <Box sx={{ display: 'flex', gap: 1.5, '& > button': { flex: 1 } }}>
-                        <Button variant="outlined" color="neutral">
-                            Chat
-                        </Button>
-                        <Button variant="solid" color="primary">
-                            Follow
-                        </Button>
-                    </Box> */}
+            
                 </CardContent>
             </Card >
         </Box >

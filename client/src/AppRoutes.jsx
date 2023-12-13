@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
+import MemorialProfile from './pages/MemorialProfile';
 
 function AppRoutes() {
     return (
@@ -16,6 +17,7 @@ function AppRoutes() {
             < Route path='home' element={<Home />} />
             < Route path='managerRegister' element={<ManagerRegister />} />
             < Route path='about' element={<About />} />
+            < Route path='memorialProfile/:id' element={<MemorialProfile />} />
             <Route path="*" element={<NoPage />} />
         </Routes>
     );
