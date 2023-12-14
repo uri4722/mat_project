@@ -281,7 +281,7 @@ function MemorialProfile() {
             { name: "Gittin", learn: false },
             { name: "Kiddushin", learn: false }],
 
-            [{ name: "Bava Kamma", learn: false },
+            [{ name: "Bava Kamma", learn: true },
             { name: "Bava Metzia", learn: false },
             { name: "Bava Batra", learn: false },
             { name: "Sanhedrin", learn: false },
@@ -344,6 +344,7 @@ function MemorialProfile() {
         <Header />
         <div>
             <MemorialProfileUi profile={profile} />
+            
         </div>
     </>
     );
