@@ -4,6 +4,7 @@ import React from 'react';
 import './css/MemorialProfileUi.css'
 import ProfileCard from './ProfileCard';
 import StorysUi from './StorysUi';
+import MishnaiotUi from './MishnaiotUi';
 
 
 function MemorialProfileUi({ profile }) {
@@ -20,14 +21,21 @@ function MemorialProfileUi({ profile }) {
             })
             count.masechet = isSederLearn ? count.masechet + 1 : count.masechet;
         })
-        console.log(count);
         return count
     }
 
     return (
         <div className='continer'>
-            <ProfileCard profile={profile} countMishnaiot={countMishnaiot} />
-            <StorysUi storys={profile.storys} />
+            <div className='card-gird'>
+                <ProfileCard profile={profile} countMishnaiot={countMishnaiot} />
+            </div>
+            <div className='storys-gird'>
+                <StorysUi storys={profile.storys} />
+            </div>
+            <div className='mishnaiot-grid'>
+                <MishnaiotUi mishnaiot={profile.mishnaiot} />
+            </div>
+
         </div>
     )
 }

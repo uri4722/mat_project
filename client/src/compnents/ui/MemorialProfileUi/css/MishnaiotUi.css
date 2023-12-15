@@ -1,0 +1,34 @@
+.mishnaiotContiner {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    /* gap: 5px; */
+    /* height: 500px; */
+}
+
+.mishnaiotContiner .header {
+    display: flex;
+    justify-content: center;
+    grid-column: span 6;
+    grid-row: span 1;
+    /* border: 1px solid rgb(31, 24, 24); */
+
+}
+
+.seder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* border: 1px solid rgb(31, 24, 24); */
+    grid-column: span 1;
+    grid-row: span 4;
+}
+
+.btn-send {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: span 1;
+    grid-column: span 6;
+}

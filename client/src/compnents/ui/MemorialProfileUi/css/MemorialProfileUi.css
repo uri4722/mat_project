@@ -1,10 +1,31 @@
-body{
+body {
     background-color: rgb(246, 243, 243);
 }
+
 .continer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5px;
+}
+
+.continer .card-gird {
+    grid-column: span 3;
+    grid-row: span 1;
+    /* border: 1px solid rgb(238, 159, 159); */
+}
+
+.continer .mishnaiot-grid {
+    grid-column: span 3;
+    grid-row: span 1;
+    /* border: 1px solid rgb(46, 204, 41); */
+
+}
+
+.continer .storys-gird {
+    grid-column: span 1;
+    grid-row: span 2;
+    /* border: 1px solid rgb(59, 49, 194); */
+
+
 }

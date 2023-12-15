@@ -12,7 +12,7 @@ function ProfileCard({ profile, countMishnaiot }) {
             <div className='card-img'>
                 <img src={img ? img : candle} alt={`${name} img`} />
             </div>
-            <h2>{name}</h2>
+            <h2 className='name'>{name}</h2>
         </div>
         <div className='grid-item2'>
             <h3>תאריך פטירה</h3>
@@ -40,7 +40,7 @@ function ProfileCard({ profile, countMishnaiot }) {
             <p>{mishnaiot && countMishnaiot(mishnaiot).masechet}</p>
         </div>
     </div>
-        <Divider orientation="horizontal" sx={{ width: "40vw" }} />
+        <Divider orientation="horizontal" sx={{ width: "80%" }} />
     </>
 }
 

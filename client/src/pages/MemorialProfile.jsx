@@ -260,80 +260,91 @@ function MemorialProfile() {
                 { name: "ערלה", learn: false },
                 { name: "ביכורים", learn: false },
             ],
-            [{ name: "Shabbat", learn: false },
-            { name: "Eruvin", learn: false },
-            { name: "Pesahim", learn: false },
-            { name: "Shekalim", learn: false },
-            { name: "Yoma", learn: false },
-            { name: "Sukkah", learn: false },
-            { name: "Beitzah", learn: false },
-            { name: "Rosh Hashanah", learn: false },
-            { name: "Taanit", learn: false },
-            { name: "Megillah", learn: false },
-            { name: "Moed Katan", learn: false },
-            { name: "Hagigah", learn: false }],
+            [{ name: "שבת", learn: false },
+            { name: "עירובין", learn: false },
+            { name: "פסחים", learn: false },
+            { name: "שקלים", learn: false },
+            { name: "יומא", learn: false },
+            { name: "סוכה", learn: false },
+            { name: "ביצה", learn: false },
+            { name: "ראש השנה", learn: false },
+            { name: "תענית", learn: false },
+            { name: "מגילה", learn: false },
+            { name: "מועד קטן", learn: false },
+            { name: "חגיגה", learn: false }
+            ],
 
-            [{ name: "Yevamot", learn: false },
-            { name: "Ketubot", learn: false },
-            { name: "Nedarim", learn: false },
-            { name: "Nazir", learn: false },
-            { name: "Sotah", learn: false },
-            { name: "Gittin", learn: false },
-            { name: "Kiddushin", learn: false }],
+            [{ name: "יבמות", learn: false },
+            { name: "כתובות", learn: false },
+            { name: "נדרים", learn: false },
+            { name: "נזיר", learn: false },
+            { name: "סוטה", learn: false },
+            { name: "גיטין", learn: false },
+            { name: "קידושין", learn: false }
+            ],
 
-            [{ name: "Bava Kamma", learn: true },
-            { name: "Bava Metzia", learn: false },
-            { name: "Bava Batra", learn: false },
-            { name: "Sanhedrin", learn: false },
-            { name: "Makkot", learn: false },
-            { name: "Shevuot", learn: false },
-            { name: "Eduyot", learn: false },
-            { name: "Avodah Zarah", learn: false },
-            { name: "Avot", learn: false },
-            { name: "Horayot", learn: false }],
-            [{ name: "Zevahim", learn: false },
-            { name: "Menahot", learn: false },
-            { name: "Hullin", learn: false },
-            { name: "Bekhorot", learn: false },
-            { name: "Arakhin", learn: false },
-            { name: "Temurah", learn: false },
-            { name: "Keritot", learn: false },
-            { name: "Meilah", learn: false },
-            { name: "Tamid", learn: false },
-            { name: "Middot", learn: false },
-            { name: "Kinnim", learn: false }],
+            [
+                { name: "בבא קמא", learn: false },
+                { name: "בבא מציעא", learn: false },
+                { name: "בבא בתרא", learn: false },
+                { name: "סנהדרין", learn: false },
+                { name: "מכות", learn: false },
+                { name: "שבועות", learn: false },
+                { name: "עדיות", learn: false },
+                { name: "עבודה זרה", learn: false },
+                { name: "אבות", learn: false },
+                { name: "הוריות", learn: false }
+            ],
 
-            [{ name: "Kelaim", learn: false },
-            { name: "Oholot", learn: false },
-            { name: "Negaim", learn: false },
-            { name: "Parah", learn: false },
-            { name: "Tohorot", learn: false },
-            { name: "Mikvaot", learn: false },
-            { name: "Niddah", learn: false },
-            { name: "Makhshirin", learn: false },
-            { name: "Zavim", learn: false },
-            { name: "Tevul Yom", learn: false },
-            { name: "Yadayim", learn: false },
-            { name: "Uktzin", learn: false }]
-        ]
+            [{ name: "זבחים", learn: false },
+            { name: "מנחות", learn: false },
+            { name: "חולין", learn: false },
+            { name: "בכורות", learn: false },
+            { name: "ערכין", learn: true },
+            { name: "תמורה", learn: false },
+            { name: "כריתות", learn: false },
+            { name: "מעילה", learn: false },
+            { name: "תמיד", learn: false },
+            { name: "מדות", learn: false },
+            { name: "קנים", learn: false },
+            ],
 
+            [{ name: "kelim", learn: true },
+            { name: "ohalot", learn: false },
+            { name: "negaim", learn: false },
+            { name: "para", learn: false },
+            { name: "taharot", learn: false },
+            { name: "mikvaot", learn: false },
+            { name: "nida", learn: false },
+            { name: "machshirin", learn: false },
+            { name: "zavim", learn: false },
+            { name: "tevulYom", learn: false },
+            { name: "yadayim", learn: false },
+            { name: "oktzin", learn: false },
+            ]
+        ];
 
         res.storys = [
             {
                 title: "הצדקה של ר' משה",
-                content: "פעם, ר' משה היה מסתובב ברחובות העיר ומחלק מטבעות לעניים. הוא היה אומר להם: 'אני מודה לכם שנותנים לי את הזכות לתרום לצדקה.'"
+                content: "פעם, ר' משה היה מסתובב ברחובות העיר ומחלק מטבעות לעניים. הוא היה אומר להם: 'אני מודה לכם שנותנים לי את הזכות לתרום לצדקה.'",
+                gmail: "avi@gmail.com "
             },
             {
                 title: "החסד של ר' משה",
-                content: "ביום אחד, ר' משה ראה איש זקן שנכשל ברחוב. הוא עזר לו להתאושש, ואז הציע לו להכין לו ארוחה בביתו."
+                content: "ביום אחד, ר' משה ראה איש זקן שנכשל ברחוב. הוא עזר לו להתאושש, ואז הציע לו להכין לו ארוחה בביתו.",
+                gmail: "or@gmail.com"
             },
             {
                 title: "התפילה של ר' משה",
-                content: "ר' משה היה מתפלל בכוונה גדולה. פעם, בעת שהיה מתפלל, הוא פתאום פתח את עיניו ואמר: 'אני מרגיש שכל תפילה שלי משנה את העולם לטובה.'"
+                content: "ר' משה היה מתפלל בכוונה גדולה. פעם, בעת שהיה מתפלל, הוא פתאום פתח את עיניו ואמר: 'אני מרגיש שכל תפילה שלי משנה את העולם לטובה.'",
+                gmail: "uri@gmail.com"
+
             },
             {
                 title: "התורה של ר' משה",
-                content: "ר' משה היה אוהב את התורה. פעם, בעת שהיה לומד, הוא הפסיק, הסתכל בעיניים מבריקות ואמר: 'אין דבר יותר מרגש מללמוד תורה.'"
+                content: "ר' משה היה אוהב את התורה. פעם, בעת שהיה לומד, הוא הפסיק, הסתכל בעיניים מבריקות ואמר: 'אין דבר יותר מרגש מללמוד תורה.'",
+                gmail: "yael@gmail.com"
             }
         ];
         setProfile(res);
@@ -344,7 +355,6 @@ function MemorialProfile() {
         <Header />
         <div>
             <MemorialProfileUi profile={profile} />
-            
         </div>
     </>
     );
