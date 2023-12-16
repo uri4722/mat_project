@@ -3,20 +3,22 @@ USE mat_project;
 CREATE TABLE `storys`(
     `story_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT NOT NULL,
-    `pass_away_id` INT NOT NULL,
+    `passed_away_id` INT NOT NULL,
     `title` VARCHAR(255) NOT NULL,
     `story` VARCHAR(255) NOT NULL
 );
 CREATE TABLE `passed_away`(
-    `pass_away_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `passed_away_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `manager_id` INT NOT NULL,
     `name` VARCHAR(255) NOT NULL,
-    `date` DATE NOT NULL,
+    `year_death` INT NOT NULL,
+    `month_death` INT NOT NULL,
+    `day_death` INT NOT NULL,
     `about` VARCHAR(255) NULL,
-    `img` VARCHAR(255) NOT NULL,
-    `lonely` TINYINT(1) NULL,
-    `soldier` TINYINT(1) NULL,
-    `rabbi` TINYINT(1) NULL,
+    `img` VARCHAR(255)  NULL,
+    `lonely` TINYINT(1) NULL DEFAULT 0,
+    `soldier` TINYINT(1) NULL DEFAULT 0,
+    `rabbi` TINYINT(1) NULL DEFAULT 0,
     `age` INT NULL
 );
 CREATE TABLE `managers`(
@@ -31,7 +33,7 @@ CREATE TABLE `obligations`(
     `maschet` VARCHAR(255) NOT NULL,
     `episode` VARCHAR(255) NOT NULL,
     `user_id` INT NOT NULL,
-    `pass_away_id` INT NOT NULL,
+    `passed_away_id` INT NOT NULL,
     `start_date` DATE NOT NULL,
     `deadline` DATE NOT NULL
 );
