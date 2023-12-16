@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise');
 
-require('dotenv').config({ path: "C:/Users/אורי/Documents/GitHub/mat_project/serves/SQL_communication/.env" });
+require('dotenv').config({ path: "C:/Users/אורי/Documents/GitHub/mat_project/server/SQL_communication/.env" });
 
 const pool = mysql.createPool({
     host: process.env.host,
@@ -69,7 +69,7 @@ async function getRecords(table, searchKey, searchValue, select) {
 
 async function test() {
     try {
-        console.log(await getRecords());
+        console.log(await getRecords("passed_away"));
     } catch (error) {
         console.log(error);
     }
