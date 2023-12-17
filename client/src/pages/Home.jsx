@@ -80,7 +80,6 @@ function Home() {
         const URL = `${BASEURL}passedAway`;
         // צריך להוסיף קריאה לשרת כאן
         // ולהכניס את המערך שיגיע מהשרת לסטייט
-
         async function getPassedAway() {
             const { data } = await axios.get(URL);
             setPassedAwayArray(data);
@@ -88,7 +87,6 @@ function Home() {
         }
         try {
             getPassedAway();
-            console.log(passedAwayArray);
         } catch (error) {
             console.log(error);
         }
@@ -329,6 +327,10 @@ function Home() {
         // ];
 
     }, [])
+
+    // useEffect(() => {
+    //     console.log(displayPassedAway);
+    // }, [displayPassedAway])
 
 
     return (
