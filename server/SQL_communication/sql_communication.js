@@ -1,6 +1,6 @@
 const mysql = require('mysql2/promise');
 
-require('dotenv').config({ path: "C:/Users/אורי/Documents/GitHub/mat_project/server/SQL_communication/.env" });
+require('dotenv').config({ path: "./.env" });
 
 const pool = mysql.createPool({
     host: process.env.host,
@@ -8,7 +8,6 @@ const pool = mysql.createPool({
     database: process.env.database,
     password: process.env.password,
 })
-
 
 async function insertRow(table, columns, values) {
     console.log(table, columns, values);
