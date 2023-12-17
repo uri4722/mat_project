@@ -9,6 +9,15 @@ const pool = mysql.createPool({
     password: process.env.password,
 })
 
+
+async function getRecords(table, searchKey, searchValue, select) {
+    const sql = `SELECT ${select ? select : "*"} FROM ${table} 
+    ${searchKey ? `WHERE ${searchKey} = ?` : ";"}`;
+
+    const [res] = await pool.query(sql, [searchValue])
+    return res;
+}
+
 async function insertRow(table, columns, values) {
     console.log(table, columns, values);
     // Generic function to add a row in any table
@@ -27,13 +36,7 @@ async function insertRow(table, columns, values) {
     return row;
 }
 
-async function getRecords(table, searchKey, searchValue, select) {
-    const sql = `SELECT ${select ? select : "*"} FROM ${table} 
-    ${searchKey ? `WHERE ${searchKey} = ?` : ";"}`;
 
-    const [res] = await pool.query(sql, [searchValue])
-    return res;
-}
 
 // async function deleteRaw(table, pkName, id) {
 //     const sql = `DELETE FROM ${table} 
@@ -66,14 +69,15 @@ async function getRecords(table, searchKey, searchValue, select) {
 //     else res.status(401).send('not allowed');
 // }
 
-async function test() {
-    try {
-        console.log(await getRecords("passed_away"));
-    } catch (error) {
-        console.log(error);
-    }
-}
-test()
+// async function test() {
+//     try {
+//         console.log(await getRecords("passed_away"));
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+// test()
 
 // module.exports = { addRow, search, deleteRaw, updateRaw, userAuth }
+
 module.exports = { insertRow, getRecords }

@@ -19,6 +19,8 @@ function AppRoutes() {
             < Route path='about' element={<About />} />
             < Route path='memorialProfile/:id' element={<MemorialProfile />} />
             <Route path="*" element={<NoPage />} />
+
+
         </Routes>
     );
 }
