@@ -15,7 +15,7 @@ function Filters({ passedAwayNames, handeleSearch, handeleSelect, handeleSort })
             <SelectIndicator
                 handeleSelect={handeleSelect}
                 op={["רבנים", "גלמודים", "חיילים", "יארצייט", "כולם"]}
-                opValues={["isRabbi", "isLonely", "isSoldier", "Yahrzeit", ""]}
+                opValues={["rabbi", "lonely", "soldier", "Yahrzeit", ""]}
                 placeholder="בחר סוג נפטר"
             />
 
