@@ -26,6 +26,7 @@ function ProfileCard({ profile, countMishnaiot }) {
             <h3> בקצרה</h3>
             <p>{about}</p>
         </div>
+
         <div className='grid-item3'>
             <h5> סך המסכתות שנלמדו </h5>
             <p>{mishnaiot && countMishnaiot(mishnaiot).learn}</p>
