@@ -1,7 +1,11 @@
 const { insertRowSql, getRecordsSql } = require("./basicFunction");
 
-async function getPassedAway() {
-    return await getRecordsSql('passed_away');
+async function getPassedAway(id) {
+    if (id) {
+        return await getRecordsSql('passed_away', 'passed_away_id', id);
+    } else {
+        return await getRecordsSql('passed_away');
+    }
 }
 
 async function newPassedAway(keys, values) {

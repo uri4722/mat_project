@@ -5,8 +5,14 @@ const { tishreiToNissan } = require('./function');
 const HDate = require('@hebcal/core').HDate;
 
 
-async function getPassedAwayService() {
-    const passedAway = await getPassedAway('passedAway');
+async function getPassedAwayService(id) {
+    let passedAway;
+    if (!id) {
+        passedAway = await getPassedAway();
+    } else {
+        passedAway = await getPassedAway(id);
+        console.log(passedAway);
+    }
 
     // Add Hebrew date to each record
     passedAway.forEach(passed => {
