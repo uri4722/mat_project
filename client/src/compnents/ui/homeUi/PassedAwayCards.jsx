@@ -3,7 +3,6 @@ import Grid from '@mui/joy/Grid';
 import './css/PassedAwayCards.css'
 import UserCard from './UserCard';
 import { NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
 
 
 function PassedAwayCards({ passedAwayArray }) {

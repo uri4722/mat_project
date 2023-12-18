@@ -5,8 +5,7 @@ import Header from "../compnents/navigtion/Header.jsx";
 import PassedAwayCards from "../compnents/ui/homeUi/PassedAwayCards.jsx";
 import Filters from "../compnents/ui/homeUi/Filters.jsx";
 
-import axios from 'axios';
-
+import { getAllPassedAwayApi } from "../function/fetchFunction.js";
 
 
 
@@ -16,18 +15,17 @@ function Home() {
     const [displayPassedAway, setDisplayPassedAway] = useState([]);
 
 
-    const BASEURL = 'http://localhost:7000/api/';
 
-    async function getPassedAway() {
-        const URL = `${BASEURL}passedAway`;
-        const { data } = await axios.get(URL);
+    const getPassedAwayArray = async () => {
+        const data = await getAllPassedAwayApi();
         setPassedAwayArray(data);
         setDisplayPassedAway(data)
     }
 
     useEffect(() => {
+
         try {
-            getPassedAway();
+            getPassedAwayArray();
         } catch (error) {
             console.log(error);
         }
