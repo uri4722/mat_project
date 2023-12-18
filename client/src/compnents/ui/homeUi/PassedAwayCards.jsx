@@ -19,15 +19,15 @@ function PassedAwayCards({ passedAwayArray }) {
                     return (
                         <div className="userCard" key={pass.name + pass.about}>
                             <Grid lg='auto' >
-                                < NavLink to={`/memorialProfile/${pass.passed_away_id}`}>
+                                < NavLink to={`/memorialProfile/${pass.passed_away_id}`} state={{ passedAway: pass }} >
                                     <UserCard passedAway={pass} />
                                 </NavLink>
                             </Grid>
                         </div>
                     )
                 })}
-            </Grid>
-        </div>
+            </Grid >
+        </div >
     );
 }
 

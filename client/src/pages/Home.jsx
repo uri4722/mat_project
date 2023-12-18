@@ -5,13 +5,34 @@ import Header from "../compnents/navigtion/Header.jsx";
 import PassedAwayCards from "../compnents/ui/homeUi/PassedAwayCards.jsx";
 import Filters from "../compnents/ui/homeUi/Filters.jsx";
 
+import axios from 'axios';
 
 
 
 
 
-function Home({ passedAwayArray }) {
-    const [displayPassedAway, setDisplayPassedAway] = useState([passedAwayArray]);
+function Home() {
+    const [passedAwayArray, setPassedAwayArray] = useState([]);
+    const [displayPassedAway, setDisplayPassedAway] = useState([]);
+
+
+    const BASEURL = 'http://localhost:7000/api/';
+
+    async function getPassedAway() {
+        const URL = `${BASEURL}passedAway`;
+        const { data } = await axios.get(URL);
+        setPassedAwayArray(data);
+        setDisplayPassedAway(data)
+    }
+
+    useEffect(() => {
+        try {
+            getPassedAway();
+        } catch (error) {
+            console.log(error);
+        }
+
+    }, [])
 
     useEffect(() => {
         setDisplayPassedAway(passedAwayArray);
