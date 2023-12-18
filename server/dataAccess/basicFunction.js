@@ -10,7 +10,7 @@ const pool = mysql.createPool({
 })
 
 
-async function getRecords(table, searchKey, searchValue, select) {
+async function getRecordsSql(table, searchKey, searchValue, select) {
     const sql = `SELECT ${select ? select : "*"} FROM ${table} 
     ${searchKey ? `WHERE ${searchKey} = ?` : ";"}`;
 
@@ -18,8 +18,8 @@ async function getRecords(table, searchKey, searchValue, select) {
     return res;
 }
 
-async function insertRow(table, columns, values) {
-    console.log(table, columns, values);
+async function insertRowSql(table, columns, values) {
+
     // Generic function to add a row in any table
     const sql = `INSERT INTO ${table} (${columns.join(',')})
     VALUES (?);`;
@@ -80,4 +80,4 @@ async function insertRow(table, columns, values) {
 
 // module.exports = { addRow, search, deleteRaw, updateRaw, userAuth }
 
-module.exports = { insertRow, getRecords }
+module.exports = { insertRowSql, getRecordsSql }

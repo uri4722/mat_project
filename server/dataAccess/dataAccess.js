@@ -1,12 +1,11 @@
-const { getRecords } = require("./basicFunction");
+const { insertRowSql, getRecordsSql } = require("./basicFunction");
 
-async function get(get) {
-    switch (get) {
-        case "passedAway":
-           return await getRecords('passed_away');
-        default:
-            throw new Error("get function not found");
-    }
+async function getPassedAway() {
+    return await getRecordsSql('passed_away');
 }
 
-module.exports = { get };
+async function newPassedAway(keys, values) {
+    return await insertRowSql('passed_away', keys, values);
+}
+
+module.exports = { getPassedAway, newPassedAway };

@@ -28,7 +28,7 @@ CREATE TABLE `managers`(
     `password` VARCHAR(255) NOT NULL,
     `phone` VARCHAR(255) NULL
 );
-CREATE TABLE `obligations`(
+CREATE TABLE `commitments`(
     `obligation_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `maschet` VARCHAR(255) NOT NULL,
     `episode` VARCHAR(255) NOT NULL,
@@ -46,10 +46,10 @@ CREATE TABLE `users`(
 -- ALTER TABLE
 --     `passed_away` ADD CONSTRAINT `passed_away_manager_id_foreign` FOREIGN KEY(`manager_id`) REFERENCES `managers`(`manager_id`);
 -- ALTER TABLE
---     `obligations` ADD CONSTRAINT `obligations_pass_away_id_foreign` FOREIGN KEY(`pass_away_id`) REFERENCES `passes_away`(`pass_away_id`);
+--     `commitments` ADD CONSTRAINT `commitments_pass_away_id_foreign` FOREIGN KEY(`pass_away_id`) REFERENCES `passes_away`(`pass_away_id`);
 -- ALTER TABLE
 --     `storys` ADD CONSTRAINT `storys_story_id_foreign` FOREIGN KEY(`story_id`) REFERENCES `users`(`user_id`);
 -- ALTER TABLE
---     `obligations` ADD CONSTRAINT `obligations_user_id_foreign` FOREIGN KEY(`user_id`) REFERENCES `users`(`user_id`);
+--     `commitments` ADD CONSTRAINT `commitments_user_id_foreign` FOREIGN KEY(`user_id`) REFERENCES `users`(`user_id`);
 -- ALTER TABLE
 --     `storys` ADD CONSTRAINT `storys_pass_away_id_foreign` FOREIGN KEY(`pass_away_id`) REFERENCES `passes_away`(`pass_away_id`);
