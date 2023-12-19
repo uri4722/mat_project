@@ -1,0 +1,80 @@
+.formUi {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formUi form {
+    width: 60%;
+    max-width: 800px;
+    height: 400px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20vh;
+}
+
+
+.formUi input {
+    width: 300px;
+    height: 40px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    font-size: 16px;
+}
+
+.formUi select {
+    width: 100px;
+    height: 40px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    font-size: 16px;
+
+}
+
+.formUi .month_death {
+    width: 80px;
+}
+
+.formUi .day_death {
+    width: 60px;
+}
+
+.formUi button {
+    width: 300px;
+    height: 40px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+.formUi button:hover {
+    background-color: #504c4c;
+    border: 1px solid #333;
+}
+
+.formUi a {
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    background-color: #fff;
+}
+
+.formUi a:hover {
+    text-decoration: underline;
+}
