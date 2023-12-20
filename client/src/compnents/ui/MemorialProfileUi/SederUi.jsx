@@ -12,7 +12,7 @@ function SederUi({ seder, name }) {
                         label={masechet.name}
                         size="md"
                         variant="plain"
-                        disabled={masechet.learn}
+                        disabled={masechet.alreadyTaken}
                     />
                 </div>
             )

@@ -30,3 +30,9 @@ export const createPassedAwayApi = async (passedAway) => {
     }
 
 }
+
+export const getMishnayotApi = async (id) => {
+    const URL = `${BASEURL}commitments/passedAway/${id}`;
+    const { data } = await axios.get(URL);
+    return data;
+}

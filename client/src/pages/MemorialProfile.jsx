@@ -2,89 +2,89 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import Header from '../compnents/navigtion/Header';
 import MemorialProfileUi from '../compnents/ui/MemorialProfileUi/MemorialProfileUi';
-import { getPassedAwayApi } from '../function/fetchFunction';
+import { getMishnayotApi, getPassedAwayApi } from '../function/fetchFunction';
 
 
 // צריך לבא מהשרת 
 // מידע זמני
-const mishnaiot = [
-    [
-        { name: "ברכות", learn: true },
-        { name: "פאה", learn: true },
-        { name: "דמאי", learn: false },
-        { name: "כלאים", learn: false },
-        { name: "שביעית", learn: false },
-        { name: "תרומות", learn: false },
-        { name: "מעשרות", learn: false },
-        { name: "מעשר שני", learn: false },
-        { name: "חלה", learn: false },
-        { name: "ערלה", learn: false },
-        { name: "ביכורים", learn: false },
-    ],
-    [{ name: "שבת", learn: false },
-    { name: "עירובין", learn: false },
-    { name: "פסחים", learn: false },
-    { name: "שקלים", learn: false },
-    { name: "יומא", learn: false },
-    { name: "סוכה", learn: false },
-    { name: "ביצה", learn: false },
-    { name: "ראש השנה", learn: false },
-    { name: "תענית", learn: false },
-    { name: "מגילה", learn: false },
-    { name: "מועד קטן", learn: false },
-    { name: "חגיגה", learn: false }
-    ],
+// const mishnaiot = [
+//     [
+//         { name: "ברכות", learn: false },
+//         { name: "פאה", learn: false },
+//         { name: "דמאי", learn: false },
+//         { name: "כלאים", learn: false },
+//         { name: "שביעית", learn: false },
+//         { name: "תרומות", learn: false },
+//         { name: "מעשרות", learn: false },
+//         { name: "מעשר שני", learn: false },
+//         { name: "חלה", learn: false },
+//         { name: "ערלה", learn: false },
+//         { name: "ביכורים", learn: false },
+//     ],
+//     [{ name: "שבת", learn: false },
+//     { name: "עירובין", learn: false },
+//     { name: "פסחים", learn: false },
+//     { name: "שקלים", learn: false },
+//     { name: "יומא", learn: false },
+//     { name: "סוכה", learn: false },
+//     { name: "ביצה", learn: false },
+//     { name: "ראש השנה", learn: false },
+//     { name: "תענית", learn: false },
+//     { name: "מגילה", learn: false },
+//     { name: "מועד קטן", learn: false },
+//     { name: "חגיגה", learn: false }
+//     ],
 
-    [{ name: "יבמות", learn: false },
-    { name: "כתובות", learn: false },
-    { name: "נדרים", learn: false },
-    { name: "נזיר", learn: false },
-    { name: "סוטה", learn: false },
-    { name: "גיטין", learn: false },
-    { name: "קידושין", learn: false }
-    ],
+//     [{ name: "יבמות", learn: false },
+//     { name: "כתובות", learn: false },
+//     { name: "נדרים", learn: false },
+//     { name: "נזיר", learn: false },
+//     { name: "סוטה", learn: false },
+//     { name: "גיטין", learn: false },
+//     { name: "קידושין", learn: false }
+//     ],
 
-    [
-        { name: "בבא קמא", learn: false },
-        { name: "בבא מציעא", learn: false },
-        { name: "בבא בתרא", learn: false },
-        { name: "סנהדרין", learn: false },
-        { name: "מכות", learn: false },
-        { name: "שבועות", learn: false },
-        { name: "עדיות", learn: false },
-        { name: "עבודה זרה", learn: false },
-        { name: "אבות", learn: false },
-        { name: "הוריות", learn: false }
-    ],
+//     [
+//         { name: "בבא קמא", learn: false },
+//         { name: "בבא מציעא", learn: false },
+//         { name: "בבא בתרא", learn: false },
+//         { name: "סנהדרין", learn: false },
+//         { name: "מכות", learn: false },
+//         { name: "שבועות", learn: false },
+//         { name: "עדיות", learn: false },
+//         { name: "עבודה זרה", learn: false },
+//         { name: "אבות", learn: false },
+//         { name: "הוריות", learn: false }
+//     ],
 
-    [{ name: "זבחים", learn: false },
-    { name: "מנחות", learn: false },
-    { name: "חולין", learn: false },
-    { name: "בכורות", learn: false },
-    { name: "ערכין", learn: true },
-    { name: "תמורה", learn: false },
-    { name: "כריתות", learn: false },
-    { name: "מעילה", learn: false },
-    { name: "תמיד", learn: false },
-    { name: "מדות", learn: false },
-    { name: "קנים", learn: false },
-    ],
+//     [{ name: "זבחים", learn: false },
+//     { name: "מנחות", learn: false },
+//     { name: "חולין", learn: false },
+//     { name: "בכורות", learn: false },
+//     { name: "ערכין", learn: false },
+//     { name: "תמורה", learn: false },
+//     { name: "כריתות", learn: false },
+//     { name: "מעילה", learn: false },
+//     { name: "תמיד", learn: false },
+//     { name: "מדות", learn: false },
+//     { name: "קנים", learn: false },
+//     ],
 
-    [{ name: "כלים", learn: true },
-    { name: "אוהלות", learn: false },
-    { name: "נגעים", learn: false },
-    { name: "פרה", learn: false },
-    { name: "טהרות", learn: false },
-    { name: "מקוואות", learn: false },
-    { name: "נדה", learn: false },
-    { name: "מכשירין", learn: false },
-    { name: "זבים", learn: false },
-    { name: "טבול יום", learn: false },
-    { name: "ידיים", learn: false },
-    { name: "עוקצים ", learn: false }
+//     [{ name: "כלים", learn: false },
+//     { name: "אוהלות", learn: false },
+//     { name: "נגעים", learn: false },
+//     { name: "פרה", learn: false },
+//     { name: "טהרות", learn: false },
+//     { name: "מקוואות", learn: false },
+//     { name: "נדה", learn: false },
+//     { name: "מכשירין", learn: false },
+//     { name: "זבים", learn: false },
+//     { name: "טבול יום", learn: false },
+//     { name: "ידיים", learn: false },
+//     { name: "עוקצים ", learn: false }
 
-    ]
-];
+//     ]
+// ];
 
 // צריך לבא מהשרת
 // מידע זמני
@@ -118,8 +118,15 @@ function MemorialProfile() {
     const { state } = useLocation();
 
     const [passedAway, setPassedAway] = useState();
+    const [mishnaiot, setMishnaiot] = useState();
 
-
+    useEffect(() => {
+        getMishnayotApi(id).then((data) => {
+            setMishnaiot(data);
+        }).catch((error) => {
+            console.log(error);
+        })
+    }, [])
 
     useEffect(() => {
         const getPassedAway = async () => {
@@ -145,7 +152,7 @@ function MemorialProfile() {
             setPassedAway({ ...passedAway, mishnaiot: mishnaiot, storys: storys });
         }
 
-    }, [passedAway])
+    }, [passedAway, mishnaiot])
 
     return (<>
         <Header />
