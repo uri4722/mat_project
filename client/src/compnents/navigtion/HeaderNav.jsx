@@ -10,7 +10,7 @@ function HeaderNav() {
             </nav>
             <nav className="navBtn">
                 <NavLink to={"/עכיח"}>לאזור האישי</NavLink>
-                <NavLink to={"/addPassedAway"}>להוספת נפטר</NavLink>
+                <NavLink to={"/createPassedAway"}>להוספת נפטר</NavLink>
                 <NavLink to={"/home"}>לרשימת הנפטרים</NavLink>
                 <NavLink to={"/about"}>קצת עלינו</NavLink>
             </nav>

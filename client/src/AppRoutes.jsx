@@ -8,7 +8,7 @@ import About from './pages/About';
 import LandingPage from './pages/LandingPage';
 import Login from './pages/Login';
 import MemorialProfile from './pages/MemorialProfile';
-import AddPassedAway from './pages/AddPassedAway';
+import CreatePassedAway from './pages/CreatePassedAway';
 
 
 function AppRoutes() {
@@ -23,7 +23,7 @@ function AppRoutes() {
             < Route path='managerRegister' element={<ManagerRegister />} />
             < Route path='about' element={<About />} />
             < Route path='memorialProfile/:id' element={<MemorialProfile />} />
-            < Route path='addPassedAway' element={<AddPassedAway />} />
+            < Route path='createPassedAway' element={<CreatePassedAway />} />
             <Route path="*" element={<NoPage />} />
 
 

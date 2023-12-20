@@ -3,6 +3,7 @@ const { tishreiToNissan } = require('./function');
 
 
 const HDate = require('@hebcal/core').HDate;
+const gematriyaStrToNum = require('@hebcal/core').gematriyaStrToNum;
 
 
 async function getPassedAwayService(id) {
@@ -29,6 +30,9 @@ async function getPassedAwayService(id) {
 
 
 async function newPassedAwayService({ manager_id, name, year_death, month_death, day_death, about, age, lonely, soldier, rabbi }) {
+
+    year_death = gematriyaStrToNum(year_death);
+    
     const res = await newPassedAway(
         ['manager_id', 'name', 'year_death', 'month_death', 'day_death', 'about', 'age', 'lonely', 'soldier', 'rabbi'],
         [manager_id, name, year_death, month_death, day_death, about, age, lonely, soldier, rabbi]

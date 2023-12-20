@@ -1,5 +1,4 @@
-import { HDate } from '@hebcal/core';
-import gematriya from "gematriya";
+import { HDate, gematriya } from '@hebcal/core';
 
 function makeHeDates() {
     const yearOptions = [];
@@ -9,6 +8,7 @@ function makeHeDates() {
     for (let i = new HDate().getFullYear(); i > 0; i--) {
         yearOptions.push(gematriya(i));
     }
+
     for (let i = 1; i <= 30; i++) {
         dayOptions.push(gematriya(i));
     }

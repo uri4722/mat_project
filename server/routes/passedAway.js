@@ -25,11 +25,15 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+    console.log("post passed away");
     const { body } = req;
+
+    console.log(body);
+
     try {
         const res = await newPassedAwayService(body);
     } catch (error) {
-        console.log(error);
+        res.status(500).json({ message: error.message });
     }
 })
 

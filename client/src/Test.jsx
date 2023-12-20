@@ -1,9 +1,8 @@
-import gematriya from "gematriya";
 
 
 function Test() {
-   const a = gematriya(5774)
-    
+
+    const a = "";
     return (
         <div>
             <h1>Test</h1>

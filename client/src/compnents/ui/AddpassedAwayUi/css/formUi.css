@@ -20,16 +20,32 @@
     margin-top: 20vh;
 }
 
-
 .formUi input {
-    width: 300px;
     height: 40px;
     border: 1px solid #333;
     border-radius: 5px;
     margin-bottom: 10px;
     padding: 0 10px;
     font-size: 16px;
+
 }
+
+.nameAgeContiner{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.formUi .nameInput {
+    width: 150px;
+}
+
+.formUi .ageInput {
+    width: 50px;
+}
+
 
 .formUi select {
     width: 100px;
@@ -48,6 +64,33 @@
 
 .formUi .day_death {
     width: 60px;
+}
+
+
+
+.formUi .checkboxContiner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.checkboxContiner input {
+    width: 20px;
+    height: 20px;
+    margin: 0 10px;
+
+}
+
+textarea {
+    width: 300px;
+    height: 100px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    margin: 10px 0px;
+    padding: 0 10px;
+    font-size: 16px;
+
 }
 
 .formUi button {
