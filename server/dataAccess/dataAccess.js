@@ -12,4 +12,8 @@ async function newPassedAway(keys, values) {
     return await insertRowSql('passed_away', keys, values);
 }
 
-module.exports = { getPassedAway, newPassedAway };
+async function getCommitments(id) {
+    return await getRecordsSql('commitments', 'passed_away_id', id);
+}
+
+module.exports = { getPassedAway, newPassedAway, getCommitments };

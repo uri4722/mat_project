@@ -1,4 +1,4 @@
-const { getPassedAway, newPassedAway } = require('../dataAccess/dataAccess');
+const { getPassedAway, newPassedAway, getCommitments } = require('../dataAccess/dataAccess');
 const { tishreiToNissan } = require('./function');
 
 
@@ -12,7 +12,6 @@ async function getPassedAwayService(id) {
         passedAway = await getPassedAway();
     } else {
         passedAway = await getPassedAway(id);
-        console.log(passedAway);
     }
 
     // Add Hebrew date to each record
@@ -32,7 +31,7 @@ async function getPassedAwayService(id) {
 async function newPassedAwayService({ manager_id, name, year_death, month_death, day_death, about, age, lonely, soldier, rabbi }) {
 
     year_death = gematriyaStrToNum(year_death);
-    
+
     const res = await newPassedAway(
         ['manager_id', 'name', 'year_death', 'month_death', 'day_death', 'about', 'age', 'lonely', 'soldier', 'rabbi'],
         [manager_id, name, year_death, month_death, day_death, about, age, lonely, soldier, rabbi]
@@ -40,5 +39,10 @@ async function newPassedAwayService({ manager_id, name, year_death, month_death,
     console.log(res);
 }
 
+async function getCommitmentsService(id) {
+    const commitments = await getCommitments(id);
+    return commitments;
+}
 
-module.exports = { getPassedAwayService, newPassedAwayService }
+
+module.exports = { getPassedAwayService, newPassedAwayService, getCommitmentsService }
