@@ -29,7 +29,7 @@ CREATE TABLE `managers`(
     `phone` VARCHAR(255) NULL
 );
 CREATE TABLE `commitments`(
-    `obligation_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `commitment_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `maschet` VARCHAR(255) NOT NULL,
     `episode` VARCHAR(255) NOT NULL,
     `user_id` INT NOT NULL,
