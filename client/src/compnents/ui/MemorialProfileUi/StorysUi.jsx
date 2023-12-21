@@ -8,7 +8,7 @@ function StorisUi({ storys }) {
                 return (
                     <div key={index} className="story">
                         <h2>{story.title}</h2>
-                        <p>{story.content}</p>
+                        <p>{story.story}</p>
                         <br />
                         <p>{story.gmail}</p>
                     </div>

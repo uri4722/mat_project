@@ -8,6 +8,7 @@ router.get('/passedAway/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const storys = await getStorysService(id);
+        console.log(storys);
         res.status(200).json(storys);
     } catch (error) {
         res.status(500).json({ message: error.message });

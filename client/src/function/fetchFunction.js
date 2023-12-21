@@ -14,7 +14,9 @@ export const getAllPassedAwayApi = async () => {
 export const getPassedAwayApi = async (id) => {
     const URL = `${BASEURL}passedAway/${id}`;
     const { data } = await axios.get(URL);
-    return data;
+    console.log(data[0]
+         );
+    return data[0];
 }
 
 export const createPassedAwayApi = async (passedAway) => {
@@ -31,8 +33,14 @@ export const createPassedAwayApi = async (passedAway) => {
 
 }
 
+
 export const getMishnayotApi = async (id) => {
     const URL = `${BASEURL}commitments/passedAway/${id}`;
+    const { data } = await axios.get(URL);
+    return data;
+}
+export const getStorysApi = async (id) => {
+    const URL = `${BASEURL}Storys/passedAway/${id}`;
     const { data } = await axios.get(URL);
     return data;
 }

@@ -8,6 +8,7 @@ import MishnaiotUi from './MishnaiotUi';
 
 
 function MemorialProfileUi({ profile }) {
+    // console.log(profile);
     const countMishnaiot = (sedriMishna) => {
         let count = { learn: 0, masechet: 0 };
 

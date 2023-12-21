@@ -17,6 +17,8 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const passed_away = await getPassedAwayService(id);
+        console.log("this");
+        console.log(passed_away);
         res.status(200).json(passed_away);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -28,10 +30,9 @@ router.post('/', async (req, res) => {
     console.log("post passed away");
     const { body } = req;
 
-    console.log(body);
-
     try {
-        const res = await newPassedAwayService(body);
+        const response = await newPassedAwayService(body);
+        res.status(200).json(response);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
