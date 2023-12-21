@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Header from "../compnents/navigtion/Header";
 import FormUi from "../compnents/ui/AddpassedAwayUi/FormUi";
 import makeHeDates from "../function/makeHeDates";
@@ -25,7 +25,9 @@ function CreatePassedAway() {
 
     });
     const [message, setMessage] = useState({ type: "", body: "" });
-    const [heDates, setHeDates] = useState()
+    const heDates = useMemo(() => {
+        return makeHeDates();
+    }, []);
 
 
     const handleChange = (event) => {
@@ -48,10 +50,6 @@ function CreatePassedAway() {
         }
     }
 
-    useEffect(() => {
-        setHeDates(makeHeDates());
-
-    }, []);
 
     return (
         <>

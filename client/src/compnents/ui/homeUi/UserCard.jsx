@@ -24,6 +24,7 @@ export default function UserCard({ passedAway }) {
                 sx={{
                     width: '100%',
                     flexWrap: 'wrap',
+                    height: '180px',
                 }}
             >
                 <AspectRatio flex ratio="1" maxHeight={182} sx={{ minWidth: 182 }}>

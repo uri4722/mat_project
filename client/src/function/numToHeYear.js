@@ -1,5 +1,4 @@
 function numToHeYear(num) {
-    console.log(num);
     let heYear = "";
     if (num >= 1000) {
         heYear += units(Math.floor(num / 1000));
@@ -13,7 +12,6 @@ function numToHeYear(num) {
         heYear += tens(Math.floor(num / 10));
         num %= 10;
     }
-    console.log(num);
     heYear += units(Math.floor(num));
     if (heYear.length >= 2) {
         heYear = heYear.slice(0, heYear.length - 1) + '"' + heYear.slice(heYear.length - 1);

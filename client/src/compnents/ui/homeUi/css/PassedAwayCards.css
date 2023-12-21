@@ -3,11 +3,12 @@
     width: 80%;
 }
 
-.userCard{
+.userCard {
     transition: transform 0.4s;
+    width: 500px;
 }
 
-.userCard:hover{
+.userCard:hover {
     background-color: #e6e6e6;
 
     cursor: pointer;
@@ -15,7 +16,7 @@
 
 }
 
-a{
+a {
     text-decoration: none;
     color: black;
 }
