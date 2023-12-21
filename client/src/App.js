@@ -5,8 +5,8 @@ import Test from './Test';
 function App() {
   return (
     <BrowserRouter>
-      <MyApp />
-      {/* <Test /> */}
+      {/* <MyApp /> */}
+      <Test />
     </BrowserRouter >
   );
 }

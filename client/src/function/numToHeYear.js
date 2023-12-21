@@ -42,17 +42,4 @@ function hundreds(num) {
 
 }
 
-
-
-
-function Test() {
-
-    const a = numToHeYear(1);
-    return (
-        <div>
-            <h1>Test</h1>
-            <h1>{a}</h1>
-        </div>
-    )
-}
-export default Test;
+export default numToHeYear;
