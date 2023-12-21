@@ -1,4 +1,4 @@
-const { getPassedAway, newPassedAway, getCommitments } = require('../dataAccess/dataAccess');
+const { getPassedAway, newPassedAway, getCommitments,getStorys } = require('../dataAccess/dataAccess');
 const { tishreiToNissan } = require('./function');
 
 
@@ -129,9 +129,12 @@ async function getCommitmentsService(id) {
                 })
             })
         })
-    } 
+    }
     return mishnaiot;
 }
 
+async function getStorysService(id) {
+    const storys = await getStorys(id);
+}
 
-module.exports = { getPassedAwayService, newPassedAwayService, getCommitmentsService }
+module.exports = { getPassedAwayService, newPassedAwayService, getCommitmentsService, getStorysService }

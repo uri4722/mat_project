@@ -2,7 +2,7 @@ USE mat_project;
 
 CREATE TABLE `storys`(
     `story_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `user_email` VARCHAR(255) NOT NULL,
+    `user_id` INT NOT NULL,
     `passed_away_id` INT NOT NULL,
     `title` VARCHAR(255) NOT NULL,
     `story` VARCHAR(255) NOT NULL
@@ -31,16 +31,16 @@ CREATE TABLE `managers`(
 CREATE TABLE `commitments`(
     `commitment_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `maschet` VARCHAR(255) NOT NULL,
-    `user_email` VARCHAR(255) NOT NULL,
+    `user_id` INT NOT NULL,
     `passed_away_id` INT NOT NULL,
     `start_date` DATE NOT NULL,
     `deadline` DATE NULL
 );
--- CREATE TABLE `users`(
---     `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
---     `name` VARCHAR(255) NOT NULL,
---     `email` VARCHAR(255) NOT NULL
--- );
+CREATE TABLE `users`(
+    `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `name` VARCHAR(255) NOT NULL,
+    `email` VARCHAR(255) NOT NULL
+);
 
 -- ALTER TABLE
 --     `passed_away` ADD CONSTRAINT `passed_away_manager_id_foreign` FOREIGN KEY(`manager_id`) REFERENCES `managers`(`manager_id`);
