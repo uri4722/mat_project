@@ -2,7 +2,7 @@ USE mat_project;
 
 CREATE TABLE `storys`(
     `story_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `user_id` INT NOT NULL,
+    `user_email` VARCHAR(255) NOT NULL,
     `passed_away_id` INT NOT NULL,
     `title` VARCHAR(255) NOT NULL,
     `story` VARCHAR(255) NOT NULL
