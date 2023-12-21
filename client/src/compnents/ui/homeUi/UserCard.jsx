@@ -27,7 +27,7 @@ export default function UserCard({ passedAway }) {
                     height: '180px',
                 }}
             >
-                <AspectRatio flex ratio="1" maxHeight={182} sx={{ minWidth: 182 }}>
+                <AspectRatio flex ratio="1" maxHeight={160} sx={{ minWidth: 160 }}>
                     <img
                         src={img ? img : candle}
                         srcSet="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=286&dpr=2 2x"
