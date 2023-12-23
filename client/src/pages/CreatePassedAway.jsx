@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import Header from "../compnents/navigtion/Header";
 import FormUi from "../compnents/ui/AddpassedAwayUi/FormUi";
 import makeHeDates from "../function/makeHeDates";
@@ -12,8 +12,8 @@ function CreatePassedAway() {
     const [newPassed, setNewPassed] = useState({
         name: "",
         year_death: "",
-        month_death: "",
-        day_death: "",
+        month_death: "1",
+        day_death: "1",
         age: "",
         about: "",
         img: "",
@@ -26,8 +26,10 @@ function CreatePassedAway() {
     });
     const [message, setMessage] = useState({ type: "", body: "" });
     const heDates = useMemo(() => {
-        return makeHeDates();
-    }, []);
+        const heDates = makeHeDates();
+        setNewPassed((prevPassed) => ({ ...prevPassed, year_death: heDates.yearOptions[0]}));
+        return heDates;
+    }, []); 
 
 
     const handleChange = (event) => {

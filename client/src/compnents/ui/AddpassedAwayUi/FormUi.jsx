@@ -40,6 +40,7 @@ function FormUi({ newPassed, handleChange, handleSubmit, message, heDates }) {
                         onChange={handleChange}
                         name="name"
                         value={newPassed.name}
+                        required
                     />
 
                     <input
@@ -51,6 +52,7 @@ function FormUi({ newPassed, handleChange, handleSubmit, message, heDates }) {
                         value={newPassed.age}
                         min="1"
                         max="130"
+                        required
                     />
                 </div>
                 <SelectHeDates handleChange={handleChange} heDates={heDates} />
