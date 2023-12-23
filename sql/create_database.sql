@@ -1,1 +1,0 @@
-CREATE DATABASE mat_project;

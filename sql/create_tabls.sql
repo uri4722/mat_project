@@ -1,3 +1,5 @@
+CREATE DATABASE mat_project;
+
 USE mat_project;
 
 
