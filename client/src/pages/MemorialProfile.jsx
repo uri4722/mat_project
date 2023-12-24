@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import Header from '../compnents/navigtion/Header';
 import MemorialProfileUi from '../compnents/ui/MemorialProfileUi/MemorialProfileUi';
-import { getPassedAwayApi } from '../function/fetchFunction';
+import { createMemorialProfileApi, getPassedAwayApi } from '../function/fetchFunction';
+
+import Joi from 'joi';
+
 
 
 function MemorialProfile() {
@@ -10,6 +13,7 @@ function MemorialProfile() {
     const { state } = useLocation();
 
     const [passedAway, setPassedAway] = useState();
+    const [message, setMessage] = useState({ body: "", type: "" });
 
 
     useEffect(() => {
@@ -32,7 +36,7 @@ function MemorialProfile() {
 
     }, [state, id])
 
-    const [user, setUser] = useState({ email: "", password: "", masechtot: [], storys: [] });
+    const [user, setUser] = useState({ email: "", password: "", masechtot: [], story: { title: "", story: "" } });
 
 
     const handleChangeMasechtot = (event) => {
@@ -42,19 +46,45 @@ function MemorialProfile() {
             setUser({ ...user, masechtot: user.masechtot.filter((masechet) => masechet !== event.target.name) })
         }
     }
-    const handleChangeStorys = (event) => {
-        
-
+    const handleChangeStorys = ({ target }) => {
+        setUser({ ...user, story: { ...user.story, [target.name]: target.value } })
     }
     const handleChangeInput = ({ target }) => {
         setUser({ ...user, [target.name]: target.value })
     }
 
-    const handleSubmitMishnaiot = () => {
-        console.log(user);
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
+        const { error } = schema.validate(user);
+        if (error) {
+            setMessage({ body: error.details[0].message, type: "error" });
+            return;
+        }
+        if (!error) {
+            const ans = await createMemorialProfileApi(id, user);
+            console.log(ans);
+            // setMessage({ body: "ההרשמה בוצעה בהצלחה", type: "success" });
+            setUser({ email: "", password: "", masechtot: [], story: { title: "", story: "" } });
+        }
     }
 
+    const schema = Joi.object({
+        email: Joi.string()
+            .email({ tlds: { allow: false } })
+            .message("כתובת מייל לא תקינה")
+            .required()
+            .messages({ 'string.empty': ' צריך למלאות אימייל' }),
+        password: Joi.string()
+            .min(6)
+            .message("סיסמא חייבת להכיל לפחות 6 תווים")
+            .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+            .message("סיסמא חייבת להכיל אותיות באנגלית ומספרים בלבד")
+            .required()
+            .messages({ 'string.empty': ' צריך למלאות סיסמא' }),
+        masechtot: Joi.array(),
+        story: Joi.object()
+    })
 
 
     const countMishnaiot = (sedriMishna) => {
@@ -83,9 +113,9 @@ function MemorialProfile() {
                 user={user}
                 handleChangeMasechtot={handleChangeMasechtot}
                 handleChangeInput={handleChangeInput}
-                handleSubmit={handleSubmitMishnaiot}
+                handleSubmit={handleSubmit}
                 handleChangeStorys={handleChangeStorys}
-
+                message={message}
             />
         </div>}
 

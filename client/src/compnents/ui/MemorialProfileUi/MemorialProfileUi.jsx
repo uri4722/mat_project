@@ -14,7 +14,8 @@ function MemorialProfileUi({
     handleChangeMasechtot,
     handleChangeStorys,
     handleChangeInput,
-    handleSubmit }) {
+    handleSubmit,
+    message }) {
 
 
 
@@ -24,7 +25,11 @@ function MemorialProfileUi({
                 <ProfileCard profile={profile} countMishnaiot={countMishnaiot} />
             </div>
             <div className='storys-gird'>
-                <StorysUi storys={profile.storys} handleChangeStorys={handleChangeStorys} />
+                <StorysUi
+                    storys={profile.storys}
+                    handleChangeStorys={handleChangeStorys}
+                    newStory={user.story}
+                />
             </div>
             <div className='mishnaiot-grid'>
                 <MishnaiotUi
@@ -34,11 +39,12 @@ function MemorialProfileUi({
                 />
             </div>
             <div className='form-grid'>
-                {user.masechtot.length > 0 || user.storys.length > 0 ?
+                {user.masechtot.length > 0 || user.story.story ?
                     <UserFormUi
                         user={user}
                         handleChangeInput={handleChangeInput}
                         handleSubmit={handleSubmit}
+                        message={message}
                     /> : null}
             </div>
 

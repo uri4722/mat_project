@@ -30,7 +30,6 @@ export const createPassedAwayApi = async (passedAway) => {
 
 }
 
-
 export const getMishnayotApi = async (id) => {
     const URL = `${BASEURL}commitments/passedAway/${id}`;
     const { data } = await axios.get(URL);
@@ -39,5 +38,11 @@ export const getMishnayotApi = async (id) => {
 export const getStorysApi = async (id) => {
     const URL = `${BASEURL}Storys/passedAway/${id}`;
     const { data } = await axios.get(URL);
+    return data;
+}
+
+export const createMemorialProfileApi = async (id, memorialProfile) => {
+    const URL = `${BASEURL}memorialProfile/${id}`;
+    const { data } = await axios.post(URL, memorialProfile);
     return data;
 }

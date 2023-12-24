@@ -5,7 +5,7 @@ import { Input, Textarea } from '@mui/joy';
 
 
 
-function StorisUi({ storys, handleChangeStorys }) {
+function StorisUi({ storys, handleChangeStorys, newStory }) {
     const [display, setDisplay] = useState(false);
     return (
         <div className="storysContiner">
@@ -33,6 +33,9 @@ function StorisUi({ storys, handleChangeStorys }) {
                     size="sm"
                     variant="plain"
                     sx={{ marginTop: "10px" }}
+                    name="title"
+                    value={newStory.title}
+                    onChange={handleChangeStorys}
                 />
                 <Textarea
                     color="success"
@@ -40,6 +43,9 @@ function StorisUi({ storys, handleChangeStorys }) {
                     variant="plain"
                     placeholder="כתוב פה מעשה טוב או סיפור  "
                     sx={{ marginTop: "10px" }}
+                    name="story"
+                    value={newStory.story}
+                    onChange={handleChangeStorys}
 
                 />
             </div>}
