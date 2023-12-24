@@ -1,29 +1,22 @@
 
-import React from 'react';
 
 import './css/MemorialProfileUi.css'
 import ProfileCard from './ProfileCard';
 import StorysUi from './StorysUi';
 import MishnaiotUi from './MishnaiotUi';
+import UserFormUi from './UserFormUi';
 
 
-function MemorialProfileUi({ profile }) {
-    // console.log(profile);
-    const countMishnaiot = (sedriMishna) => {
-        let count = { learn: 0, masechet: 0 };
+function MemorialProfileUi({
+    profile,
+    countMishnaiot,
+    user,
+    handleChangeMasechtot,
+    handleChangeStorys,
+    handleChangeInput,
+    handleSubmit }) {
 
-        sedriMishna.forEach((seder) => {
-            let isSederLearn = false;
-            seder.forEach((masechet) => {
-                if (masechet.learn) {
-                    isSederLearn = true;
-                    count.learn++
-                }
-            })
-            count.masechet = isSederLearn ? count.masechet + 1 : count.masechet;
-        })
-        return count
-    }
+
 
     return (
         <div className='continer'>
@@ -31,13 +24,26 @@ function MemorialProfileUi({ profile }) {
                 <ProfileCard profile={profile} countMishnaiot={countMishnaiot} />
             </div>
             <div className='storys-gird'>
-                <StorysUi storys={profile.storys} />
+                <StorysUi storys={profile.storys} handleChangeStorys={handleChangeStorys} />
             </div>
             <div className='mishnaiot-grid'>
-                <MishnaiotUi mishnaiot={profile.mishnaiot} />
+                <MishnaiotUi
+                    user={user}
+                    mishnaiot={profile.mishnaiot}
+                    handleChangeMasechtot={handleChangeMasechtot}
+                />
+            </div>
+            <div className='form-grid'>
+                {user.masechtot.length > 0 || user.storys.length > 0 ?
+                    <UserFormUi
+                        user={user}
+                        handleChangeInput={handleChangeInput}
+                        handleSubmit={handleSubmit}
+                    /> : null}
             </div>
 
-        </div>
+
+        </div >
     )
 }
 

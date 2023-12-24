@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { json } from 'react-router-dom';
 
 const BASEURL = 'http://localhost:7000/api/';
 
@@ -14,8 +13,6 @@ export const getAllPassedAwayApi = async () => {
 export const getPassedAwayApi = async (id) => {
     const URL = `${BASEURL}passedAway/${id}`;
     const { data } = await axios.get(URL);
-    console.log(data[0]
-         );
     return data[0];
 }
 

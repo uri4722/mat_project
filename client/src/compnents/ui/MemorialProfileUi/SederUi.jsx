@@ -1,7 +1,6 @@
-import { useState } from "react";
 import Checkbox from '@mui/joy/Checkbox';
 
-function SederUi({ seder, name }) {
+function SederUi({ seder, name, handleChangeMasechtot }) {
     return <>
         <h2 >{name} </h2>
         {seder.map((masechet, index) => {
@@ -10,9 +9,11 @@ function SederUi({ seder, name }) {
                     <Checkbox
                         color="success"
                         label={masechet.name}
+                        name={masechet.name}
                         size="md"
                         variant="plain"
                         disabled={masechet.alreadyTaken}
+                        onChange={handleChangeMasechtot}
                     />
                 </div>
             )

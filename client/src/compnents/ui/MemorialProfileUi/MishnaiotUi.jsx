@@ -3,14 +3,11 @@ import SederUi from "./SederUi";
 import "./css/MishnaiotUi.css"
 
 import Switch from '@mui/joy/Switch';
-import Input from '@mui/joy/Input';
-import Button from '@mui/joy/Button';
 
-function MishnaiotUi({ mishnaiot }) {
+
+function MishnaiotUi({ mishnaiot, handleChangeMasechtot}) {
 
     const [display, setDisplay] = useState(false);
-    const [obligations, setObligations] = useState({ email: "", masechtot: [] });
-    const [email, setEmail] = useState("");
 
     const sedriMishna = ["סדר זרעים", "סדר מועד", "סדר נשים", "סדר נזיקין", "סדר קדשים", "סדר טהרות"]
     return (
@@ -30,24 +27,10 @@ function MishnaiotUi({ mishnaiot }) {
                 {mishnaiot && display && mishnaiot.map((seder, index) => {
                     return (
                         <div className="seder" key={index}>
-                            <SederUi seder={seder} name={sedriMishna[index]} />
+                            <SederUi seder={seder} name={sedriMishna[index]} handleChangeMasechtot={handleChangeMasechtot} />
                         </div>
                     )
                 })}
-                {display && <div className="btn-send">
-                    <Input
-                        type="email"
-                        endDecorator={<Button onClick={({ target }) => { console.log(email) }} color="success">לאישור</Button>}
-                        sx={{
-                            "--Input-radius": "10px",
-                            width: "400px",
-                        }}
-                        placeholder="הכנס אימייל לאישור  "
-                        color="success"
-                        value={email}
-                        onChange={({ target }) => setEmail(target.value)}
-                    /></div>}
-
             </div>
         </>
     )
