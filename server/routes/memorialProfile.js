@@ -1,4 +1,5 @@
 const express = require('express');
+const { newMemorialProfileService } = require('../service/service');
 
 const router = express.Router();
 
@@ -7,13 +8,13 @@ router.post('/:id', async (req, res) => {
     const { id } = req.params;
     const { body } = req;
 
-    console.log(id);
-    console.log(body);
-
     try {
+        const response = await newMemorialProfileService(id, body);
+        console.log(response);
         res.status(200).json(body);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.log(error);
+        res.status(500).json({ message: error });
     }
 })
 

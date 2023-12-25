@@ -17,8 +17,6 @@ router.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {
         const passed_away = await getPassedAwayService(id);
-        console.log("this");
-        console.log(passed_away);
         res.status(200).json(passed_away);
     } catch (error) {
         res.status(500).json({ message: error.message });

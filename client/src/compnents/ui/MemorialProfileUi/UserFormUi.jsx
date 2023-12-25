@@ -34,6 +34,7 @@ function userFormUi({ user, handleChangeInput, handleSubmit, message }) {
             onChange={handleChangeInput}
         />
         <Button onClick={handleSubmit} color="success" size="sm">לאישור</Button>
+        {/* להוסיף אם לא רשום */}
     </div>}</>
 
 }

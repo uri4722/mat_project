@@ -19,5 +19,15 @@ async function getStorys(id) {
     return await getRecordsSql('storys', 'passed_away_id', id);
 
 }
+async function getUser(email) {
+    return await getRecordsSql('users', 'email', email)
+}
+async function newCommitment(keys, values) {
+    return await insertRowSql('commitments', keys, values);
+}
 
-module.exports = { getPassedAway, newPassedAway, getCommitments, getStorys };
+async function newStory(keys, values) {
+    return await insertRowSql('storys', keys, values);
+}
+
+module.exports = { getPassedAway, newPassedAway, getCommitments, getStorys, getUser,newStory, newCommitment };

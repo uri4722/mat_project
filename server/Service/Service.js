@@ -1,4 +1,5 @@
-const { getPassedAway, newPassedAway, getCommitments, getStorys } = require('../dataAccess/dataAccess');
+const e = require('express');
+const { getPassedAway, newPassedAway, getCommitments, getStorys, getUser, newCommitment, newStory } = require('../dataAccess/dataAccess');
 const { tishreiToNissan } = require('./function');
 
 
@@ -140,4 +141,45 @@ async function getStorysService(id) {
     return storys;
 }
 
-module.exports = { getPassedAwayService, newPassedAwayService, getCommitmentsService, getStorysService }
+async function newMemorialProfileService(id, memorialProfile) {
+    const { email, password, masechtot, story } = memorialProfile;
+    let user;
+    try {
+        user = await userAuth(email, password);
+    }
+    catch (error) {
+        throw error;
+    }
+    if (!masechtot && !story) {
+        throw "no memorial profile to add"
+    }
+
+    if (masechtot && masechtot.length > 0) {
+        const todayISO = new Date().toISOString().slice(0, 10);
+        masechtot.forEach(async masechet => {
+            const keys = ['passed_away_id', 'maschet', 'user_id', 'start_date'];
+            const values = [id, masechet, user.user_id, todayISO];
+            await newCommitment(keys, values);
+            return "success"
+
+        })
+    }
+
+    if (story.story) {
+        const keys = ['passed_away_id', 'title', 'story', 'user_id'];
+        const values = [id, story.title, story.story, user.user_id];
+        await newStory(keys, values);
+        return "success"
+    }
+}
+
+async function userAuth(email, password) {
+    const [user] = await getUser(email);
+    if (password !== user.password) {
+        throw 'password is incorrect';
+    } else {
+        return user;
+    }
+}
+
+module.exports = { getPassedAwayService, newPassedAwayService, getCommitmentsService, getStorysService, newMemorialProfileService }

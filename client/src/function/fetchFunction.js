@@ -21,7 +21,7 @@ export const createPassedAwayApi = async (passedAway) => {
     console.log(passedAway);
     try {
         const res = await axios.post(URL, passedAway);
-        console.log(res);
+        // console.log(res);
         const { data } = res;
         return data;
     } catch (error) {
@@ -42,6 +42,7 @@ export const getStorysApi = async (id) => {
 }
 
 export const createMemorialProfileApi = async (id, memorialProfile) => {
+    console.log(memorialProfile);
     const URL = `${BASEURL}memorialProfile/${id}`;
     const { data } = await axios.post(URL, memorialProfile);
     return data;
