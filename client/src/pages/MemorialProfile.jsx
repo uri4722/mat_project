@@ -63,9 +63,17 @@ function MemorialProfile() {
         }
         if (!error) {
             const ans = await createMemorialProfileApi(id, user);
-            console.log(ans);
+            // dont work need to fix
+            // i dont know why
+            // console.log({ ...passedAway, storys: [...passedAway.storys, ans.story] });
+            // setPassedAway( { ...passedAway, storys: [...passedAway.storys, ans.story] });
+            // 
+            if (ans.story.story) {
+                passedAway.storys.push(ans.story);
+            }
+            setPassedAway({ ...passedAway, mishnaiot: updateMishnioat(passedAway.mishnaiot, ans.masechtot) });
             // setMessage({ body: "ההרשמה בוצעה בהצלחה", type: "success" });
-            setUser({ email: "", password: "", masechtot: [], story: { title: "", story: "" } });
+            setUser({ ...user, masechtot: [], story: { title: "", story: "" } });
         }
     }
 
@@ -85,6 +93,19 @@ function MemorialProfile() {
         masechtot: Joi.array(),
         story: Joi.object()
     })
+
+    const updateMishnioat = (masechtot, masechtotChange) => {
+        const newMisnaiot = [...masechtot];
+        newMisnaiot.forEach((seder, i) => {
+            seder.forEach((masechet, index) => {
+                if (masechtotChange.includes(masechet.name)) {
+                    newMisnaiot[i][index].alreadyTaken = true;
+                }
+            })
+        })
+        return newMisnaiot;
+    }
+
 
 
     const countMishnaiot = (sedriMishna) => {

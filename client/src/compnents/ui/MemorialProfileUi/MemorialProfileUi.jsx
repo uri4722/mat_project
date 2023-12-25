@@ -5,6 +5,8 @@ import ProfileCard from './ProfileCard';
 import StorysUi from './StorysUi';
 import MishnaiotUi from './MishnaiotUi';
 import UserFormUi from './UserFormUi';
+import { useState } from 'react';
+import UserRegister from '../../../pages/UserRegister';
 
 
 function MemorialProfileUi({
@@ -17,9 +19,10 @@ function MemorialProfileUi({
     handleSubmit,
     message }) {
 
+    const [registerDisplay, setRegisterDisplay] = useState(false);
 
 
-    return (
+    return (<>
         <div className='continer'>
             <div className='card-gird'>
                 <ProfileCard profile={profile} countMishnaiot={countMishnaiot} />
@@ -45,11 +48,14 @@ function MemorialProfileUi({
                         handleChangeInput={handleChangeInput}
                         handleSubmit={handleSubmit}
                         message={message}
+                        setRegisterDisplay={setRegisterDisplay}
                     /> : null}
             </div>
-
-
         </div >
+        {registerDisplay && <div className="popup-continer">
+            <UserRegister setRegisterDisplay={setRegisterDisplay} />
+        </div>}
+    </>
     )
 }
 

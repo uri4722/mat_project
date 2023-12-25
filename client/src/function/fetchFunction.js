@@ -18,15 +18,8 @@ export const getPassedAwayApi = async (id) => {
 
 export const createPassedAwayApi = async (passedAway) => {
     const URL = `${BASEURL}passedAway`;
-    console.log(passedAway);
-    try {
-        const res = await axios.post(URL, passedAway);
-        // console.log(res);
-        const { data } = res;
-        return data;
-    } catch (error) {
-        throw error.response.data;
-    }
+    const ans = await postRequst(passedAway, URL);
+    return ans;
 
 }
 
@@ -42,8 +35,24 @@ export const getStorysApi = async (id) => {
 }
 
 export const createMemorialProfileApi = async (id, memorialProfile) => {
-    console.log(memorialProfile);
     const URL = `${BASEURL}memorialProfile/${id}`;
-    const { data } = await axios.post(URL, memorialProfile);
-    return data;
+    const ans = await postRequst(memorialProfile, URL)
+    return ans;
+}
+
+export const createUser = async (user) => {
+    const URL = `${BASEURL}user`;
+    const ans = postRequst(user, URL);
+    return ans;
+
+}
+
+const postRequst = async (body, path) => {
+    try {
+        const res = await axios.post(path, body);
+        const { data } = res;
+        return data;
+    } catch (error) {
+        throw error.response.data;
+    }
 }

@@ -1,5 +1,5 @@
 const e = require('express');
-const { getPassedAway, newPassedAway, getCommitments, getStorys, getUser, newCommitment, newStory } = require('../dataAccess/dataAccess');
+const { getPassedAway, newPassedAway, getCommitments, getStorys, getUser, newCommitment, newStory, newUser } = require('../dataAccess/dataAccess');
 const { tishreiToNissan } = require('./function');
 
 
@@ -169,8 +169,18 @@ async function newMemorialProfileService(id, memorialProfile) {
         const keys = ['passed_away_id', 'title', 'story', 'user_id'];
         const values = [id, story.title, story.story, user.user_id];
         await newStory(keys, values);
-        return "success"
+        return "success";
     }
+}
+
+async function newUserService({ name, password, email }) {
+    const keys = ['name', 'password', 'email'];
+    const values = [name, password, email];
+    const ans = await newUser(keys, values);
+    console.log(ans);
+    return ans;
+
+
 }
 
 async function userAuth(email, password) {
@@ -182,4 +192,4 @@ async function userAuth(email, password) {
     }
 }
 
-module.exports = { getPassedAwayService, newPassedAwayService, getCommitmentsService, getStorysService, newMemorialProfileService }
+module.exports = { getPassedAwayService, newPassedAwayService, getCommitmentsService, getStorysService, newMemorialProfileService, newUserService }
