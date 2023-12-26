@@ -47,6 +47,20 @@ export const createUser = async (user) => {
 
 }
 
+export const createManager = async (user) => {
+    const URL = `${BASEURL}manager/register`;
+    const ans = postRequst(user, URL);
+    return ans;
+
+}
+
+export const LoginManager = async (user) => {
+    const URL = `${BASEURL}manager/login`;
+    const ans = postRequst(user, URL);
+    return ans;
+
+}
+
 const postRequst = async (body, path) => {
     try {
         const res = await axios.post(path, body);

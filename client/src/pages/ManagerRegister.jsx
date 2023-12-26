@@ -1,9 +1,10 @@
 import "./css/managerRegister.css";
-import {  useState } from "react";
+import { useState } from "react";
 import Joi from 'joi';
 import Header from "../compnents/navigtion/Header";
 import ManagerRegisterUi from "../compnents/ui/LoginUi/ManagerRegisterUi";
 import { useNavigate } from "react-router-dom";
+import { createManager } from "../function/fetchFunction";
 
 
 export default function ManagerRegister() {
@@ -40,11 +41,14 @@ export default function ManagerRegister() {
             Joi.string()
                 .email({ tlds: { allow: false } })
                 .message("כתובת מייל לא תקינה")
-                .required(),
+                .required()
+                .messages({ 'string.empty': ' צריך למלאות אימייל' }),
+
         phone:
             Joi.string()
-                .pattern(new RegExp('^[0-9]{10}$'))
-                .message("מספר טלפון חייב להכיל 10 ספרות "),
+                .pattern(new RegExp('^(\\+972|0)[1-9]\\d{7,8}$'))
+                .message("מספר טלפון חייב להיות בפורמט המתאים")
+                .allow(''),
 
     })
 
@@ -52,7 +56,7 @@ export default function ManagerRegister() {
         setUser({ ...user, [target.name]: target.value });
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(user);
 
@@ -63,11 +67,21 @@ export default function ManagerRegister() {
         }
         if (!error) {
 
-            setUser({ name: "", password: "", verifyPassword: "", email: "", phone: "" });
-            setMessage({ body: "ההרשמה בוצעה בהצלחה", type: "success" });    
-            setTimeout(() => {
-                navigate("/");
-            }, 1600)
+            try {
+                const newUser = await createManager(user);
+                localStorage.setItem("manager", JSON.stringify(newUser));
+
+
+                setUser({ name: "", password: "", verifyPassword: "", email: "", phone: "" });
+                setMessage({ body: "ההרשמה בוצעה בהצלחה", type: "success" });
+                setTimeout(() => {
+                    navigate("/MyAccount");
+                }, 1600)
+            } catch (error) {
+                setMessage({ body: error.message, type: "error" });
+            }
+
+
         }
     }
 

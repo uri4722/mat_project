@@ -30,6 +30,20 @@
     font-size: 16px;
 }
 
+.loginForm .rememberMe {
+    display: flex;
+    justify-content: flex-end;
+    width: 300px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+.rememberMe input {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
 .loginForm button {
     width: 300px;
     height: 40px;

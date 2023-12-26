@@ -33,5 +33,24 @@ async function newStory(keys, values) {
 async function newUser(keys, values) {
     return await insertRowSql('users', keys, values);
 }
+async function newManager(keys, values) {
+    return await insertRowSql('managers', keys, values);
+}
 
-module.exports = { getPassedAway, newPassedAway, getCommitments, getStorys, getUser,newStory, newCommitment,newUser };
+async function getManager(email) {
+    return await getRecordsSql('managers', 'email', email);
+}
+
+
+module.exports = {
+    getPassedAway,
+    newPassedAway,
+    getCommitments,
+    getStorys,
+    getUser,
+    newStory,
+    newCommitment,
+    newUser,
+    newManager,
+    getManager
+};

@@ -1,14 +1,18 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Header from "../compnents/navigtion/Header";
 import FormUi from "../compnents/ui/AddpassedAwayUi/FormUi";
 import makeHeDates from "../function/makeHeDates";
 
 import CircularProgress from '@mui/joy/CircularProgress';
 import { createPassedAwayApi } from "../function/fetchFunction";
+import useManagerPermission from "../function/usePermission";
 
 
 
 function CreatePassedAway() {
+    const manager = useManagerPermission();
+
+
     const [newPassed, setNewPassed] = useState({
         name: "",
         year_death: "",
@@ -21,15 +25,15 @@ function CreatePassedAway() {
         soldier: false,
         rabbi: false,
         // זמני צריך להגיע מההרשמה
-        manager_id: 1,
+        // manager_id: 1,
 
     });
     const [message, setMessage] = useState({ type: "", body: "" });
     const heDates = useMemo(() => {
         const heDates = makeHeDates();
-        setNewPassed((prevPassed) => ({ ...prevPassed, year_death: heDates.yearOptions[0]}));
+        setNewPassed((prevPassed) => ({ ...prevPassed, year_death: heDates.yearOptions[0] }));
         return heDates;
-    }, []); 
+    }, []);
 
 
     const handleChange = (event) => {
@@ -51,6 +55,14 @@ function CreatePassedAway() {
             setMessage({ type: "error", body: "הזכרון לא נוצר" });
         }
     }
+
+    useEffect(() => {
+        if (manager) {
+            setNewPassed((prevPassed) => ({ ...prevPassed, manager_id: JSON.parse(manager).id }));
+        }
+     
+    }, [manager])
+
 
 
     return (

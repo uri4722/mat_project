@@ -19,8 +19,8 @@ function UserRegister({ setRegisterDisplay }) {
         }
         if (!error) {
             try {
-                const user = await createUser(user);
-                console.log(user);
+                const newUser = await createUser(user);
+                console.log(newUser);
                 setMessage({ body: "ההרשמה בוצעה בהצלחה", type: "success" });
                 setUser({ name: "", email: "", password: "" });
                 setTimeout(setRegisterDisplay, 1600)

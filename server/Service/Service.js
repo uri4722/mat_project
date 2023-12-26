@@ -1,5 +1,16 @@
 const e = require('express');
-const { getPassedAway, newPassedAway, getCommitments, getStorys, getUser, newCommitment, newStory, newUser } = require('../dataAccess/dataAccess');
+const {
+    getPassedAway,
+    newPassedAway,
+    getCommitments,
+    getStorys,
+    getUser,
+    newCommitment,
+    newStory,
+    newUser,
+    newManager,
+    getManager
+} = require('../dataAccess/dataAccess');
 const { tishreiToNissan } = require('./function');
 
 
@@ -183,6 +194,29 @@ async function newUserService({ name, password, email }) {
 
 }
 
+async function newManagerService({ name, password, email, phone }) {
+    const keys = ['full_name', 'password', 'email', 'phone'];
+    const values = [name, password, email, phone];
+    const ans = await newManager(keys, values);
+    console.log(ans);
+    return ans;
+}
+
+async function loginManagerService({ email, password }) {
+    const [manager] = await getManager(email);
+    console.log(manager);
+    if (!manager) {
+        throw { message: 'מייל לא קיים במערכת'}
+    } else {
+        if (password !== manager.password) {
+            throw { message: 'סיסמא לא נכונה' };
+        } else {
+            return manager;
+        }
+    }
+
+}
+
 async function userAuth(email, password) {
     const [user] = await getUser(email);
     if (password !== user.password) {
@@ -192,4 +226,14 @@ async function userAuth(email, password) {
     }
 }
 
-module.exports = { getPassedAwayService, newPassedAwayService, getCommitmentsService, getStorysService, newMemorialProfileService, newUserService }
+module.exports = {
+    getPassedAwayService,
+    newPassedAwayService,
+    getCommitmentsService,
+    getStorysService,
+    newMemorialProfileService,
+    newUserService,
+    newManagerService,
+    loginManagerService
+
+}
