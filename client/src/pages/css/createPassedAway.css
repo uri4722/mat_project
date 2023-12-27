@@ -1,0 +1,14 @@
+.error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(212, 81, 81);
+}
+
+.success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(88, 210, 92);
+    font-size: xx-large;
+}

@@ -6,11 +6,16 @@ import makeHeDates from "../function/makeHeDates";
 import CircularProgress from '@mui/joy/CircularProgress';
 import { createPassedAwayApi } from "../function/fetchFunction";
 import useManagerPermission from "../function/usePermission";
+import { useNavigate } from "react-router-dom";
+
+import './css/createPassedAway.css'
 
 
 
 function CreatePassedAway() {
     const manager = useManagerPermission();
+
+    const navigate = useNavigate();
 
 
     const [newPassed, setNewPassed] = useState({
@@ -50,6 +55,10 @@ function CreatePassedAway() {
         try {
             await createPassedAwayApi(newPassed);
             setMessage({ type: "success", body: "הזכרון נוצר בהצלחה" });
+            setTimeout(() => {
+                navigate("/home");
+            }, 1400)
+
         } catch (error) {
             console.log(error);
             setMessage({ type: "error", body: "הזכרון לא נוצר" });
@@ -58,9 +67,9 @@ function CreatePassedAway() {
 
     useEffect(() => {
         if (manager) {
-            setNewPassed((prevPassed) => ({ ...prevPassed, manager_id: JSON.parse(manager).id }));
+            const { manager_id } = JSON.parse(manager);
+            setNewPassed((prevPassed) => ({ ...prevPassed, manager_id: manager_id }));
         }
-     
     }, [manager])
 
 
@@ -76,8 +85,9 @@ function CreatePassedAway() {
                     message={message}
                     heDates={heDates}
                 /> : <CircularProgress thickness={1} />}
-            {message.type && <div className={message.type}>{message.body}</div>}
-
+            {message.type && <div className={message.type}>
+                {message.body}
+            </div>}
         </>
     );
 }
