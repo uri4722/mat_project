@@ -38,7 +38,6 @@ function UserFormUi({ user, handleChangeInput, handleSubmit, message,setRegister
             />
             <Button onClick={handleSubmit} color="success" size="sm">לאישור</Button>
         </div>
-        {/* להוסיף אם לא רשום */}
         <Link color="success" onClick={() => setRegisterDisplay(true)}>לא רשום עדין</Link>
     </div>
 }

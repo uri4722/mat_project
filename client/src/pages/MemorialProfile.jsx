@@ -66,13 +66,13 @@ function MemorialProfile() {
             // dont work need to fix
             // i dont know why
             // console.log({ ...passedAway, storys: [...passedAway.storys, ans.story] });
-            // setPassedAway( { ...passedAway, storys: [...passedAway.storys, ans.story] });
-            // 
-            if (ans.story.story) {
-                passedAway.storys.push(ans.story);
-            }
+            setPassedAway( { ...passedAway, storys: [...passedAway.storys, ans.story] });
+            
+            // if (ans.story.story) {
+            //     passedAway.storys.push(ans.story);
+            // }
             setPassedAway({ ...passedAway, mishnaiot: updateMishnioat(passedAway.mishnaiot, ans.masechtot) });
-            // setMessage({ body: "ההרשמה בוצעה בהצלחה", type: "success" });
+            setMessage({ body: "ההרשמה בוצעה בהצלחה", type: "success" });
             setUser({ ...user, masechtot: [], story: { title: "", story: "" } });
         }
     }

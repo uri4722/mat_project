@@ -54,7 +54,6 @@ CREATE TABLE `commitments`(
 );
 
 
-
 -- here foreign keys
 ALTER TABLE `passed_away`
 ADD FOREIGN KEY (`manager_id`) REFERENCES `managers`(`manager_id`);
