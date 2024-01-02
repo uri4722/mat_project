@@ -36,7 +36,13 @@ async function insertRowSql(table, columns, values) {
     return row;
 }
 
-
+async function updateRowSql(table, pkName, columns, values, id) {
+    const sql = `UPDATE ${table}
+    SET ${columns.map((column) => `${column} = ?`).join(',')}
+    WHERE ${pkName} = ?;`;
+    const [res] = await pool.query(sql, [...values, id]);
+    return res;
+}
 
 // async function deleteRaw(table, pkName, id) {
 //     const sql = `DELETE FROM ${table} 
@@ -80,4 +86,4 @@ async function insertRowSql(table, columns, values) {
 
 // module.exports = { addRow, search, deleteRaw, updateRaw, userAuth }
 
-module.exports = { insertRowSql, getRecordsSql }
+module.exports = { insertRowSql, getRecordsSql, updateRowSql }

@@ -5,6 +5,7 @@ import Header from "../compnents/navigtion/Header";
 import ManagerRegisterUi from "../compnents/ui/LoginUi/ManagerRegisterUi";
 import { useNavigate } from "react-router-dom";
 import { createManager } from "../function/fetchFunction";
+import { managerRegisterSchema } from "../JoiSchema/managerRegisterSchema";
 
 
 export default function ManagerRegister() {
@@ -18,40 +19,6 @@ export default function ManagerRegister() {
     const [message, setMessage] = useState({ body: "", type: "" });
     const navigate = useNavigate();
 
-
-
-    const schema = Joi.object({
-        name:
-            Joi.string().min(2)
-                .message("שם חייב להכיל לפחות 2 תווים")
-                .required().messages({ 'string.empty': ' צריך למלאות שם' }),
-        password:
-            Joi.string()
-                .min(6)
-                .message("סיסמא חייבת להכיל לפחות 6 תווים")
-                .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
-                .message("סיסמא חייבת להכיל אותיות באנגלית ומספרים בלבד")
-                .required()
-                .messages({ 'string.empty': ' צריך למלאות סיסמא' }),
-        verifyPassword:
-            Joi.valid(Joi.ref('password'))
-                .required()
-                .messages({ 'any.only': 'הסיסמאות חייבות להיות זהות' }),
-        email:
-            Joi.string()
-                .email({ tlds: { allow: false } })
-                .message("כתובת מייל לא תקינה")
-                .required()
-                .messages({ 'string.empty': ' צריך למלאות אימייל' }),
-
-        phone:
-            Joi.string()
-                .pattern(new RegExp('^(\\+972|0)[1-9]\\d{7,8}$'))
-                .message("מספר טלפון חייב להיות בפורמט המתאים")
-                .allow(''),
-
-    })
-
     const handleChange = ({ target }) => {
         setUser({ ...user, [target.name]: target.value });
     }
@@ -60,7 +27,7 @@ export default function ManagerRegister() {
         e.preventDefault();
         console.log(user);
 
-        const { error } = schema.validate(user);
+        const { error } = managerRegisterSchema.validate(user);
         if (error) {
             setMessage({ body: error.details[0].message, type: "error" });
             return;

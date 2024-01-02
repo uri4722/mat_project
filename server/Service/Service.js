@@ -10,7 +10,8 @@ const {
     newUser,
     newManager,
     getManager,
-    getManagerPassedAway
+    getManagerPassedAway,
+    updateManager
 } = require('../dataAccess/dataAccess');
 const { tishreiToNissan } = require('./function');
 
@@ -196,7 +197,7 @@ async function newUserService({ name, password, email }) {
 }
 
 async function newManagerService({ name, password, email, phone }) {
-    const keys = ['full_name', 'password', 'email', 'phone'];
+    const keys = ['name', 'password', 'email', 'phone'];
     const values = [name, password, email, phone];
     const ans = await newManager(keys, values);
     console.log(ans);
@@ -237,6 +238,13 @@ async function userAuth(email, password) {
         return user;
     }
 }
+async function updateManagerService(body, id) {
+    const columns = ['name', 'password', 'email', 'phone'];
+    const values = [body.name, body.password, body.email, body.phone];
+    const ans = await updateManager(columns, values, id);
+    console.log(ans);
+    return ans;
+}
 
 module.exports = {
     getPassedAwayService,
@@ -247,6 +255,7 @@ module.exports = {
     newUserService,
     newManagerService,
     loginManagerService,
-    getManagerPassedAwayService
+    getManagerPassedAwayService,
+    updateManagerService
 
 }

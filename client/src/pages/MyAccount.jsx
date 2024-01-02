@@ -1,26 +1,60 @@
 import { useEffect, useState } from "react";
 import HeaderNav from "../compnents/navigtion/HeaderNav";
 import useManagerPermission from "../function/usePermission";
-import { getManagerPassedAwayApi } from "../function/fetchFunction";
+import { getManagerPassedAwayApi, updateManager } from "../function/fetchFunction";
 import MyAccountUi from "../compnents/ui/MyAccountUi/MyAccountUi";
+import { managerRegisterSchema } from "../JoiSchema/managerRegisterSchema";
 
 function MyAccount() {
     const manager = useManagerPermission();
-    const [managerInputs, setManagerInputs] = useState({});
-    const [passedAwayArray, setPassedAwayArray] = useState([]);
+    const { manager_id, ...managerFileds } = manager;
+    const [managerInputs, setManagerInputs] = useState({ ...managerFileds });
+    const [message, setMessage] = useState({ body: "", type: "" });
 
-    const getPassedAwayArray = async (id) => {
-        const data = await getManagerPassedAwayApi(id);
-        setPassedAwayArray(data);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setManagerInputs({ ...managerInputs, [name]: value });
     }
 
-    useEffect(() => {
-        getPassedAwayArray(manager?.manager_id);
-        setManagerInputs({...manager});
-    }, [manager?.manager_id])
-    useEffect(() => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const { error } = managerRegisterSchema.validate(managerInputs);
+        if (error) {
+            setMessage({ body: error.details[0].message, type: "error" });
+            return;
+        }
+
+        if (!error) {
+            try {
+                await updateManager(managerInputs, manager_id);
+                sessionStorage.getItem("manager") ?
+                    sessionStorage.setItem("manager", JSON.stringify({ ...managerInputs, manager_id: manager_id })) :
+                    localStorage.setItem("manager", JSON.stringify({ ...managerInputs, manager_id: manager_id }));
+                // setManagerInputs({ ...managerInputs });
+                setMessage({ body: "העידכון בוצע בהצלחה", type: "success" });
+
+            } catch (error) {
+                setMessage({ body: error.message, type: "error" });
+            }
+        }
         console.log(managerInputs);
-    }, [managerInputs])
+    }
+    // const [managerDetails, setMmanagerDetails] = useState({});
+    // const [passedAwayArray, setPassedAwayArray] = useState([]);
+
+    // const getPassedAwayArray = async (id) => {
+    //     const data = await getManagerPassedAwayApi(id);
+    //     setPassedAwayArray(data);
+    // }
+
+    // useEffect(() => {
+    //     getPassedAwayArray(manager?.manager_id);
+    //     setManagerInputs({...manager});
+    // }, [manager?.manager_id])
+    // useEffect(() => {
+    //     // console.log(managerInputs);
+    // }, [managerInputs])
 
     // useEffect(() => {
     //     console.log(passedAwayArray);
@@ -29,7 +63,7 @@ function MyAccount() {
     return (
         <>
             <HeaderNav />
-            <MyAccountUi manager={managerInputs} />
+            <MyAccountUi manager={managerInputs} handleChange={handleChange} handleSubmit={handleSubmit} message={message} />
         </>
     )
 

@@ -66,6 +66,13 @@ export const LoginManager = async (user) => {
     return ans;
 
 }
+export const updateManager = async (manager, id) => {
+    const URL = `${BASEURL}manager/${id}`;
+    const ans = await putRequst(manager, URL);
+    return ans;
+}
+
+
 
 const postRequst = async (body, path) => {
     try {
@@ -76,3 +83,14 @@ const postRequst = async (body, path) => {
         throw error.response.data;
     }
 }
+
+const putRequst = async (body, path) => {
+    try {
+        const res = await axios.put(path, body);
+        const { data } = res;
+        return data;
+    } catch (error) {
+        throw error.response.data;
+    }
+}
+

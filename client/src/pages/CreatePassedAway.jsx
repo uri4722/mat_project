@@ -29,8 +29,7 @@ function CreatePassedAway() {
         lonely: false,
         soldier: false,
         rabbi: false,
-        // זמני צריך להגיע מההרשמה
-        // manager_id: 1,
+       
 
     });
     const [message, setMessage] = useState({ type: "", body: "" });

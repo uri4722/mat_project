@@ -1,5 +1,5 @@
 const express = require('express');
-const { newManagerService, loginManagerService, getManagerPassedAwayService } = require("../service/service");
+const { newManagerService, loginManagerService, getManagerPassedAwayService,updateManagerService } = require("../service/service");
 
 const router = express.Router();
 
@@ -35,6 +35,19 @@ router.post('/login', async (req, res) => {
 
     try {
         const response = await loginManagerService(body);
+        res.status(200).json(response);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+})
+
+router.put('/:id', async (req, res) => {
+    console.log("put manager");
+    const { body } = req;
+    const { id } = req.params;
+
+    try {
+        const response = await updateManagerService(body, id);
         res.status(200).json(response);
     } catch (error) {
         res.status(500).json({ message: error.message });
