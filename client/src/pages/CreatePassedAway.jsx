@@ -66,7 +66,7 @@ function CreatePassedAway() {
 
     useEffect(() => {
         if (manager) {
-            const { manager_id } = JSON.parse(manager);
+            const { manager_id } = manager;
             setNewPassed((prevPassed) => ({ ...prevPassed, manager_id: manager_id }));
         }
     }, [manager])
