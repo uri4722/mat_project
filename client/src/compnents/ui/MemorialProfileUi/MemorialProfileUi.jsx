@@ -2,7 +2,7 @@
 
 import './css/MemorialProfileUi.css'
 import ProfileCard from './ProfileCard';
-import StorysUi from './StorysUi';
+import StoresUi from './StoresUi';
 import MishnaiotUi from './MishnaiotUi';
 import UserFormUi from './UserFormUi';
 import { useState } from 'react';
@@ -14,7 +14,7 @@ function MemorialProfileUi({
     countMishnaiot,
     user,
     handleChangeMasechtot,
-    handleChangeStorys,
+    handleChangeStores,
     handleChangeInput,
     handleSubmit,
     message }) {
@@ -27,10 +27,10 @@ function MemorialProfileUi({
             <div className='card-gird'>
                 <ProfileCard profile={profile} countMishnaiot={countMishnaiot} />
             </div>
-            <div className='storys-gird'>
-                <StorysUi
-                    storys={profile.storys}
-                    handleChangeStorys={handleChangeStorys}
+            <div className='stores-gird'>
+                <StoresUi
+                    stores={profile.stores}
+                    handleChangeStores={handleChangeStores}
                     newStory={user.story}
                 />
             </div>

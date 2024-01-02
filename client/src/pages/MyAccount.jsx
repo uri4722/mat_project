@@ -1,25 +1,35 @@
 import { useEffect, useState } from "react";
 import HeaderNav from "../compnents/navigtion/HeaderNav";
 import useManagerPermission from "../function/usePermission";
+import { getManagerPassedAwayApi } from "../function/fetchFunction";
+import MyAccountUi from "../compnents/ui/MyAccountUi/MyAccountUi";
 
 function MyAccount() {
     const manager = useManagerPermission();
-    const [managerDetails, setManagerDetails] = useState(null);
+    const [managerInputs, setManagerInputs] = useState({});
+    const [passedAwayArray, setPassedAwayArray] = useState([]);
 
+    const getPassedAwayArray = async (id) => {
+        const data = await getManagerPassedAwayApi(id);
+        setPassedAwayArray(data);
+    }
 
     useEffect(() => {
-        if (manager) {
-            setManagerDetails(JSON.parse(manager));
-        }
-    }, [])
+        getPassedAwayArray(manager?.manager_id);
+        setManagerInputs({...manager});
+    }, [manager?.manager_id])
     useEffect(() => {
-        console.log(manager);
-    }, [manager])
+        console.log(managerInputs);
+    }, [managerInputs])
+
+    // useEffect(() => {
+    //     console.log(passedAwayArray);
+    // }, [passedAwayArray])
 
     return (
         <>
             <HeaderNav />
-            <h1>MyAccount</h1>
+            <MyAccountUi manager={managerInputs} />
         </>
     )
 

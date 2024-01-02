@@ -3,13 +3,14 @@ const {
     getPassedAway,
     newPassedAway,
     getCommitments,
-    getStorys,
+    getStores,
     getUser,
     newCommitment,
     newStory,
     newUser,
     newManager,
-    getManager
+    getManager,
+    getManagerPassedAway
 } = require('../dataAccess/dataAccess');
 const { tishreiToNissan } = require('./function');
 
@@ -26,7 +27,7 @@ async function getPassedAwayService(id) {
     } else {
         passedAway = await getPassedAway(id);
         passedAway[0].mishnaiot = await getCommitmentsService(id);
-        passedAway[0].storys = await getStorysService(id);
+        passedAway[0].stores = await getStoresService(id);
     }
 
     // Add Hebrew date to each record
@@ -147,9 +148,9 @@ async function getCommitmentsService(id) {
     return mishnaiot;
 }
 
-async function getStorysService(id) {
-    const storys = await getStorys(id);
-    return storys;
+async function getStoresService(id) {
+    const stores = await getStores(id);
+    return stores;
 }
 
 async function newMemorialProfileService(id, memorialProfile) {
@@ -217,6 +218,17 @@ async function loginManagerService({ email, password }) {
 
 }
 
+async function getStoresService(id) {
+    const stores = await getStores(id);
+    return stores;
+}
+
+async function getManagerPassedAwayService(id) {
+    const passedAwayList = await getManagerPassedAway(id);
+    console.log(passedAwayList);
+    return passedAwayList;
+}
+
 async function userAuth(email, password) {
     const [user] = await getUser(email);
     if (password !== user.password) {
@@ -230,10 +242,11 @@ module.exports = {
     getPassedAwayService,
     newPassedAwayService,
     getCommitmentsService,
-    getStorysService,
+    getStoresService,
     newMemorialProfileService,
     newUserService,
     newManagerService,
-    loginManagerService
+    loginManagerService,
+    getManagerPassedAwayService
 
 }

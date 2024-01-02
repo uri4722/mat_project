@@ -1,15 +1,15 @@
 import Switch from "@mui/joy/Switch";
-import "./css/StorysUi.css"
+import "./css/StoresUi.css"
 import { useState } from "react";
 import { Input, Textarea } from '@mui/joy';
 
 
 
-function StorisUi({ storys, handleChangeStorys, newStory }) {
+function StorisUi({ stores, handleChangeStores, newStory }) {
     const [display, setDisplay] = useState(false);
     return (
-        <div className="storysContiner">
-            {storys && storys.map((story, index) => {
+        <div className="storesContiner">
+            {stores && stores.map((story, index) => {
                 return (
                     <div key={index} className="story">
                         <h2>{story.title}</h2>
@@ -35,7 +35,7 @@ function StorisUi({ storys, handleChangeStorys, newStory }) {
                     sx={{ marginTop: "10px" }}
                     name="title"
                     value={newStory.title}
-                    onChange={handleChangeStorys}
+                    onChange={handleChangeStores}
                 />
                 <Textarea
                     color="success"
@@ -45,7 +45,7 @@ function StorisUi({ storys, handleChangeStorys, newStory }) {
                     sx={{ marginTop: "10px" }}
                     name="story"
                     value={newStory.story}
-                    onChange={handleChangeStorys}
+                    onChange={handleChangeStores}
 
                 />
             </div>}

@@ -15,8 +15,8 @@ async function newPassedAway(keys, values) {
 async function getCommitments(id) {
     return await getRecordsSql('commitments', 'passed_away_id', id);
 }
-async function getStorys(id) {
-    return await getRecordsSql('storys', 'passed_away_id', id);
+async function getStores(id) {
+    return await getRecordsSql('stores', 'passed_away_id', id);
 
 }
 async function getUser(email) {
@@ -27,7 +27,7 @@ async function newCommitment(keys, values) {
 }
 
 async function newStory(keys, values) {
-    return await insertRowSql('storys', keys, values);
+    return await insertRowSql('stores', keys, values);
 }
 
 async function newUser(keys, values) {
@@ -41,16 +41,22 @@ async function getManager(email) {
     return await getRecordsSql('managers', 'email', email);
 }
 
+async function getManagerPassedAway(id) {
+    return await getRecordsSql('passed_away', 'manager_id', id);
+}
+
+
 
 module.exports = {
     getPassedAway,
     newPassedAway,
     getCommitments,
-    getStorys,
+    getStores,
     getUser,
     newStory,
     newCommitment,
     newUser,
     newManager,
-    getManager
+    getManager,
+    getManagerPassedAway
 };

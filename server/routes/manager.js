@@ -1,8 +1,21 @@
 const express = require('express');
-const { newManagerService, loginManagerService } = require("../service/service");
+const { newManagerService, loginManagerService, getManagerPassedAwayService } = require("../service/service");
 
 const router = express.Router();
 
+
+router.get('/:id/passedAway', async (req, res) => {
+    console.log("get all passed away by manager id");
+    const { id } = req.params;
+
+    try {
+        const managerPassedAway = await getManagerPassedAwayService(id);
+        res.status(200).json(managerPassedAway);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+
+})
 
 
 router.post('/register', async (req, res) => {

@@ -51,7 +51,7 @@ function FormUi({ newPassed, handleChange, handleSubmit, message, heDates }) {
                         name="age"
                         value={newPassed.age}
                         min="1"
-                        max="130"
+                        max="200"
                         required
                     />
                 </div>

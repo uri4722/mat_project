@@ -33,7 +33,7 @@ CREATE TABLE `users`(
     `password` VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE `storys`(
+CREATE TABLE `stores`(
     `story_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT UNSIGNED NOT NULL,
     `passed_away_id` INT UNSIGNED NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE `commitments`(
 ALTER TABLE `passed_away`
 ADD FOREIGN KEY (`manager_id`) REFERENCES `managers`(`manager_id`);
 
-ALTER TABLE `storys`
+ALTER TABLE `stores`
 ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`),
 ADD FOREIGN KEY (`passed_away_id`) REFERENCES `passed_away`(`passed_away_id`);
 

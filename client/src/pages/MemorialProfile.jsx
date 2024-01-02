@@ -46,7 +46,7 @@ function MemorialProfile() {
             setUser({ ...user, masechtot: user.masechtot.filter((masechet) => masechet !== event.target.name) })
         }
     }
-    const handleChangeStorys = ({ target }) => {
+    const handleChangeStores = ({ target }) => {
         setUser({ ...user, story: { ...user.story, [target.name]: target.value } })
     }
     const handleChangeInput = ({ target }) => {
@@ -63,14 +63,17 @@ function MemorialProfile() {
         }
         if (!error) {
             const ans = await createMemorialProfileApi(id, user);
+
             // dont work need to fix
-            // i dont know why
-            // console.log({ ...passedAway, storys: [...passedAway.storys, ans.story] });
-            setPassedAway( { ...passedAway, storys: [...passedAway.storys, ans.story] });
-            
-            // if (ans.story.story) {
-            //     passedAway.storys.push(ans.story);
-            // }
+            // console.log({ ...passedAway, stores: [...passedAway.stores, ans.story] });
+
+            // setPassedAway({ ...passedAway, stores: [...passedAway.stores, ans.story] });
+
+            if (ans.story.story) {
+                passedAway.stores.push(ans.story);
+            }
+            // 
+
             setPassedAway({ ...passedAway, mishnaiot: updateMishnioat(passedAway.mishnaiot, ans.masechtot) });
             setMessage({ body: "ההרשמה בוצעה בהצלחה", type: "success" });
             setUser({ ...user, masechtot: [], story: { title: "", story: "" } });
@@ -135,7 +138,7 @@ function MemorialProfile() {
                 handleChangeMasechtot={handleChangeMasechtot}
                 handleChangeInput={handleChangeInput}
                 handleSubmit={handleSubmit}
-                handleChangeStorys={handleChangeStorys}
+                handleChangeStores={handleChangeStores}
                 message={message}
             />
         </div>}

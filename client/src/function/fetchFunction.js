@@ -16,6 +16,12 @@ export const getPassedAwayApi = async (id) => {
     return data[0];
 }
 
+export const getManagerPassedAwayApi = async (id) => {
+    const URL = `${BASEURL}manager/${id}/passedAway`;
+    const { data } = await axios.get(URL);
+    return data;
+}
+
 export const createPassedAwayApi = async (passedAway) => {
     const URL = `${BASEURL}passedAway`;
     const ans = await postRequst(passedAway, URL);
@@ -28,8 +34,8 @@ export const getMishnayotApi = async (id) => {
     const { data } = await axios.get(URL);
     return data;
 }
-export const getStorysApi = async (id) => {
-    const URL = `${BASEURL}Storys/passedAway/${id}`;
+export const getStoresApi = async (id) => {
+    const URL = `${BASEURL}Stores/passedAway/${id}`;
     const { data } = await axios.get(URL);
     return data;
 }

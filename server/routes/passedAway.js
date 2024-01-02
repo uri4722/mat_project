@@ -4,7 +4,7 @@ const { newPassedAwayService, getPassedAwayService } = require('../service/servi
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    // console.log("get all passed away");
+    console.log("get all passed away");
     try {
         const passed_away = await getPassedAwayService();
         res.status(200).json(passed_away);

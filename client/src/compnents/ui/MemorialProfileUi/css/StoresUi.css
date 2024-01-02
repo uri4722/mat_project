@@ -1,4 +1,4 @@
-.storysContiner {
+.storesContiner {
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -8,7 +8,7 @@
     overflow-y: auto;
 }
 
-.storysContiner h4 {
+.storesContiner h4 {
     margin: 0px;
 }
 
