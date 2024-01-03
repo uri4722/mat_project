@@ -7,8 +7,8 @@ import { managerRegisterSchema } from "../JoiSchema/managerRegisterSchema";
 
 function MyAccount() {
     const manager = useManagerPermission();
-    const { manager_id, ...managerFileds } = manager;
-    const [managerInputs, setManagerInputs] = useState({ ...managerFileds });
+    const { manager_id, ...managerFields } = manager;
+    const [managerInputs, setManagerInputs] = useState({ ...managerFields });
     const [message, setMessage] = useState({ body: "", type: "" });
 
     const handleChange = (e) => {

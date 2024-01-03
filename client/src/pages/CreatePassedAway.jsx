@@ -1,7 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useState } from "react";
 import Header from "../compnents/navigtion/Header";
 import FormUi from "../compnents/ui/AddpassedAwayUi/FormUi";
-import makeHeDates from "../function/makeHeDates";
 
 import CircularProgress from '@mui/joy/CircularProgress';
 import { createPassedAwayApi } from "../function/fetchFunction";
@@ -12,15 +11,18 @@ import './css/createPassedAway.css'
 
 
 
-function CreatePassedAway() {
+function CreatePassedAway({ heDates }) {
     const manager = useManagerPermission();
-
     const navigate = useNavigate();
+    if (!manager) {
+        navigate("/login");
+    }
+
 
 
     const [newPassed, setNewPassed] = useState({
         name: "",
-        year_death: "",
+        year_death: heDates.yearOptions[0],
         month_death: "1",
         day_death: "1",
         age: "",
@@ -29,16 +31,12 @@ function CreatePassedAway() {
         lonely: false,
         soldier: false,
         rabbi: false,
-       
+        manager_id: manager?.manager_id
 
     });
     const [message, setMessage] = useState({ type: "", body: "" });
-    const heDates = useMemo(() => {
-        const heDates = makeHeDates();
-        setNewPassed((prevPassed) => ({ ...prevPassed, year_death: heDates.yearOptions[0] }));
-        return heDates;
-    }, []);
 
+ 
 
     const handleChange = (event) => {
         if (event.target.type === "checkbox") {
@@ -63,13 +61,6 @@ function CreatePassedAway() {
             setMessage({ type: "error", body: "הזכרון לא נוצר" });
         }
     }
-
-    useEffect(() => {
-        if (manager) {
-            const { manager_id } = manager;
-            setNewPassed((prevPassed) => ({ ...prevPassed, manager_id: manager_id }));
-        }
-    }, [manager])
 
 
 

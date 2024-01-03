@@ -12,6 +12,6 @@ function useManagerPermission() {
         !manager && navigate("/Login")
     }, [manager, navigate])
 
-    return JSON.parse(manager);
+    return manager ? JSON.parse(manager) : {};
 }
 export default useManagerPermission
