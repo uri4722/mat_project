@@ -13,10 +13,10 @@ const {
     getManagerPassedAway,
     updateManager
 } = require('../dataAccess/dataAccess');
-const { tishreiToNissan } = require('./function');
+const { tishreiToNissan, arrangeSqlDate } = require('./function');
 
 
-const HDate = require('@hebcal/core').HDate;
+// const HDate = require('@hebcal/core').HDate;
 const gematriyaStrToNum = require('@hebcal/core').gematriyaStrToNum;
 
 
@@ -33,14 +33,9 @@ async function getPassedAwayService(id) {
 
     // Add Hebrew date to each record
     passedAway.forEach(passed => {
-        const { day_death, month_death, year_death } = passed;
-
-        const date = new HDate(new HDate(day_death, month_death, year_death));
-        passed.date = date.renderGematriya();
-        delete passed.year_death;
-        delete passed.month_death;
-        delete passed.day_death;
+        arrangeSqlDate(passed);
     });
+    console.log(passedAway);
     return passedAway;
 }
 
@@ -208,7 +203,7 @@ async function loginManagerService({ email, password }) {
     const [manager] = await getManager(email);
     console.log(manager);
     if (!manager) {
-        throw { message: 'מייל לא קיים במערכת'}
+        throw { message: 'מייל לא קיים במערכת' }
     } else {
         if (password !== manager.password) {
             throw { message: 'סיסמא לא נכונה' };
@@ -226,7 +221,11 @@ async function getStoresService(id) {
 
 async function getManagerPassedAwayService(id) {
     const passedAwayList = await getManagerPassedAway(id);
-    console.log(passedAwayList);
+    // Add Hebrew date to each record
+    passedAwayList.forEach(passed => {
+        arrangeSqlDate(passed);
+    });
+    // console.log(passedAwayList);
     return passedAwayList;
 }
 

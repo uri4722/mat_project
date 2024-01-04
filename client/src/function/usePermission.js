@@ -1,17 +1,17 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function useManagerPermission() {
-    const manager = sessionStorage.getItem("manager") ?
-        sessionStorage.getItem("manager") :
-        localStorage.getItem("manager");
+function usePermission(type) {
+    const user = sessionStorage.getItem(type) ?
+        sessionStorage.getItem(type) :
+        localStorage.getItem(type);
     const navigate = useNavigate();
 
 
     useEffect(() => {
-        !manager && navigate("/Login")
-    }, [manager, navigate])
+        !user && navigate("/Login")
+    }, [user, navigate])
 
-    return manager ? JSON.parse(manager) : {};
+    return JSON.parse(user);
 }
-export default useManagerPermission
+export default usePermission

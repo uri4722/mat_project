@@ -1,9 +1,11 @@
 import { NavLink } from "react-router-dom";
 import "./css/HeaderNav.css"
 import { useEffect, useState } from "react";
+import useManagerPermission from "../../function/usePermission";
 
 function HeaderNav() {
     const [manager, setManager] = useState(null);
+
 
     useEffect(() => {
         const manager = localStorage.getItem("manager") ?

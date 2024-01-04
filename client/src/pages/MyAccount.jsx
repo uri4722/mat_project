@@ -6,10 +6,15 @@ import MyAccountUi from "../compnents/ui/MyAccountUi/MyAccountUi";
 import { managerRegisterSchema } from "../JoiSchema/managerRegisterSchema";
 
 function MyAccount() {
-    const manager = useManagerPermission();
+    let manager = useManagerPermission('manager');
+    if (!manager) {
+        manager = {};
+    }
     const { manager_id, ...managerFields } = manager;
     const [managerInputs, setManagerInputs] = useState({ ...managerFields });
     const [message, setMessage] = useState({ body: "", type: "" });
+    const [passedAwayArray, setPassedAwayArray] = useState([]);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -40,30 +45,36 @@ function MyAccount() {
         }
         console.log(managerInputs);
     }
-    // const [managerDetails, setMmanagerDetails] = useState({});
-    // const [passedAwayArray, setPassedAwayArray] = useState([]);
 
-    // const getPassedAwayArray = async (id) => {
-    //     const data = await getManagerPassedAwayApi(id);
-    //     setPassedAwayArray(data);
-    // }
 
-    // useEffect(() => {
-    //     getPassedAwayArray(manager?.manager_id);
-    //     setManagerInputs({...manager});
-    // }, [manager?.manager_id])
-    // useEffect(() => {
-    //     // console.log(managerInputs);
-    // }, [managerInputs])
+    const getPassedAwayArray = async (id) => {
+        const data = await getManagerPassedAwayApi(id);
+        setPassedAwayArray(data);
+    }
 
+    useEffect(() => {
+        setManagerInputs({ ...manager });
+        getPassedAwayArray(manager_id);
+    }, [])
     // useEffect(() => {
     //     console.log(passedAwayArray);
     // }, [passedAwayArray])
 
+
+
     return (
         <>
             <HeaderNav />
-            <MyAccountUi manager={managerInputs} handleChange={handleChange} handleSubmit={handleSubmit} message={message} />
+            {manager_id && <>
+                <MyAccountUi
+                    manager={managerInputs}
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmit}
+                    message={message}
+                    passedAwayArray={passedAwayArray}
+                />
+            </>
+            }
         </>
     )
 

@@ -2,7 +2,6 @@ import { useState } from "react";
 import Header from "../compnents/navigtion/Header";
 import FormUi from "../compnents/ui/AddpassedAwayUi/FormUi";
 
-import CircularProgress from '@mui/joy/CircularProgress';
 import { createPassedAwayApi } from "../function/fetchFunction";
 import useManagerPermission from "../function/usePermission";
 import { useNavigate } from "react-router-dom";
@@ -12,11 +11,9 @@ import './css/createPassedAway.css'
 
 
 function CreatePassedAway({ heDates }) {
-    const manager = useManagerPermission();
+    const manager = useManagerPermission('manager');
+  
     const navigate = useNavigate();
-    if (!manager) {
-        navigate("/login");
-    }
 
 
 
@@ -36,7 +33,7 @@ function CreatePassedAway({ heDates }) {
     });
     const [message, setMessage] = useState({ type: "", body: "" });
 
- 
+
 
     const handleChange = (event) => {
         if (event.target.type === "checkbox") {
@@ -63,18 +60,17 @@ function CreatePassedAway({ heDates }) {
     }
 
 
-
     return (
         <>
             <Header />
-            {heDates ?
+            {heDates && manager &&
                 <FormUi
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
                     newPassed={newPassed}
                     message={message}
                     heDates={heDates}
-                /> : <CircularProgress thickness={1} />}
+                />}
             {message.type && <div className={message.type}>
                 {message.body}
             </div>}

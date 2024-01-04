@@ -1,7 +1,6 @@
 import makeHeDates from "./makeHeDates";
 
 function getHeDates() {
-    console.log("getHeDates");
     let heDates = localStorage.getItem("heDates");
     if (heDates) {
         heDates = JSON.parse(heDates);
