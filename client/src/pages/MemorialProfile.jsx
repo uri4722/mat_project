@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import Header from '../compnents/navigtion/Header';
 import MemorialProfileUi from '../compnents/ui/MemorialProfileUi/MemorialProfileUi';
-import { createMemorialProfileApi, getPassedAwayApi } from '../function/fetchFunction';
+import { createMemorialProfileApi, deleteStoryApi, getPassedAwayApi } from '../function/fetchFunction';
 
 import Joi from 'joi';
 
@@ -11,19 +11,13 @@ import Joi from 'joi';
 function MemorialProfile() {
     const { id } = useParams();
     const { state } = useLocation();
+    const manager = state?.manager;
 
     const [passedAway, setPassedAway] = useState();
     const [message, setMessage] = useState({ body: "", type: "" });
 
 
     useEffect(() => {
-        // if the user came form navigate to this page
-        // until the data is loaded from the API
-        // Not including the mishniot and the stories
-        if (state) {
-            setPassedAway(state.passedAway);
-        }
-
         // from the API 
         // including the mishniot and the stories
         getPassedAwayApi(id).then((data) => {
@@ -34,9 +28,15 @@ function MemorialProfile() {
         })
 
 
+
     }, [state, id])
 
-    const [user, setUser] = useState({ email: "", password: "", masechtot: [], story: { title: "", story: "" } });
+    // useEffect(() => {
+    //     console.log(passedAway);
+    // }, [passedAway])
+
+
+    const [user, setUser] = useState({ email: "", password: "", masechtot: [], story: { title: "", story: "", story_id: "" } });
 
 
     const handleChangeMasechtot = (event) => {
@@ -48,6 +48,16 @@ function MemorialProfile() {
     }
     const handleChangeStores = ({ target }) => {
         setUser({ ...user, story: { ...user.story, [target.name]: target.value } })
+    }
+    const handleDeleteStores = async (storyId) => {
+        try {
+            await deleteStoryApi(storyId);
+            const newStores = passedAway.stores.filter((story) => story.story_id !== storyId);
+            setPassedAway({ ...passedAway, stores: newStores });
+            setMessage({ body: "הסיפור נמחק בהצלחה", type: "success" });
+        } catch (error) {
+            console.log(error);
+        }
     }
     const handleChangeInput = ({ target }) => {
         setUser({ ...user, [target.name]: target.value })
@@ -62,21 +72,17 @@ function MemorialProfile() {
             return;
         }
         if (!error) {
-            const ans = await createMemorialProfileApi(id, user);
+            try {
+                const ans = await createMemorialProfileApi(id, user);
+                console.log(ans);
+                setPassedAway({ ...passedAway, stores: [...passedAway.stores, ans.stores] });
 
-            // dont work need to fix
-            // console.log({ ...passedAway, stores: [...passedAway.stores, ans.story] });
-
-            // setPassedAway({ ...passedAway, stores: [...passedAway.stores, ans.story] });
-
-            if (ans.story.story) {
-                passedAway.stores.push(ans.story);
+                setPassedAway({ ...passedAway, mishnaiot: updateMishnioat(passedAway.mishnaiot, ans.masechtot) });
+                setMessage({ body: "ההרשמה בוצעה בהצלחה", type: "success" });
+                setUser({ ...user, masechtot: [], story: { title: "", story: "" } });
+            } catch (error) {
+                console.log(error);
             }
-            // 
-
-            setPassedAway({ ...passedAway, mishnaiot: updateMishnioat(passedAway.mishnaiot, ans.masechtot) });
-            setMessage({ body: "ההרשמה בוצעה בהצלחה", type: "success" });
-            setUser({ ...user, masechtot: [], story: { title: "", story: "" } });
         }
     }
 
@@ -117,7 +123,7 @@ function MemorialProfile() {
         sedriMishna.forEach((seder) => {
             let isSederLearn = false;
             seder.forEach((masechet) => {
-                if (masechet.learn) {
+                if (masechet.alreadyTaken) {
                     isSederLearn = true;
                     count.learn++
                 }
@@ -140,6 +146,8 @@ function MemorialProfile() {
                 handleSubmit={handleSubmit}
                 handleChangeStores={handleChangeStores}
                 message={message}
+                manager={manager}
+                handleDeleteStores={handleDeleteStores}
             />
         </div>}
 

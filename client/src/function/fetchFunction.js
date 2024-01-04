@@ -71,6 +71,11 @@ export const updateManager = async (manager, id) => {
     const ans = await putRequst(manager, URL);
     return ans;
 }
+export const deleteStoryApi = async (id) => {
+    const URL = `${BASEURL}stores/${id}`;
+    const ans = await axios.delete(URL);
+    return ans;
+}
 
 
 
@@ -92,5 +97,6 @@ const putRequst = async (body, path) => {
     } catch (error) {
         throw error.response.data;
     }
+
 }
 

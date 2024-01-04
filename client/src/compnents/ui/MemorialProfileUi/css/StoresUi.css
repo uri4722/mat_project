@@ -29,3 +29,7 @@
     font-weight: bold;
     margin: 5px;
 }
+
+.story button {
+    float: right;
+}

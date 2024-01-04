@@ -1,17 +1,15 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import isUser from "./isUser";
+import getUser from "./getUser";
 
 function usePermission(type) {
-    const user = sessionStorage.getItem(type) ?
-        sessionStorage.getItem(type) :
-        localStorage.getItem(type);
     const navigate = useNavigate();
 
-
     useEffect(() => {
-        !user && navigate("/Login")
-    }, [user, navigate])
+        if (!isUser(type)) navigate("/Login")
+    }, [navigate])
 
-    return JSON.parse(user);
+    return getUser(type);
 }
 export default usePermission

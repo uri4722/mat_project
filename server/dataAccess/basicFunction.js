@@ -44,13 +44,13 @@ async function updateRowSql(table, pkName, columns, values, id) {
     return res;
 }
 
-// async function deleteRaw(table, pkName, id) {
-//     const sql = `DELETE FROM ${table} 
-//     WHERE ${pkName} = ?`;
-//     const [res] = await pool.query(sql, [id])
+async function deleteRawSql(table, pkName, id) {
+    const sql = `DELETE FROM ${table} 
+    WHERE ${pkName} = ?`;
+    const [res] = await pool.query(sql, [id])
 
-//     return res;
-// }
+    return res;
+}
 
 // async function updateRaw(table, pkName, id, keyChange, valueChange) {
 //     const sql = `UPDATE ${table}
@@ -86,4 +86,4 @@ async function updateRowSql(table, pkName, columns, values, id) {
 
 // module.exports = { addRow, search, deleteRaw, updateRaw, userAuth }
 
-module.exports = { insertRowSql, getRecordsSql, updateRowSql }
+module.exports = { insertRowSql, getRecordsSql, updateRowSql,deleteRawSql }

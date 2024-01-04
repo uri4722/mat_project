@@ -14,11 +14,6 @@ function Home() {
     const [passedAwayArray, setPassedAwayArray] = useState([]);
     const [displayPassedAway, setDisplayPassedAway] = useState([]);
 
-    // useEffect(() => {
-    //     console.log(displayPassedAway);
-    //     console.log(passedAwayArray);
-    // }, [displayPassedAway, passedAwayArray])
-
     const getPassedAwayArray = async () => {
         const data = await getAllPassedAwayApi();
         setPassedAwayArray(data);

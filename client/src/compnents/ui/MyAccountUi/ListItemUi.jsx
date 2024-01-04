@@ -12,10 +12,9 @@ import candle from '../../../assets/img/candle2.jpg'
 
 
 function ListItemUi({ name, date, about, img, lonely, soldier, rabbi, age }) {
-    console.log(date);
     return (
 
-        <ListItem>
+        <ListItem >
             <ListItemDecorator>
                 <Avatar src={img ? img : candle} />
             </ListItemDecorator>

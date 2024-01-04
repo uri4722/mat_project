@@ -9,9 +9,9 @@ router.post('/:id', async (req, res) => {
     const { body } = req;
 
     try {
-        const response = await newMemorialProfileService(id, body);
-        console.log(response);
-        res.status(200).json(body);
+        const newStory = await newMemorialProfileService(id, body);
+        const response = { story: newStory, masechtot: body.masechtot };
+        res.status(200).json(response);
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: error });

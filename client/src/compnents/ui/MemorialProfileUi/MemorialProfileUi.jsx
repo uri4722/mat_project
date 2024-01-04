@@ -1,5 +1,4 @@
 
-
 import './css/MemorialProfileUi.css'
 import ProfileCard from './ProfileCard';
 import StoresUi from './StoresUi';
@@ -17,7 +16,10 @@ function MemorialProfileUi({
     handleChangeStores,
     handleChangeInput,
     handleSubmit,
-    message }) {
+    message,
+    manager,
+    handleDeleteStores
+}) {
 
     const [registerDisplay, setRegisterDisplay] = useState(false);
 
@@ -32,6 +34,8 @@ function MemorialProfileUi({
                     stores={profile.stores}
                     handleChangeStores={handleChangeStores}
                     newStory={user.story}
+                    manager={manager}
+                    handleDeleteStores={handleDeleteStores}
                 />
             </div>
             <div className='mishnaiot-grid'>
