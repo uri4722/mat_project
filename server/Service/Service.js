@@ -35,7 +35,7 @@ async function getPassedAwayService(id) {
     passedAway.forEach(passed => {
         arrangeSqlDate(passed);
     });
-    // console.log(passedAway);
+    console.log(passedAway);
     return passedAway;
 }
 
@@ -185,7 +185,7 @@ async function newUserService({ name, password, email }) {
     const keys = ['name', 'password', 'email'];
     const values = [name, password, email];
     const ans = await newUser(keys, values);
-    // console.log(ans);
+    console.log(ans);
     return ans;
 
 
@@ -195,13 +195,13 @@ async function newManagerService({ name, password, email, phone }) {
     const keys = ['name', 'password', 'email', 'phone'];
     const values = [name, password, email, phone];
     const ans = await newManager(keys, values);
-    // console.log(ans);
+    console.log(ans);
     return ans;
 }
 
 async function loginManagerService({ email, password }) {
     const [manager] = await getManager(email);
-    // console.log(manager);
+    console.log(manager);
     if (!manager) {
         throw { message: 'מייל לא קיים במערכת' }
     } else {
@@ -241,7 +241,7 @@ async function updateManagerService(body, id) {
     const columns = ['name', 'password', 'email', 'phone'];
     const values = [body.name, body.password, body.email, body.phone];
     const ans = await updateManager(columns, values, id);
-    // console.log(ans);
+    console.log(ans);
     return ans;
 }
 
