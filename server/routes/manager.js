@@ -29,8 +29,8 @@ router.post('/register', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 })
-router.post('/login', async (req, res) => {
-    console.log("post manager login");
+router.post('/LoginManager', async (req, res) => {
+    console.log("post manager LoginManager");
     const { body } = req;
 
     try {

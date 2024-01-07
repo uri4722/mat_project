@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
     }
 })
 router.get('/:id', async (req, res) => {
-    // console.log("get passed away");
+    console.log("get passed away");
     const { id } = req.params;
     try {
         const passed_away = await getPassedAwayService(id);

@@ -63,7 +63,7 @@ async function deleteRawSql(table, pkName, id) {
 
 // async function userAuth(req, res, next) {
 //     console.log(req.path);
-//     if (req.path === '/login') {
+//     if (req.path === '/LoginManager') {
 //         next();
 //     }
 
