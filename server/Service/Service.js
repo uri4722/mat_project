@@ -11,8 +11,7 @@ const {
     newManager,
     getManager,
     getManagerPassedAway,
-    updateManager,
-    deleteStory
+    updateManager
 } = require('../dataAccess/dataAccess');
 const { tishreiToNissan, arrangeSqlDate } = require('./function');
 
@@ -165,22 +164,21 @@ async function newMemorialProfileService(id, memorialProfile) {
 
     if (masechtot && masechtot.length > 0) {
         const todayISO = new Date().toISOString().slice(0, 10);
-        await masechtot.forEach(async masechet => {
+        masechtot.forEach(async masechet => {
             const keys = ['passed_away_id', 'maschet', 'user_id', 'start_date'];
             const values = [id, masechet, user.user_id, todayISO];
             await newCommitment(keys, values);
+            return "success"
+
         })
     }
 
     if (story.story) {
         const keys = ['passed_away_id', 'title', 'story', 'user_id'];
         const values = [id, story.title, story.story, user.user_id];
-        const ans = await newStory(keys, values);
-        ans.story_id = ans.id;
-        delete ans.id;
-        return ans;
+        await newStory(keys, values);
+        return "success";
     }
-    return "success";
 }
 
 async function newUserService({ name, password, email }) {
@@ -247,11 +245,6 @@ async function updateManagerService(body, id) {
     return ans;
 }
 
-async function deleteStoryService(id) {
-    const ans = await deleteStory(id);
-    return ans;
-}
-
 module.exports = {
     getPassedAwayService,
     newPassedAwayService,
@@ -262,7 +255,6 @@ module.exports = {
     newManagerService,
     loginManagerService,
     getManagerPassedAwayService,
-    updateManagerService,
-    deleteStoryService
+    updateManagerService
 
 }

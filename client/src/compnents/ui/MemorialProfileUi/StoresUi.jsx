@@ -1,32 +1,21 @@
 import Switch from "@mui/joy/Switch";
 import "./css/StoresUi.css"
 import { useState } from "react";
-import { Chip, Input, Textarea } from '@mui/joy';
-// import DeleteForever from '@mui/icons-material/DeleteForever';
+import { Input, Textarea } from '@mui/joy';
 
 
 
-
-function StorisUi({ stores, handleChangeStores, newStory, manager,handleDeleteStores }) {
+function StorisUi({ stores, handleChangeStores, newStory }) {
     const [display, setDisplay] = useState(false);
     return (
         <div className="storesContiner">
             {stores && stores.map((story, index) => {
                 return (
-                    <div key={story.story_id} className="story">
+                    <div key={index} className="story">
                         <h2>{story.title}</h2>
                         <p>{story.story}</p>
                         <br />
                         <p>{story.gmail}</p>
-                        {manager &&
-                            <Chip
-                                variant="outlined"
-                                color="danger"
-                                onClick={() => handleDeleteStores(story.story_id)}
-                            >
-                                מחק
-                            </Chip>
-                        }
                     </div>
                 )
             })}

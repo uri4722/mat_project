@@ -1,4 +1,4 @@
-const { insertRowSql, getRecordsSql,updateRowSql, deleteRawSql } = require("./basicFunction");
+const { insertRowSql, getRecordsSql,updateRowSql } = require("./basicFunction");
 
 async function getPassedAway(id) {
     if (id) {
@@ -48,10 +48,6 @@ async function updateManager(columns, values, id) {
     return await updateRowSql('managers',"manager_id", columns, values, id);
 }
 
-async function deleteStory(id) {
-    return await deleteRawSql('stores', 'story_id', id);
-}
-
 
 
 module.exports = {
@@ -66,6 +62,5 @@ module.exports = {
     newManager,
     getManager,
     getManagerPassedAway,
-    updateManager,
-    deleteStory
+    updateManager
 };
