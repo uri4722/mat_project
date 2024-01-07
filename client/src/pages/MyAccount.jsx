@@ -10,6 +10,8 @@ function MyAccount() {
     if (!manager) {
         manager = {};
     }
+    console.log(manager);
+    console.log(manager.manager_id);
     const { manager_id, ...managerFields } = manager;
     const [managerInputs, setManagerInputs] = useState({ ...managerFields });
     const [message, setMessage] = useState({ body: "", type: "" });

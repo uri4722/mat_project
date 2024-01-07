@@ -3,8 +3,8 @@ import { useState } from "react"
 import Header from "../compnents/navigtion/Header";
 import LoginUi from "../compnents/ui/LoginUi/LoginUi";
 import { useNavigate } from "react-router-dom";
-import Joi from "joi";
 import { LoginManager } from "../function/fetchFunction";
+import { loginSchema } from "../JoiSchema/loginSchema";
 function Login() {
     const [user, setUser] = useState({ email: "", password: "" });
     const [rememberMe, setRememberMe] = useState(false);
@@ -50,23 +50,7 @@ function Login() {
 
     }
 
-    const schema = Joi.object({
-        email:
-            Joi.string()
-                .email({ tlds: { allow: false } })
-                .message("כתובת מייל לא תקינה")
-                .required()
-                .messages({ 'string.empty': ' צריך למלאות אימייל' }),
-
-        password:
-            Joi.string()
-                .min(6)
-                .message("סיסמא חייבת להכיל לפחות 6 תווים")
-                .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
-                .message("סיסמא חייבת להכיל אותיות באנגלית ומספרים בלבד")
-                .required()
-                .messages({ 'string.empty': ' צריך למלאות סיסמא' }),
-    })
+    const schema = loginSchema;
 
 
 

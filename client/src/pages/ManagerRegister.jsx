@@ -1,6 +1,5 @@
 import "./css/managerRegister.css";
 import { useState } from "react";
-import Joi from 'joi';
 import Header from "../compnents/navigtion/Header";
 import ManagerRegisterUi from "../compnents/ui/LoginUi/ManagerRegisterUi";
 import { useNavigate } from "react-router-dom";
@@ -35,7 +34,9 @@ export default function ManagerRegister() {
         if (!error) {
 
             try {
-                const newUser = await createManager(user);
+                let newUser = await createManager(user);
+                newUser.manager_id = newUser.id;
+                delete newUser._id;
                 localStorage.setItem("manager", JSON.stringify(newUser));
 
 
