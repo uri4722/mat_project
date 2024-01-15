@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import HeaderNav from "../compnents/navigtion/HeaderNav";
-import useManagerPermission from "../function/usePermission";
+import usePermission from "../function/usePermission";
 import { getManagerPassedAwayApi, updateManager } from "../function/fetchFunction";
 import MyAccountUi from "../compnents/ui/MyAccountUi/MyAccountUi";
 import { managerRegisterSchema } from "../JoiSchema/managerRegisterSchema";
 
 function MyAccount() {
-    let manager = useManagerPermission('manager');
+    let manager = usePermission('manager');
     if (!manager) {
         manager = {};
     }

@@ -7,7 +7,7 @@ function usePermission(type) {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!isUser(type)) navigate("/Login")
+        if (!isUser(type)) navigate(type === "manager" ? "/Login" : "/userLogin")
     }, [navigate])
 
     return getUser(type);

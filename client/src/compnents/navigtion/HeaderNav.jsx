@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import "./css/HeaderNav.css"
 import { useEffect, useState } from "react";
-import useManagerPermission from "../../function/usePermission";
 
 function HeaderNav() {
     const [manager, setManager] = useState(null);
@@ -23,6 +22,7 @@ function HeaderNav() {
             </nav>
             <nav className="navBtn">
                 <NavLink to={"/MyAccount"}>לאזור האישי</NavLink>
+                <NavLink to={"/MyCommitments"}>המשניות שלי</NavLink>
                 <NavLink to={"/createPassedAway"}>להוספת נפטר</NavLink>
                 <NavLink to={"/home"}>לרשימת הנפטרים</NavLink>
                 <NavLink to={"/about"}>קצת עלינו</NavLink>

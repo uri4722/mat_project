@@ -5,7 +5,8 @@ import LoginUi from "../compnents/ui/LoginUi/LoginUi";
 import { useNavigate } from "react-router-dom";
 import { LoginManager } from "../function/fetchFunction";
 import { loginSchema } from "../JoiSchema/loginSchema";
-function Login() {
+function Login({type}) {
+    console.log(type);
     const [user, setUser] = useState({ email: "", password: "" });
     const [rememberMe, setRememberMe] = useState(false);
     const [message, setMessage] = useState({ body: "", type: "" });
