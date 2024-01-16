@@ -1,7 +1,7 @@
 import Divider from "@mui/joy/Divider";
 import "./css/myCommitmentsUi.css"
 
-function MyCommitmentsUi({ commitments }) {
+function MyCommitmentsUi({ commitments, getMishnayot }) {
     return (
         <div className="commitments-container">
             <h2>המשניות שקיבלתי על עצמי</h2>
@@ -14,7 +14,7 @@ function MyCommitmentsUi({ commitments }) {
                         <ul>
                             {commitment.masechtot.map((masechet, index) => {
                                 return (
-                                    <li key={masechet} className="masechet">
+                                    <li key={masechet} className="masechet" onClick={() => getMishnayot(masechet)}>
                                         📖{masechet}
                                     </li>
                                 )

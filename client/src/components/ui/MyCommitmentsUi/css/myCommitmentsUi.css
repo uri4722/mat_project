@@ -1,13 +1,11 @@
-body{
-    background-color: rgb(247, 245, 244);
-}
+
 
 .commitments-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: auto;
     margin-top: 20px;
 }
 
@@ -18,8 +16,8 @@ body{
     align-items: center;
     justify-content: center;
     width: 100%;
-    
-   
+
+
 }
 
 .commitments-list h3 {
@@ -31,7 +29,8 @@ body{
     text-align: center;
 
 }
-.commitments-list ul{
+
+.commitments-list ul {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -40,9 +39,10 @@ body{
     margin: 0;
     padding: 0;
 
-   /* height: 40px; */
+    /* height: 40px; */
 
 }
+
 .commitments-list li {
     display: flex;
     flex-direction: column;

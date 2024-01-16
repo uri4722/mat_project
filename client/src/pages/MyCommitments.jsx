@@ -3,11 +3,17 @@ import Header from "../components/navigtion/Header";
 import usePermission from "../function/usePermission";
 import { getMyCommitmentsApi } from "../function/fetchFunction";
 import MyCommitmentsUi from "../components/ui/MyCommitmentsUi/MyCommitmentsUi";
+import axios from "axios";
+import DisplayMishnayot from "../components/ui/MyCommitmentsUi/DisplayMishnayot";
 
 function MyCommitments() {
     let user = usePermission('user');
-   
-    const [commitments, setCommitments] = useState([]); // מערך של ההתחייבויות של המשתמש
+    const [open, setOpen] = useState(false);
+
+
+    const [commitments, setCommitments] = useState([]);
+    const [mishnayot, setMishnayot] = useState([]);      
+
 
     const getMyCommitments = async () => {
         try {
@@ -25,15 +31,25 @@ function MyCommitments() {
         getMyCommitments();
     }, [])
 
-    //in the end delete
-    useEffect(() => {
-        console.log(commitments);
+    const getMishnayot = async (masechet) => {
+        try {
+            const { data } = await axios.get(`https://www.sefaria.org/api/texts/משנה ${masechet}?context=0&pad=0`);
+            setMishnayot(data.he);
+            setOpen(true);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 
-    }, [commitments])
+    useEffect(() => {
+        getMishnayot()
+    }, [])
 
     return (<>
         <Header />
-        {user && <MyCommitmentsUi commitments={commitments} />}
+        {mishnayot && <DisplayMishnayot mishnayot={mishnayot} open={open} setOpen={setOpen} />}
+        {user && <MyCommitmentsUi commitments={commitments} getMishnayot={getMishnayot} />}
+
 
     </>
     )
