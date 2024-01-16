@@ -4,7 +4,7 @@ import Header from '../components/navigtion/Header';
 import MemorialProfileUi from '../components/ui/MemorialProfileUi/MemorialProfileUi';
 import { createMemorialProfileApi, deleteStoryApi, getPassedAwayApi } from '../function/fetchFunction';
 
-import Joi from 'joi';
+import { memorialProfileSchema } from '../JoiSchema/memorialProfileSchema';
 
 
 
@@ -27,16 +27,12 @@ function MemorialProfile() {
             console.log(error);
         })
 
-
-
     }, [state, id])
 
-    // useEffect(() => {
-    //     console.log(passedAway);
-    // }, [passedAway])
-
-
     const [user, setUser] = useState({ email: "", password: "", masechtot: [], story: { title: "", story: "", story_id: "" } });
+    // useEffect(() => {
+    //     console.log(user);
+    // }, [user])
 
 
     const handleChangeMasechtot = (event) => {
@@ -86,22 +82,7 @@ function MemorialProfile() {
         }
     }
 
-    const schema = Joi.object({
-        email: Joi.string()
-            .email({ tlds: { allow: false } })
-            .message("כתובת מייל לא תקינה")
-            .required()
-            .messages({ 'string.empty': ' צריך למלאות אימייל' }),
-        password: Joi.string()
-            .min(6)
-            .message("סיסמא חייבת להכיל לפחות 6 תווים")
-            .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
-            .message("סיסמא חייבת להכיל אותיות באנגלית ומספרים בלבד")
-            .required()
-            .messages({ 'string.empty': ' צריך למלאות סיסמא' }),
-        masechtot: Joi.array(),
-        story: Joi.object()
-    })
+    const schema = memorialProfileSchema;
 
     const updateMishnioat = (masechtot, masechtotChange) => {
         const newMisnaiot = [...masechtot];

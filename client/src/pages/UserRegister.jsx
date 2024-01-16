@@ -1,8 +1,8 @@
 import { useState } from "react";
 import UserRegisterUi from "../components/ui/UserRegisterUi/UserRegisterUi";
 
-import Joi from 'joi';
 import { createUser } from "../function/fetchFunction";
+import { userRegisterSchema } from "../JoiSchema/userRegisterSchema";
 
 function UserRegister({ setRegisterDisplay }) {
     const [user, setUser] = useState({ name: "", email: "", password: "" });
@@ -33,26 +33,7 @@ function UserRegister({ setRegisterDisplay }) {
         }
     }
 
-    const schema = Joi.object({
-        email: Joi.string()
-            .email({ tlds: { allow: false } })
-            .message("כתובת מייל לא תקינה")
-            .required()
-            .messages({ 'string.empty': ' צריך למלאות אימייל' }),
-        password: Joi.string()
-            .min(6)
-            .message("סיסמא חייבת להכיל לפחות 6 תווים")
-            .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
-            .message("סיסמא חייבת להכיל אותיות באנגלית ומספרים בלבד")
-            .required()
-            .messages({ 'string.empty': ' צריך למלאות סיסמא' }),
-        name: Joi.string()
-            .min(2)
-            .message("שם חייב להכיל לפחות 2 תווים")
-            .required()
-            .messages({ 'string.empty': ' צריך למלאות שם' }),
-
-    })
+    const schema = userRegisterSchema;
 
 
     return <>
