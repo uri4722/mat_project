@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Header from "../compnents/navigtion/Header";
-import FormUi from "../compnents/ui/AddpassedAwayUi/FormUi";
+import Header from "../components/navigtion/Header";
+import FormUi from "../components/ui/AddpassedAwayUi/FormUi";
 
 import { createPassedAwayApi } from "../function/fetchFunction";
 import useManagerPermission from "../function/usePermission";

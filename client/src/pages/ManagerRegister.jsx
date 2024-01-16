@@ -1,7 +1,7 @@
 import "./css/managerRegister.css";
 import { useState } from "react";
-import Header from "../compnents/navigtion/Header";
-import ManagerRegisterUi from "../compnents/ui/LoginUi/ManagerRegisterUi";
+import Header from "../components/navigtion/Header";
+import ManagerRegisterUi from "../components/ui/LoginUi/ManagerRegisterUi";
 import { useNavigate } from "react-router-dom";
 import { createManager } from "../function/fetchFunction";
 import { managerRegisterSchema } from "../JoiSchema/managerRegisterSchema";

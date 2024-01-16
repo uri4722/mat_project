@@ -1,19 +1,20 @@
 import "./css/login.css"
 import { useState } from "react"
-import Header from "../compnents/navigtion/Header";
-import LoginUi from "../compnents/ui/LoginUi/LoginUi";
+import Header from "../components/navigtion/Header";
+import LoginUi from "../components/ui/LoginUi/LoginUi";
 import { useNavigate } from "react-router-dom";
-import { LoginManager } from "../function/fetchFunction";
+import { fetchLogin } from "../function/fetchFunction";
 import { loginSchema } from "../JoiSchema/loginSchema";
-function Login({type}) {
-    console.log(type);
-    const [user, setUser] = useState({ email: "", password: "" });
+
+function Login({ type }) {
+    const [login, setLogin] = useState({ email: "", password: "" });
     const [rememberMe, setRememberMe] = useState(false);
     const [message, setMessage] = useState({ body: "", type: "" });
     const navigate = useNavigate();
 
+
     const handleChange = ({ target }) => {
-        setUser({ ...user, [target.name]: target.value });
+        setLogin({ ...login, [target.name]: target.value });
     }
 
     const handleCheck = ({ target }) => {
@@ -22,25 +23,26 @@ function Login({type}) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(user);
+        console.log(login);
 
-        const { error } = schema.validate(user);
+        const schema = loginSchema;
+        const { error } = schema.validate(login);
         if (error) {
             setMessage({ body: error.details[0].message, type: "error" });
             return;
         }
         else {
             try {
-                const manager = await LoginManager(user);
+                const user = await fetchLogin(type, login);
 
                 rememberMe ?
-                    localStorage.setItem("manager", JSON.stringify(manager)) :
-                    sessionStorage.setItem("manager", JSON.stringify(manager));
+                    localStorage.setItem(type, JSON.stringify(user)) :
+                    sessionStorage.setItem(type, JSON.stringify(user));
 
                 setMessage({ body: "התחברת בהצלחה", type: "success" });
-                setUser({ email: "", password: "" });
+                setLogin({ email: "", password: "" });
                 setTimeout(() => {
-                    navigate("/MyAccount");
+                    navigate(type === 'manager' ? "/MyAccount" : "/MyCommitments");
                 }, 1600)
             } catch (error) {
                 setMessage({ body: error.message, type: "error" });
@@ -48,11 +50,7 @@ function Login({type}) {
 
         }
 
-
     }
-
-    const schema = loginSchema;
-
 
 
     return (
@@ -60,7 +58,7 @@ function Login({type}) {
             <Header />
             <LoginUi
                 message={message}
-                user={user}
+                user={login}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
                 handleCheck={handleCheck}

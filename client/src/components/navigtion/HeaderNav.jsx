@@ -1,24 +1,16 @@
 import { NavLink } from "react-router-dom";
 import "./css/HeaderNav.css"
 import { useEffect, useState } from "react";
+import isUser from "../../function/isUser";
 
 function HeaderNav() {
-    const [manager, setManager] = useState(null);
+    const userConect = isUser('manager') || isUser('user');
 
-
-    useEffect(() => {
-        const manager = localStorage.getItem("manager") ?
-            localStorage.getItem("manager") :
-            sessionStorage.getItem("manager");
-        if (manager) {
-            setManager(JSON.parse(manager));
-        }
-    }, [])
 
     return (
         <div className="header-nav">
             <nav className="loginNav">
-                <NavLink to={manager ? '/logout' : '/login'}> {manager ? 'התנתקות' : 'התחברות'} </NavLink>
+                <NavLink to={userConect ? '/logout' : '/login'}> {userConect ? 'התנתקות' : 'התחברות'} </NavLink>
             </nav>
             <nav className="navBtn">
                 <NavLink to={"/MyAccount"}>לאזור האישי</NavLink>

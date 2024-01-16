@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./css/logout.css"
-import HeaderNav from "../compnents/navigtion/HeaderNav";
+import HeaderNav from "../components/navigtion/HeaderNav";
 import { useEffect } from "react";
 
 function Logout() {
@@ -11,6 +11,8 @@ function Logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('manager');
         sessionStorage.removeItem('manager');
+        localStorage.removeItem('user');
+        sessionStorage.removeItem('user');
     })
 
 

@@ -47,7 +47,7 @@ export const createMemorialProfileApi = async (id, memorialProfile) => {
 }
 
 export const createUser = async (user) => {
-    const URL = `${BASEURL}user`;
+    const URL = `${BASEURL}user/register`;
     const ans = postRequst(user, URL);
     return ans;
 
@@ -60,11 +60,10 @@ export const createManager = async (user) => {
 
 }
 
-export const LoginManager = async (user) => {
-    const URL = `${BASEURL}manager/login`;
+export const fetchLogin = async (type,user) => {
+    const URL = `${BASEURL}${type}/login`;
     const ans = postRequst(user, URL);
     return ans;
-
 }
 export const updateManager = async (manager, id) => {
     const URL = `${BASEURL}manager/${id}`;
@@ -76,7 +75,11 @@ export const deleteStoryApi = async (id) => {
     const ans = await axios.delete(URL);
     return ans;
 }
-
+export const getMyCommitmentsApi = async (id) => {
+    const URL = `${BASEURL}commitments/${id}`;
+    const { data } = await axios.get(URL);
+    return data;
+}
 
 
 const postRequst = async (body, path) => {

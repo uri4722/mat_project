@@ -1,4 +1,4 @@
-import HeaderNav from "../compnents/navigtion/HeaderNav";
+import HeaderNav from "../components/navigtion/HeaderNav";
 import "./css/about.css";
 function About() {
     return (<>

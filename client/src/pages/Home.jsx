@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 import Hebcal from "hebcal";
-import Header from "../compnents/navigtion/Header.jsx";
-import PassedAwayCards from "../compnents/ui/homeUi/PassedAwayCards.jsx";
-import Filters from "../compnents/ui/homeUi/Filters.jsx";
+import Header from "../components/navigtion/Header.jsx";
+import PassedAwayCards from "../components/ui/homeUi/PassedAwayCards.jsx";
+import Filters from "../components/ui/homeUi/Filters.jsx";
 
 import { getAllPassedAwayApi } from "../function/fetchFunction.js";
 

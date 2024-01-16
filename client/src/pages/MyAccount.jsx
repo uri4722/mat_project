@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import HeaderNav from "../compnents/navigtion/HeaderNav";
+import HeaderNav from "../components/navigtion/HeaderNav";
 import usePermission from "../function/usePermission";
 import { getManagerPassedAwayApi, updateManager } from "../function/fetchFunction";
-import MyAccountUi from "../compnents/ui/MyAccountUi/MyAccountUi";
+import MyAccountUi from "../components/ui/MyAccountUi/MyAccountUi";
 import { managerRegisterSchema } from "../JoiSchema/managerRegisterSchema";
 
 function MyAccount() {
@@ -10,8 +10,7 @@ function MyAccount() {
     if (!manager) {
         manager = {};
     }
-    console.log(manager);
-    console.log(manager.manager_id);
+
     const { manager_id, ...managerFields } = manager;
     const [managerInputs, setManagerInputs] = useState({ ...managerFields });
     const [message, setMessage] = useState({ body: "", type: "" });

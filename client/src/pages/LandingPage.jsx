@@ -1,6 +1,6 @@
-import Header from "../compnents/navigtion/Header";
-import BGvideo from "../compnents/ui/LandingPageUi/BGvideo";
-import LandingPageContent from "../compnents/ui/LandingPageUi/LandingPageContent";
+import Header from "../components/navigtion/Header";
+import BGvideo from "../components/ui/LandingPageUi/BGvideo";
+import LandingPageContent from "../components/ui/LandingPageUi/LandingPageContent";
 import Hebcal from "hebcal";
 import yahrzeit from "../function/yahrzeit";
 

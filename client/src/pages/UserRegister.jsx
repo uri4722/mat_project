@@ -1,5 +1,5 @@
 import { useState } from "react";
-import UserRegisterUi from "../compnents/ui/UserRegisterUi/UserRegisterUi";
+import UserRegisterUi from "../components/ui/UserRegisterUi/UserRegisterUi";
 
 import Joi from 'joi';
 import { createUser } from "../function/fetchFunction";

@@ -12,7 +12,8 @@ const {
     getManager,
     getManagerPassedAway,
     updateManager,
-    deleteStory
+    deleteStory,
+    getMyCommitments
 } = require('../dataAccess/dataAccess');
 const { tishreiToNissan, arrangeSqlDate } = require('./function');
 
@@ -216,6 +217,18 @@ async function loginManagerService({ email, password }) {
 
 }
 
+async function loginUserService({ email, password }) {
+    try {
+        user = await userAuth(email, password);
+        return user;
+    }
+    catch (error) {
+        throw error;
+    }
+
+
+}
+
 async function getStoresService(id) {
     const stores = await getStores(id);
     return stores;
@@ -252,6 +265,37 @@ async function deleteStoryService(id) {
     return ans;
 }
 
+async function myCommitmentsService(id) {
+    // get user commitments
+    const commitments = await getMyCommitments(id);
+
+    // arrange commitments by passed away
+    let passedAwayId = commitments[0].passed_away_id;
+    const myCommitments = [{ passedAwayName: passedAwayId, masechtot: [] }];
+    index = 0;
+
+    commitments.forEach(async commitment => {
+
+        if (commitment.passed_away_id !== passedAwayId) {
+
+            index++
+            myCommitments[index] = { passedAwayName: "", masechtot: [] };
+            passedAwayId = commitment.passed_away_id;
+            myCommitments[index].passedAwayName = passedAwayId;
+        }
+        myCommitments[index].masechtot.push(commitment.maschet);
+    })
+
+    // turns id into name
+    for (let i = 0; i < myCommitments.length; i++) {
+        const passedAway = await getPassedAway(myCommitments[i].passedAwayName);
+        myCommitments[i].passedAwayName = passedAway[0].name;
+    }
+
+    return myCommitments;
+
+}
+
 module.exports = {
     getPassedAwayService,
     newPassedAwayService,
@@ -261,8 +305,10 @@ module.exports = {
     newUserService,
     newManagerService,
     loginManagerService,
+    loginUserService,
     getManagerPassedAwayService,
     updateManagerService,
-    deleteStoryService
+    deleteStoryService,
+    myCommitmentsService
 
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import Header from '../compnents/navigtion/Header';
-import MemorialProfileUi from '../compnents/ui/MemorialProfileUi/MemorialProfileUi';
+import Header from '../components/navigtion/Header';
+import MemorialProfileUi from '../components/ui/MemorialProfileUi/MemorialProfileUi';
 import { createMemorialProfileApi, deleteStoryApi, getPassedAwayApi } from '../function/fetchFunction';
 
 import Joi from 'joi';

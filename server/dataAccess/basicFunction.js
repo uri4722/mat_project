@@ -10,9 +10,9 @@ const pool = mysql.createPool({
 })
 
 
-async function getRecordsSql(table, searchKey, searchValue, select) {
+async function getRecordsSql(table, searchKey, searchValue, select, orderBy) {
     const sql = `SELECT ${select ? select : "*"} FROM ${table} 
-    ${searchKey ? `WHERE ${searchKey} = ?` : ";"}`;
+    ${searchKey ? `WHERE ${searchKey} = ?` : ";"}${orderBy ? ` ORDER BY ${orderBy}` : ""}`;
 
     const [res] = await pool.query(sql, [searchValue])
     return res;
@@ -86,4 +86,4 @@ async function deleteRawSql(table, pkName, id) {
 
 // module.exports = { addRow, search, deleteRaw, updateRaw, userAuth }
 
-module.exports = { insertRowSql, getRecordsSql, updateRowSql,deleteRawSql }
+module.exports = { insertRowSql, getRecordsSql, updateRowSql, deleteRawSql }
