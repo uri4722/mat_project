@@ -5,12 +5,19 @@ import { getMyCommitmentsApi } from "../function/fetchFunction";
 import MyCommitmentsUi from "../components/ui/MyCommitmentsUi/MyCommitmentsUi";
 
 function MyCommitments() {
-    const user = usePermission('user');
+    let user = usePermission('user');
+   
     const [commitments, setCommitments] = useState([]); // מערך של ההתחייבויות של המשתמש
 
     const getMyCommitments = async () => {
-        const data = await getMyCommitmentsApi(user.user_id);
-        setCommitments(data);
+        try {
+
+            const data = await getMyCommitmentsApi(user?.user_id);
+            setCommitments(data);
+        }
+        catch (err) {
+            console.log(err);
+        }
 
     }
 
@@ -26,7 +33,7 @@ function MyCommitments() {
 
     return (<>
         <Header />
-        <MyCommitmentsUi commitments={commitments} />
+        {user && <MyCommitmentsUi commitments={commitments} />}
 
     </>
     )

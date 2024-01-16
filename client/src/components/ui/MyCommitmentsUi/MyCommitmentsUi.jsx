@@ -11,13 +11,11 @@ function MyCommitmentsUi({ commitments }) {
                         <Divider sx={{ '--Divider-childPosition': "50%" }}>
                             <h3> {commitment.passedAwayName}</h3>
                         </Divider>
-
                         <ul>
                             {commitment.masechtot.map((masechet, index) => {
                                 return (
-                                    <li key={index} >
-                                        <span className="masechet">📖{masechet}</span>
-
+                                    <li key={masechet} className="masechet">
+                                        📖{masechet}
                                     </li>
                                 )
                             }
