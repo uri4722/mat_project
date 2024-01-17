@@ -43,13 +43,9 @@ async function getPassedAwayService(id) {
 }
 async function getPassedAwayByYahrzeitService() {
 
-
-    const { dd, mm, yy } = new HDate();
-
-    console.log(dd, mm);
+    const { dd, mm } = new HDate();
 
     const passedAway = await getPassedAwayByDate(dd, mm);
-    console.log(passedAway);
 
     // // Add Hebrew date to each record
     passedAway.forEach(passed => {

@@ -19,7 +19,7 @@ export const getPassedAwayApi = async (id) => {
 export const getYahrzeitApi = async () => {
     const URL = `${BASEURL}passedAway/yahrzeit`;
     const { data } = await axios.get(URL);
-    return data[0];
+    return data;
 }
 
 export const getManagerPassedAwayApi = async (id) => {
