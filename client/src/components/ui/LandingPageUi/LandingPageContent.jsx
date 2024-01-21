@@ -32,15 +32,22 @@ function LandingPageContent({ yahrzeitList }) {
             <div className="todayDate">
                 היום {heToday.toString('h')} חל יום הפטירה
             </div>
-            <div className="contentContainer">
-                <button onClick={() => setIndex(Math.abs((index - 1) % yahrzeitList.length))}>{"<"}</button>
-                <div className="landingPageContentText">
-                    <h2>{yahrzeitList[index]?.name} זצ"ל</h2>
-                    <h3>יום השנה ה {calcDiff()} לפטירתו</h3>
+            {yahrzeitList.length > 0 ?
+                <> <div className="contentContainer">
+                    <button onClick={() => setIndex(Math.abs((index - 1) % yahrzeitList.length))}>{"<"}</button>
+                    <div className="landingPageContentText">
+                        <h2>{yahrzeitList[index]?.name} זצ"ל</h2>
+                        <h3>יום השנה ה {calcDiff()} לפטירתו</h3>
+                    </div>
+                    <button onClick={() => setIndex((index + 1) % yahrzeitList.length)}>{">"}</button>
                 </div>
-                <button onClick={() => setIndex((index + 1) % yahrzeitList.length)}>{">"}</button>
-            </div>
-            <button className="takeBtn">לקבלת משניות לעלוי נשמתו</button>
+                    <button className="takeBtn">לקבלת משניות לעלוי נשמתו</button>
+                </> :
+
+                <h2>אין יארצטים ליום זה</h2>
+
+            }
+
         </div>
     );
 }
