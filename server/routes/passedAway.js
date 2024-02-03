@@ -1,5 +1,5 @@
 const express = require('express');
-const { newPassedAwayService, getPassedAwayService } = require('../service/service');
+const { newPassedAwayService, getPassedAwayService, getPassedAwayByYahrzeitService } = require('../service/service');
 
 const router = express.Router();
 
@@ -12,8 +12,18 @@ router.get('/', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 })
+router.get('/yahrzeit', async (req, res) => {
+    console.log("get passed away by yahrzeit");
+    try {
+        const passed_away = await getPassedAwayByYahrzeitService();
+        res.status(200).json(passed_away);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+
+})
 router.get('/:id', async (req, res) => {
-    // console.log("get passed away");
+    console.log("get passed away");
     const { id } = req.params;
     try {
         const passed_away = await getPassedAwayService(id);
@@ -23,6 +33,8 @@ router.get('/:id', async (req, res) => {
     }
 
 })
+
+
 
 router.post('/', async (req, res) => {
     console.log("post passed away");

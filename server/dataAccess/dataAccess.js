@@ -7,6 +7,11 @@ async function getPassedAway(id) {
         return await getRecordsSql('passed_away');
     }
 }
+async function getPassedAwayByDate(dd,mm) {
+        return await getRecordsSql('passed_away','day_death' ,dd,null,null,'month_death',mm);
+  
+}
+
 
 async function newPassedAway(keys, values) {
     return await insertRowSql('passed_away', keys, values);
@@ -73,5 +78,6 @@ module.exports = {
     getManagerPassedAway,
     updateManager,
     deleteStory,
-    getMyCommitments
+    getMyCommitments,
+    getPassedAwayByDate
 };

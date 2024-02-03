@@ -1,4 +1,5 @@
 const e = require('express');
+const { HDate } = require('@hebcal/core');
 const {
     getPassedAway,
     newPassedAway,
@@ -13,12 +14,12 @@ const {
     getManagerPassedAway,
     updateManager,
     deleteStory,
-    getMyCommitments
+    getMyCommitments,
+    getPassedAwayByDate
 } = require('../dataAccess/dataAccess');
 const { tishreiToNissan, arrangeSqlDate } = require('./function');
 
 
-// const HDate = require('@hebcal/core').HDate;
 const gematriyaStrToNum = require('@hebcal/core').gematriyaStrToNum;
 
 
@@ -37,6 +38,19 @@ async function getPassedAwayService(id) {
     passedAway.forEach(passed => {
         arrangeSqlDate(passed);
     });
+    // console.log(passedAway);
+    return passedAway;
+}
+async function getPassedAwayByYahrzeitService() {
+
+    const { dd, mm } = new HDate();
+
+    const passedAway = await getPassedAwayByDate(dd, mm);
+
+    // // Add Hebrew date to each record
+    passedAway.forEach(passed => {
+        arrangeSqlDate(passed);
+    });
     console.log(passedAway);
     return passedAway;
 }
@@ -44,7 +58,11 @@ async function getPassedAwayService(id) {
 
 async function newPassedAwayService({ manager_id, name, year_death, month_death, day_death, about, age, lonely, soldier, rabbi }) {
 
-    year_death = gematriyaStrToNum(year_death);
+    const thousands = gematriyaStrToNum(year_death.slice(0, 1)) * 1000;
+    const rest = gematriyaStrToNum(year_death.slice(1));
+
+    year_death = thousands + rest;
+
     const keys = ['manager_id', 'name', 'year_death', 'month_death', 'day_death', 'about', 'age', 'lonely', 'soldier', 'rabbi'];
     const values = [manager_id, name, year_death, month_death, day_death, about, age, lonely, soldier, rabbi];
 
@@ -214,7 +232,6 @@ async function loginManagerService({ email, password }) {
             return manager;
         }
     }
-
 }
 
 async function loginUserService({ email, password }) {
@@ -309,6 +326,7 @@ module.exports = {
     getManagerPassedAwayService,
     updateManagerService,
     deleteStoryService,
-    myCommitmentsService
+    myCommitmentsService,
+    getPassedAwayByYahrzeitService
 
 }

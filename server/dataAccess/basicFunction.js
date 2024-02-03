@@ -10,11 +10,12 @@ const pool = mysql.createPool({
 })
 
 
-async function getRecordsSql(table, searchKey, searchValue, select, orderBy) {
+async function getRecordsSql(table, searchKey, searchValue, select, orderBy, scendSearchKey, scendSearchValue) {
     const sql = `SELECT ${select ? select : "*"} FROM ${table} 
-    ${searchKey ? `WHERE ${searchKey} = ?` : ";"}${orderBy ? ` ORDER BY ${orderBy}` : ""}`;
+    ${searchKey ? `WHERE ${searchKey} = ? ` : ";"}${scendSearchKey ? `AND ${scendSearchKey} = ?` : ""}${orderBy ? ` ORDER BY ${orderBy}` : ""}`;
 
-    const [res] = await pool.query(sql, [searchValue])
+    const [res] = await pool.query(sql, [searchValue, scendSearchValue])
+    // console.log(res);
     return res;
 }
 

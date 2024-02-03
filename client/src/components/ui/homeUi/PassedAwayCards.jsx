@@ -16,7 +16,7 @@ function PassedAwayCards({ passedAwayArray }) {
                 justifyContent="flex-start">
                 {passedAwayArray.map(pass => {
                     return (
-                        <div className="userCard" key={pass.name + pass.about}>
+                        <div className="userCard" key={pass.name + pass.about + pass.age}>
                             <Grid lg='auto' >
                                 < NavLink to={`/memorialProfile/${pass.passed_away_id}`}  >
                                     <UserCard passedAway={pass} />

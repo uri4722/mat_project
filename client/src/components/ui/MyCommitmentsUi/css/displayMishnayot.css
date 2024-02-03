@@ -1,0 +1,28 @@
+.btn-size-container{
+    position: sticky; 
+    top: 0; 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.text-size-btn {
+    font-size: 1.2rem;
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #000;
+    background-color: #ffffff41;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.text-size-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+

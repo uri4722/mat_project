@@ -1,21 +1,31 @@
 import Header from "../components/navigtion/Header";
 import BGvideo from "../components/ui/LandingPageUi/BGvideo";
 import LandingPageContent from "../components/ui/LandingPageUi/LandingPageContent";
-import Hebcal from "hebcal";
+import { getYahrzeitApi } from "../function/fetchFunction";
 import yahrzeit from "../function/yahrzeit";
+import { useEffect, useState } from "react";
 
 
 function LandingPage() {
-yahrzeit();
-// console.log();
+    const [yahrzeitList, setYahrzeitList] = useState([]);
 
-    const heToday = new Hebcal.HDate().toString('h');
+
+    const getYahrzeit = async () => {
+        const res = await getYahrzeitApi();
+        setYahrzeitList(res);
+
+    }
+
+    useEffect(() => {
+        getYahrzeit();
+    }, [])
+
 
     return (
         <div>
             <Header />
             <BGvideo />
-            <LandingPageContent heToday={heToday} />
+            <LandingPageContent  yahrzeitList={yahrzeitList} />
 
         </div>
     );

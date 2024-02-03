@@ -11,6 +11,7 @@ function PassedAwayListUi({ passedAwayArray }) {
                 < NavLink
                     to={`/memorialProfile/${passedAway.passed_away_id}`}
                     state={{ manager: true }}
+                    key={index}
                 >
                     <ListItemUi key={index} {...passedAway} />
                 </NavLink>
