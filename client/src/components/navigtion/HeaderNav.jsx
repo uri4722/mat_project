@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import "./css/HeaderNav.css"
 import { useEffect, useState } from "react";
 import isUser from "../../function/isUser";
+import Logo from "./Logo";
 
 function HeaderNav() {
     const userConect = isUser('manager') || isUser('user');
@@ -19,9 +20,7 @@ function HeaderNav() {
                 <NavLink to={"/home"}>לרשימת הנפטרים</NavLink>
                 <NavLink to={"/about"}>קצת עלינו</NavLink>
             </nav>
-            <nav className="logo">
-                <NavLink to={"/"}> לוגו </NavLink>
-            </nav>
+                <Logo />
 
         </div>
     );

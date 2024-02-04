@@ -30,9 +30,9 @@ function MemorialProfile() {
     }, [state, id])
 
     const [user, setUser] = useState({ email: "", password: "", masechtot: [], story: { title: "", story: "", story_id: "" } });
-    // useEffect(() => {
-    //     console.log(user);
-    // }, [user])
+    useEffect(() => {
+        console.log(user);
+    }, [user])
 
 
     const handleChangeMasechtot = (event) => {
