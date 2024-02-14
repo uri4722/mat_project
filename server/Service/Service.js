@@ -18,6 +18,7 @@ const {
     getPassedAwayByDate
 } = require('../dataAccess/dataAccess');
 const { tishreiToNissan, arrangeSqlDate } = require('./function');
+const { hash, validate } = require('./authentication');
 
 
 const gematriyaStrToNum = require('@hebcal/core').gematriyaStrToNum;
@@ -203,6 +204,7 @@ async function newMemorialProfileService(id, memorialProfile) {
 }
 
 async function newUserService({ name, password, email }) {
+    // authenticate user
     const keys = ['name', 'password', 'email'];
     const values = [name, password, email];
     const ans = await newUser(keys, values);
@@ -213,11 +215,21 @@ async function newUserService({ name, password, email }) {
 }
 
 async function newManagerService({ name, password, email, phone }) {
-    const keys = ['name', 'password', 'email', 'phone'];
-    const values = [name, password, email, phone];
-    const ans = await newManager(keys, values);
-    console.log(ans);
-    return ans;
+    // authenticate manager
+
+    const user = await getManager(email);
+    if (user.length > 0) {
+        throw { message: 'המשתמש כבר קיים במערכת' };
+    } else {
+        const encryptedPassword = hash(password);
+        console.log(encryptedPassword);
+        const keys = ['name', 'password', 'email', 'phone'];
+        const values = [name, encryptedPassword, email, phone];
+        const ans = await newManager(keys, values);
+        console.log(ans);
+        return ans;
+    }
+
 }
 
 async function loginManagerService({ email, password }) {
@@ -226,9 +238,14 @@ async function loginManagerService({ email, password }) {
     if (!manager) {
         throw { message: 'מייל לא קיים במערכת' }
     } else {
-        if (password !== manager.password) {
+        console.log(password +" != "+manager.password);
+        if (!validate(password, manager.password)) {
             throw { message: 'סיסמא לא נכונה' };
-        } else {
+        }
+        // if (password !== manager.password) {
+        //     throw { message: 'סיסמא לא נכונה' };
+        // }
+        else {
             return manager;
         }
     }

@@ -24,7 +24,7 @@ function MyAccount() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        console.log(managerInputs);
         const { error } = managerRegisterSchema.validate(managerInputs);
         if (error) {
             setMessage({ body: error.details[0].message, type: "error" });
@@ -57,9 +57,7 @@ function MyAccount() {
         setManagerInputs({ ...manager });
         getPassedAwayArray(manager_id);
     }, [])
-    // useEffect(() => {
-    //     console.log(passedAwayArray);
-    // }, [passedAwayArray])
+
 
 
 

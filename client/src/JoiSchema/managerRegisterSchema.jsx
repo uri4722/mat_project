@@ -29,4 +29,8 @@ export const managerRegisterSchema = Joi.object({
             .message("מספר טלפון חייב להיות בפורמט המתאים")
             .allow(null)
             .allow(''),
+    manager_id:
+        Joi.number()
+            .allow(null)
+
 });

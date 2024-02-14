@@ -66,13 +66,14 @@ export const createManager = async (user) => {
 
 }
 
-export const fetchLogin = async (type,user) => {
+export const fetchLogin = async (type, user) => {
     const URL = `${BASEURL}${type}/login`;
     const ans = postRequst(user, URL);
     return ans;
 }
 export const updateManager = async (manager, id) => {
     const URL = `${BASEURL}manager/${id}`;
+    console.log(URL);
     const ans = await putRequst(manager, URL);
     return ans;
 }
