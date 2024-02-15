@@ -62,6 +62,7 @@ function Login({ type }) {
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
                 handleCheck={handleCheck}
+                type={type}
             />
         </>
     )
