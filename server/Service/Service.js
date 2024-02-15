@@ -287,19 +287,34 @@ async function userAuth(email, password) {
     }
 }
 async function updateManagerService(body, id) {
-    const { name, password, email, phone } = body;
-    const user = await getManager(email);
-    // if (user.length > 0) {
-    //     throw { message: 'מייל זה כבר קיים בחשבון אחר' };
-    // } else {
-    const encryptedPassword = hash(password);
-    console.log(encryptedPassword);
-    const keys = ['name', 'password', 'email', 'phone'];
-    const values = [name, encryptedPassword, email, phone];
+    const { name, oldPassword, newPassword, email, phone } = body;
+    let encryptedPassword = null;
+    console.log("I");
+    console.log(oldPassword, newPassword);
+    if (newPassword) {
+        const [manager] = await getManager(email);
+        // console.log(manager);
+        if (!validate(oldPassword, manager.password)) {
+            throw { message: 'הסיסמא לא נכונה' };
+        } else {
+            encryptedPassword = hash(newPassword);
+            console.log(encryptedPassword);
+        }
+    }
+    // const user = await getManager(email);
+    // const encryptedPassword = hash(password);
+    // console.log(encryptedPassword);
+    const keys = ['name', 'email', 'phone'];
+    const values = [name, email, phone];
+    if (encryptedPassword) {
+        keys.push('password');
+        values.push(encryptedPassword);
+    }
     const ans = await updateManager(keys, values, id);
     console.log(ans);
     return ans;
-    // }
+
+
 }
 
 async function deleteStoryService(id) {

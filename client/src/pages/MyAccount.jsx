@@ -3,7 +3,7 @@ import HeaderNav from "../components/navigtion/HeaderNav";
 import usePermission from "../function/usePermission";
 import { getManagerPassedAwayApi, updateManager } from "../function/fetchFunction";
 import MyAccountUi from "../components/ui/MyAccountUi/MyAccountUi";
-import { managerRegisterSchema } from "../JoiSchema/managerRegisterSchema";
+import { managerUpdateSchema } from "../JoiSchema/managerUpdateSchema";
 
 function MyAccount() {
     let manager = usePermission('manager');
@@ -12,7 +12,14 @@ function MyAccount() {
     }
 
     const { manager_id, ...managerFields } = manager;
-    const [managerInputs, setManagerInputs] = useState({ ...managerFields, password: "" });
+    const [managerInputs, setManagerInputs] = useState({
+        name: managerFields.name,
+        email: managerFields.email,
+        phone: managerFields.phone,
+        newPassword: "",
+        oldPassword: ""
+
+    });
     const [message, setMessage] = useState({ body: "", type: "" });
     const [passedAwayArray, setPassedAwayArray] = useState([]);
     useEffect(() => {
@@ -27,7 +34,7 @@ function MyAccount() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(managerInputs);
-        const { error } = managerRegisterSchema.validate(managerInputs);
+        const { error } = managerUpdateSchema.validate(managerInputs);
         if (error) {
             setMessage({ body: error.details[0].message, type: "error" });
             return;
