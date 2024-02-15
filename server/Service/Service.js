@@ -238,7 +238,7 @@ async function loginManagerService({ email, password }) {
     if (!manager) {
         throw { message: 'מייל לא קיים במערכת' }
     } else {
-        console.log(password +" != "+manager.password);
+        console.log(password + " != " + manager.password);
         if (!validate(password, manager.password)) {
             throw { message: 'סיסמא לא נכונה' };
         }
@@ -287,11 +287,19 @@ async function userAuth(email, password) {
     }
 }
 async function updateManagerService(body, id) {
-    const columns = ['name', 'password', 'email', 'phone'];
-    const values = [body.name, body.password, body.email, body.phone];
-    const ans = await updateManager(columns, values, id);
+    const { name, password, email, phone } = body;
+    const user = await getManager(email);
+    // if (user.length > 0) {
+    //     throw { message: 'מייל זה כבר קיים בחשבון אחר' };
+    // } else {
+    const encryptedPassword = hash(password);
+    console.log(encryptedPassword);
+    const keys = ['name', 'password', 'email', 'phone'];
+    const values = [name, encryptedPassword, email, phone];
+    const ans = await updateManager(keys, values, id);
     console.log(ans);
     return ans;
+    // }
 }
 
 async function deleteStoryService(id) {

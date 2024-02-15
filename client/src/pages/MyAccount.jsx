@@ -12,10 +12,12 @@ function MyAccount() {
     }
 
     const { manager_id, ...managerFields } = manager;
-    const [managerInputs, setManagerInputs] = useState({ ...managerFields });
+    const [managerInputs, setManagerInputs] = useState({ ...managerFields, password: "" });
     const [message, setMessage] = useState({ body: "", type: "" });
     const [passedAwayArray, setPassedAwayArray] = useState([]);
-
+    useEffect(() => {
+        console.log(managerInputs);
+    }, [managerInputs])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -54,7 +56,7 @@ function MyAccount() {
     }
 
     useEffect(() => {
-        setManagerInputs({ ...manager });
+        // setManagerInputs({ ...manager });
         getPassedAwayArray(manager_id);
     }, [])
 
