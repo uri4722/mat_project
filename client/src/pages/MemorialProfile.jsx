@@ -12,6 +12,7 @@ function MemorialProfile() {
     const { id } = useParams();
     const { state } = useLocation();
     const manager = state?.manager;
+    console.log("> " + manager);
 
     const [passedAway, setPassedAway] = useState();
     const [message, setMessage] = useState({ body: "", type: "" });
