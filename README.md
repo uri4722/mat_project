@@ -1,4 +1,4 @@
-Project Name: Eternal Memory
+Project Name: זכרון עולם
 
 Description: This website allows families and friends of the deceased to commemorate their memory by sharing memories and learning Mishnayot for the elevation of their souls.
 
