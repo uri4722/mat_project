@@ -5,7 +5,7 @@ import Divider from '@mui/joy/Divider';
 
 
 function ProfileCard({ profile, countMishnaiot }) {
-    const { name, date, about, img, lonely, soldier, rabbi, age, mishnaiot, stores } = profile
+    const { name, date, about, img, age, mishnaiot, } = profile
 
     return <>< div className='grid-container' >
         <div className='grid-item1'>
@@ -38,7 +38,7 @@ function ProfileCard({ profile, countMishnaiot }) {
         </div>
         <div className='grid-item3'>
             <h5> סך הפרקים שנלמדו </h5>
-            <p>{mishnaiot && countMishnaiot(mishnaiot).masechet}</p>
+            <p>{mishnaiot && countMishnaiot(mishnaiot).learn * 7}</p>
         </div>
     </div>
         <Divider orientation="horizontal" sx={{ width: "80%" }} />

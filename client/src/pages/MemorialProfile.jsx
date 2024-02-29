@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import Header from '../components/navigtion/Header';
 import MemorialProfileUi from '../components/ui/MemorialProfileUi/MemorialProfileUi';
-import { createMemorialProfileApi, deleteStoryApi, getPassedAwayApi } from '../function/fetchFunction';
+import { createMemorialProfileApi, deleteStoryApi, fetchLogin, getPassedAwayApi } from '../function/fetchFunction';
 
 import { memorialProfileSchema } from '../JoiSchema/memorialProfileSchema';
+import isUser from '../function/isUser';
+import getUser from '../function/getUser';
 
 
 
@@ -12,39 +14,55 @@ function MemorialProfile() {
     const { id } = useParams();
     const { state } = useLocation();
     const manager = state?.manager;
-    console.log("> " + manager);
+    const [isUserConnected, setIsUserConnected] = useState(isUser("user"));
+
 
     const [passedAway, setPassedAway] = useState();
     const [message, setMessage] = useState({ body: "", type: "" });
+    const [takeCommitmentInput, setTakeCommitmentInput] = useState({
+        email: "",
+        password: "",
+        masechtot: [],
+        story: {
+            title: "",
+            story: "",
+            story_id: ""
+        }
+    });
 
+    const getPassedAway = async (id) => {
+        try {
+            const data = await getPassedAwayApi(id);
+            setPassedAway(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        if (isUserConnected) {
+            const user = getUser("user");
+            setTakeCommitmentInput({ ...takeCommitmentInput, email: user.email, password: user.password });
+        }
+    }, [isUserConnected])
 
     useEffect(() => {
-        // from the API 
+        // get passed away from the API 
         // including the mishniot and the stories
-        getPassedAwayApi(id).then((data) => {
-            setPassedAway(data);
-
-        }).catch((error) => {
-            console.log(error);
-        })
-
+        getPassedAway(id);
     }, [state, id])
 
-    const [user, setUser] = useState({ email: "", password: "", masechtot: [], story: { title: "", story: "", story_id: "" } });
-    useEffect(() => {
-        console.log(user);
-    }, [user])
+
 
 
     const handleChangeMasechtot = (event) => {
         if (event.target.checked) {
-            setUser({ ...user, masechtot: [...user.masechtot, event.target.name] })
+            setTakeCommitmentInput({ ...takeCommitmentInput, masechtot: [...takeCommitmentInput.masechtot, event.target.name] })
         } else {
-            setUser({ ...user, masechtot: user.masechtot.filter((masechet) => masechet !== event.target.name) })
+            setTakeCommitmentInput({ ...takeCommitmentInput, masechtot: takeCommitmentInput.masechtot.filter((masechet) => masechet !== event.target.name) })
         }
     }
     const handleChangeStores = ({ target }) => {
-        setUser({ ...user, story: { ...user.story, [target.name]: target.value } })
+        setTakeCommitmentInput({ ...takeCommitmentInput, story: { ...takeCommitmentInput.story, [target.name]: target.value } })
     }
     const handleDeleteStores = async (storyId) => {
         try {
@@ -57,28 +75,35 @@ function MemorialProfile() {
         }
     }
     const handleChangeInput = ({ target }) => {
-        setUser({ ...user, [target.name]: target.value })
+        setTakeCommitmentInput({ ...takeCommitmentInput, [target.name]: target.value })
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const { error } = schema.validate(user);
+        const { error } = schema.validate(takeCommitmentInput);
         if (error) {
             setMessage({ body: error.details[0].message, type: "error" });
             return;
         }
         if (!error) {
             try {
-                const ans = await createMemorialProfileApi(id, user);
+                const user = await fetchLogin("user", takeCommitmentInput);
+                sessionStorage.setItem("user", JSON.stringify(user));
+                setIsUserConnected(true);
+                const ans = await createMemorialProfileApi(id, takeCommitmentInput);
                 console.log(ans);
-                setPassedAway({ ...passedAway, stores: [...passedAway.stores, ans.stores] });
 
+                setPassedAway({ ...passedAway, stores: [...passedAway.stores, ans.stores] });
                 setPassedAway({ ...passedAway, mishnaiot: updateMishnioat(passedAway.mishnaiot, ans.masechtot) });
-                setMessage({ body: "ההרשמה בוצעה בהצלחה", type: "success" });
-                setUser({ ...user, masechtot: [], story: { title: "", story: "" } });
+                setMessage({ body: " תודה רבה ", type: "success" });
+                setTimeout(() => {
+                    setTakeCommitmentInput({ ...takeCommitmentInput, masechtot: [], story: { title: "", story: "" } });
+                }, 2000)
             } catch (error) {
                 console.log(error);
+                setMessage({ body: error.message, type: "error" });
+
             }
         }
     }
@@ -122,7 +147,8 @@ function MemorialProfile() {
             <MemorialProfileUi
                 profile={passedAway}
                 countMishnaiot={countMishnaiot}
-                user={user}
+                user={takeCommitmentInput}
+                isUserConnected={isUserConnected}
                 handleChangeMasechtot={handleChangeMasechtot}
                 handleChangeInput={handleChangeInput}
                 handleSubmit={handleSubmit}

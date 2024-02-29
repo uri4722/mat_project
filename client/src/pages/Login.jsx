@@ -43,7 +43,7 @@ function Login({ type }) {
                 setLogin({ email: "", password: "" });
                 setTimeout(() => {
                     navigate(type === 'manager' ? "/MyAccount" : "/MyCommitments");
-                }, 1600)
+                }, 1400)
             } catch (error) {
                 setMessage({ body: error.message, type: "error" });
             }

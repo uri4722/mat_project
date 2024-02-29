@@ -12,6 +12,7 @@ function MemorialProfileUi({
     profile,
     countMishnaiot,
     user,
+    isUserConnected,
     handleChangeMasechtot,
     handleChangeStores,
     handleChangeInput,
@@ -49,6 +50,7 @@ function MemorialProfileUi({
                 {user.masechtot.length > 0 || user.story.story ?
                     <UserFormUi
                         user={user}
+                        isUserConnected={isUserConnected}
                         handleChangeInput={handleChangeInput}
                         handleSubmit={handleSubmit}
                         message={message}

@@ -9,15 +9,12 @@ import DisplayMishnayot from "../components/ui/MyCommitmentsUi/DisplayMishnayot"
 function MyCommitments() {
     let user = usePermission('user');
     const [open, setOpen] = useState(false);
-
-
     const [commitments, setCommitments] = useState([]);
-    const [mishnayot, setMishnayot] = useState([]);      
+    const [mishnayot, setMishnayot] = useState([]);
 
 
     const getMyCommitments = async () => {
         try {
-
             const data = await getMyCommitmentsApi(user?.user_id);
             setCommitments(data);
         }
@@ -26,11 +23,6 @@ function MyCommitments() {
         }
 
     }
-
-    useEffect(() => {
-        getMyCommitments();
-    }, [])
-
     const getMishnayot = async (masechet) => {
         try {
             const { data } = await axios.get(`https://www.sefaria.org/api/texts/משנה ${masechet}?context=0&pad=0`);
@@ -42,8 +34,13 @@ function MyCommitments() {
     }
 
     useEffect(() => {
+        getMyCommitments();
         getMishnayot()
+
     }, [])
+
+
+
 
     return (<>
         <Header />
