@@ -58,6 +58,7 @@ function FormUi({ newPassed, handleChange, handleSubmit, message, heDates }) {
                 <input
                     className='imageInput'
                     type="file"
+                    accept="image/*"
                     onChange={handleChange}
                     name="image"
                 />

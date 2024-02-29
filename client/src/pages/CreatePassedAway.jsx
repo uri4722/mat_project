@@ -53,9 +53,9 @@ function CreatePassedAway({ heDates }) {
         try {
             await createPassedAwayApi(newPassed);
             setMessage({ type: "success", body: "הזכרון נוצר בהצלחה" });
-            // setTimeout(() => {
-            //     navigate("/home");
-            // }, 1400)
+            setTimeout(() => {
+                navigate("/home");
+            }, 1400)
 
         } catch (error) {
             console.log(error);
