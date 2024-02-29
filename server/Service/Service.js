@@ -57,15 +57,14 @@ async function getPassedAwayByYahrzeitService() {
 }
 
 
-async function newPassedAwayService({ manager_id, name, year_death, month_death, day_death, about, age, lonely, soldier, rabbi }) {
-
+async function newPassedAwayService({ manager_id, name, year_death, month_death, day_death, about, age, lonely, soldier, rabbi, image }) {
     const thousands = gematriyaStrToNum(year_death.slice(0, 1)) * 1000;
     const rest = gematriyaStrToNum(year_death.slice(1));
 
     year_death = thousands + rest;
 
-    const keys = ['manager_id', 'name', 'year_death', 'month_death', 'day_death', 'about', 'age', 'lonely', 'soldier', 'rabbi'];
-    const values = [manager_id, name, year_death, month_death, day_death, about, age, lonely, soldier, rabbi];
+    const keys = ['manager_id', 'name', 'year_death', 'month_death', 'day_death', 'about', 'age', 'lonely', 'soldier', 'rabbi', "img"];
+    const values = [manager_id, name, year_death, month_death, day_death, about, age, lonely, soldier, rabbi, image];
 
     const res = await newPassedAway(keys, values);
     return res;

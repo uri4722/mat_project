@@ -34,11 +34,30 @@ export const getManagerPassedAwayApi = async (id) => {
 }
 
 export const createPassedAwayApi = async (passedAway) => {
+    if (passedAway.image) {
+        console.log(passedAway.image);
+        const imageData = new FormData();
+        imageData.append('file', passedAway.image);
+        imageData.append('upload_preset', 'mat-project');
+        const res = await axios.post('https://api.cloudinary.com/v1_1/dwuo8k58o/image/upload', imageData);
+        console.log(res);
+        if (res.status !== 200) {
+            throw new Error('image not uploaded');
+        } else {
+            // console.log(res.data.secure_url);
+            // console.log(res.data.public_id);
+            passedAway.image = res.data.secure_url;
+        }
+    }
+    console.log(passedAway);
     const URL = `${BASEURL}passedAway`;
     const ans = await postRequst(passedAway, URL);
     return ans;
 
 }
+
+
+
 
 export const getMishnayotApi = async (id) => {
     const URL = `${BASEURL}commitments/passedAway/${id}`;

@@ -12,7 +12,7 @@ import './css/createPassedAway.css'
 
 function CreatePassedAway({ heDates }) {
     const manager = useManagerPermission('manager');
-  
+
     const navigate = useNavigate();
 
 
@@ -39,6 +39,10 @@ function CreatePassedAway({ heDates }) {
         if (event.target.type === "checkbox") {
             setNewPassed({ ...newPassed, [event.target.name]: event.target.checked });
         }
+        else if (event.target.type === "file") {
+            // console.log(event.target.files[0]);
+            setNewPassed({ ...newPassed, [event.target.name]: event.target.files[0] });
+        }
         else
             setNewPassed({ ...newPassed, [event.target.name]: event.target.value });
     }
@@ -49,9 +53,9 @@ function CreatePassedAway({ heDates }) {
         try {
             await createPassedAwayApi(newPassed);
             setMessage({ type: "success", body: "הזכרון נוצר בהצלחה" });
-            setTimeout(() => {
-                navigate("/home");
-            }, 1400)
+            // setTimeout(() => {
+            //     navigate("/home");
+            // }, 1400)
 
         } catch (error) {
             console.log(error);

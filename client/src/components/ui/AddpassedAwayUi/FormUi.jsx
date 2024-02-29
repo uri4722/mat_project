@@ -15,7 +15,6 @@
 import SelectHeDates from './SelectHeDates';
 import './css/formUi.css';
 
-import React, { useEffect, useState } from 'react';
 
 
 
@@ -54,7 +53,14 @@ function FormUi({ newPassed, handleChange, handleSubmit, message, heDates }) {
                         max="200"
                         required
                     />
+
                 </div>
+                <input
+                    className='imageInput'
+                    type="file"
+                    onChange={handleChange}
+                    name="image"
+                />
                 <SelectHeDates handleChange={handleChange} heDates={heDates} />
 
 
@@ -65,7 +71,7 @@ function FormUi({ newPassed, handleChange, handleSubmit, message, heDates }) {
                         onChange={handleChange}
                         name="lonely"
                         checked={newPassed.lonely}
-                        
+
                     />
                     <label htmlFor="soldier">חייל</label>
                     <input type="checkbox"
