@@ -13,6 +13,7 @@ import MyAccount from './pages/MyAccount';
 import Logout from './pages/Logout';
 import getHeDates from './function/getHeDates';
 import MyCommitments from './pages/MyCommitments';
+import ErrorPage from './pages/ErrorPage';
 
 
 function AppRoutes() {
@@ -31,7 +32,8 @@ function AppRoutes() {
             < Route path='createPassedAway' element={<CreatePassedAway heDates={getHeDates()} />} />
             < Route path='MyAccount' element={<MyAccount />} />
             < Route path='MyCommitments' element={<MyCommitments />} />
-            < Route path='userLogin' element={<Login type='user'/>} />
+            < Route path='userLogin' element={<Login type='user' />} />
+            < Route path='error' element={<ErrorPage />} />
             <Route path="*" element={<NoPage />} />
 
 

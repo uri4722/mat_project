@@ -6,6 +6,7 @@ import PassedAwayCards from "../components/ui/homeUi/PassedAwayCards.jsx";
 import Filters from "../components/ui/homeUi/Filters.jsx";
 
 import { getAllPassedAwayApi } from "../function/fetchFunction.js";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -13,6 +14,8 @@ import { getAllPassedAwayApi } from "../function/fetchFunction.js";
 function Home() {
     const [passedAwayArray, setPassedAwayArray] = useState([]);
     const [displayPassedAway, setDisplayPassedAway] = useState([]);
+    const navigate = useNavigate();
+
 
     const getPassedAwayArray = async () => {
         try {
@@ -21,6 +24,7 @@ function Home() {
             setDisplayPassedAway(data)
         } catch (error) {
             console.log(error);
+            navigate("/error");
         }
     }
 

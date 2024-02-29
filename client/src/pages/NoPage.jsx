@@ -4,6 +4,7 @@ export default function NoPage() {
     return (<>
         <HeaderNav />
         <div className="not-found">
+            <div className="monkey">👻</div>
             <h1>העמוד שביקשת לא נמצא</h1>
 
             <p>

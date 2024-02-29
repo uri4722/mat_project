@@ -4,10 +4,15 @@ const BASEURL = 'http://localhost:7000/api/';
 
 
 export const getAllPassedAwayApi = async () => {
+    // try {
     const URL = `${BASEURL}passedAway`;
     const { data } = await axios.get(URL);
-
     return data;
+    // } catch (error) {
+    //     console.log(error);
+    //     return [];
+    // }
+
 }
 
 export const getPassedAwayApi = async (id) => {
