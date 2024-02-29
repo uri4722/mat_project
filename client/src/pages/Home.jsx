@@ -15,19 +15,17 @@ function Home() {
     const [displayPassedAway, setDisplayPassedAway] = useState([]);
 
     const getPassedAwayArray = async () => {
-        const data = await getAllPassedAwayApi();
-        setPassedAwayArray(data);
-        setDisplayPassedAway(data)
-    }
-
-    useEffect(() => {
-
         try {
-            getPassedAwayArray();
+            const data = await getAllPassedAwayApi();
+            setPassedAwayArray(data);
+            setDisplayPassedAway(data)
         } catch (error) {
             console.log(error);
         }
+    }
 
+    useEffect(() => {
+        getPassedAwayArray();
     }, [])
 
     useEffect(() => {
@@ -35,13 +33,11 @@ function Home() {
     }, [passedAwayArray])
 
     const handeleSearch = (searchValue) => {
-        if (!passedAwayArray) return;
         const searchResult = passedAwayArray.filter(passed => passed.name.toLowerCase().includes(searchValue.toLowerCase()));
         setDisplayPassedAway(searchResult);
     }
 
     const handeleSelect = (selectValue) => {
-
         if (selectValue === "") {
             setDisplayPassedAway(passedAwayArray);
             return;
