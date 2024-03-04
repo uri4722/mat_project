@@ -1,11 +1,13 @@
 
-// import CircularProgress from '@mui/joy/CircularProgress';
+import { HDate } from '@hebcal/core';
 
 import convertTishreiToNissan from '../../../function/convertTishreiToNissan';
 import './css/selectHeDates.css';
 
 
-function SelectHeDates({ handleChange, heDates }) {
+function SelectHeDates({ handleChange, heDates, yearSelected }) {
+    // console.log(HDate.isLeapYear(5784));
+    // console.log(yearSelected);
     const { yearOptions, monthOptions, dayOptions } = heDates
 
     return (<>
@@ -16,7 +18,7 @@ function SelectHeDates({ handleChange, heDates }) {
                 {yearOptions.map((year, index) => {
                     return <option key={index} value={year}>{year}</option>
                 })}
-                
+
             </select>
 
             <select name="month_death" className='month_death' onChange={handleChange}>

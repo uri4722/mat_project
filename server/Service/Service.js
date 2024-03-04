@@ -241,9 +241,6 @@ async function loginManagerService({ email, password }) {
         if (!validate(password, manager.password)) {
             throw { message: 'סיסמא לא נכונה' };
         }
-        // if (password !== manager.password) {
-        //     throw { message: 'סיסמא לא נכונה' };
-        // }
         else {
             return manager;
         }
@@ -300,9 +297,6 @@ async function updateManagerService(body, id) {
             console.log(encryptedPassword);
         }
     }
-    // const user = await getManager(email);
-    // const encryptedPassword = hash(password);
-    // console.log(encryptedPassword);
     const keys = ['name', 'email', 'phone'];
     const values = [name, email, phone];
     if (encryptedPassword) {

@@ -62,7 +62,7 @@ function FormUi({ newPassed, handleChange, handleSubmit, message, heDates }) {
                     onChange={handleChange}
                     name="image"
                 />
-                <SelectHeDates handleChange={handleChange} heDates={heDates} />
+                <SelectHeDates handleChange={handleChange} heDates={heDates} yearSelected={newPassed.year_death}/>
 
 
                 <div className='checkboxContiner'>
