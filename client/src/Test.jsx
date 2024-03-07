@@ -4,10 +4,10 @@
 //     const currentYear = new HDate().getFullYear();
 
 //     const yearOptions = Array.from({ length: currentYear }, (_, i) => numToHeYear(1 + i));
-//     const monthOptions = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיון", "תמוז", "אב", "אלול"];
+//     const monthsOptions = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיון", "תמוז", "אב", "אלול"];
 //     const dayOptions = Array.from({ length: 30 }, (_, i) => numToHeYear(i + 1));
 
-//     return { yearOptions, monthOptions, dayOptions };
+//     return { yearOptions, monthsOptions, dayOptions };
 // }
 
 // function numToHeYear(num) {

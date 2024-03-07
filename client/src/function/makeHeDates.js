@@ -4,7 +4,7 @@ import numToHeYear from './numToHeYear';
 function makeHeDates() {
     const currentYear = new HDate().getFullYear();
     const yearOptions = [];
-    const monthOptions = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיון", "תמוז", "אב", "אלול"];
+    const monthsOptions = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיון", "תמוז", "אב", "אלול"];
     const monthsLapYearOptions = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיון", "תמוז", "אב", "אלול"];
     const dayOptions = [];
 
@@ -16,7 +16,7 @@ function makeHeDates() {
         dayOptions.push(numToHeYear(i));
     }
 
-    return { yearOptions, monthOptions, monthsLapYearOptions, dayOptions }
+    return { yearOptions, monthsOptions, monthsLapYearOptions, dayOptions }
 
 }
 export default makeHeDates;
