@@ -1,32 +1,20 @@
 import Header from "../components/navigtion/Header";
 import BGvideo from "../components/ui/LandingPageUi/BGvideo";
 import LandingPageContent from "../components/ui/LandingPageUi/LandingPageContent";
-import { getYahrzeitApi } from "../function/fetchFunction";
-import { useEffect, useState } from "react";
+import { Spinner } from "../components/ui/spinner/Spinner";
+import { useFetchApiGet } from "../function/useFetchApiGet";
 
 
 function LandingPage() {
-    const [yahrzeitList, setYahrzeitList] = useState([]);
-
-    const getYahrzeit = async () => {
-        try {
-            const res = await getYahrzeitApi();
-            setYahrzeitList(res);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    useEffect(() => {
-        getYahrzeit();
-    }, [])
-
+    const [yahrzeitList, isLoading, error] = useFetchApiGet(`passedAway/yahrzeit`);
+    console.log(error);
 
     return (
         <div>
             <Header />
             <BGvideo />
-            <LandingPageContent yahrzeitList={yahrzeitList} />
+            {isLoading && <Spinner size="45"/>}
+            {yahrzeitList && <LandingPageContent yahrzeitList={yahrzeitList} />}
 
         </div>
     );
