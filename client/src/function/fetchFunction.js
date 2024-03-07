@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 const BASEURL = 'http://localhost:7000/api/';
 
@@ -25,6 +26,27 @@ export const getYahrzeitApi = async () => {
     const URL = `${BASEURL}passedAway/yahrzeit`;
     const { data } = await axios.get(URL);
     return data;
+}
+export const useFetchApiGet = async (url) => {
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const fetchData = async () => {
+        try {
+            const { data } = await axios.get(BASEURL + url);
+            console.log(data);
+            setData(data);
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+    useEffect(() => {
+
+        fetchData();
+    }, [url]);
+    return { data, loading, error };
 }
 
 export const getManagerPassedAwayApi = async (id) => {
