@@ -1,6 +1,4 @@
 
-import { HDate } from '@hebcal/core';
-
 import convertTishreiToNissan from '../../../function/convertTishreiToNissan';
 import './css/selectHeDates.css';
 
