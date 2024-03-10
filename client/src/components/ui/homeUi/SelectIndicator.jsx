@@ -2,7 +2,7 @@ import * as React from 'react';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
 
-export default function SelectIndicator({ handeleSelect, op, opValues, placeholder }) {
+export default function SelectIndicator({ handleSelect, op, opValues, placeholder }) {
 
     return (
         <Select
@@ -12,7 +12,7 @@ export default function SelectIndicator({ handeleSelect, op, opValues, placehold
                 margin: "0 10px",
             }}
 
-            onChange={(event, value) => handeleSelect(value)}
+            onChange={(event, value) => handleSelect(value)}
         >
             {op.map((option, index) => (
                 <Option key={option} value={opValues[index]}>

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Header from "../components/navigtion/Header";
 import FormUi from "../components/ui/AddpassedAwayUi/FormUi";
 
 import { createPassedAwayApi } from "../function/fetchFunction";
@@ -7,6 +6,7 @@ import useManagerPermission from "../function/usePermission";
 import { useNavigate } from "react-router-dom";
 
 import './css/createPassedAway.css'
+import HeaderNav from "../components/navigtion/HeaderNav";
 
 
 
@@ -66,7 +66,7 @@ function CreatePassedAway({ heDates }) {
 
     return (
         <>
-            <Header />
+            < HeaderNav />
             {heDates && manager &&
                 <FormUi
                     handleChange={handleChange}

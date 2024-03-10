@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import Header from "../components/navigtion/Header";
 import usePermission from "../function/usePermission";
 import { getMyCommitmentsApi } from "../function/fetchFunction";
 import MyCommitmentsUi from "../components/ui/MyCommitmentsUi/MyCommitmentsUi";
 import axios from "axios";
 import DisplayMishnayot from "../components/ui/MyCommitmentsUi/DisplayMishnayot";
+import HeaderNav from "../components/navigtion/HeaderNav";
 
 function MyCommitments() {
     let user = usePermission('user');
@@ -43,7 +43,7 @@ function MyCommitments() {
 
 
     return (<>
-        <Header />
+        < HeaderNav />
         {mishnayot && <DisplayMishnayot mishnayot={mishnayot} open={open} setOpen={setOpen} />}
         {user && <MyCommitmentsUi commitments={commitments} getMishnayot={getMishnayot} />}
 

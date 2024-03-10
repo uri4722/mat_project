@@ -1,51 +1,44 @@
 import { useEffect, useState } from "react";
-
 import Hebcal from "hebcal";
-import Header from "../components/navigtion/Header.jsx";
 import PassedAwayCards from "../components/ui/homeUi/PassedAwayCards.jsx";
 import Filters from "../components/ui/homeUi/Filters.jsx";
 
-import { getAllPassedAwayApi } from "../function/fetchFunction.js";
 import { useNavigate } from "react-router-dom";
-
-
-
+import HeaderNav from "../components/navigtion/HeaderNav.jsx";
+import { useFetchApiGet } from "../function/useFetchApiGet.js";
+import { Spinner } from "../components/ui/spinner/Spinner.js";
 
 function Home() {
-    const [passedAwayArray, setPassedAwayArray] = useState([]);
-    const [displayPassedAway, setDisplayPassedAway] = useState([]);
     const navigate = useNavigate();
 
+    const [passedAwayArray, isLoading, error] = useFetchApiGet("passedAway");
+    const [displayPassedAway, setDisplayPassedAway] = useState([]);
+    error && navigate("/error");
 
-    const getPassedAwayArray = async () => {
-        try {
-            const data = await getAllPassedAwayApi();
-            setPassedAwayArray(data);
-            setDisplayPassedAway(data)
-        } catch (error) {
-            console.log(error);
-            navigate("/error");
+
+
+    useEffect(() => {
+        const startDisplayPassedAway = () => {
+            if (!isLoading) {
+                setDisplayPassedAway(passedAwayArray);
+            }
         }
-    }
 
-    useEffect(() => {
-        getPassedAwayArray();
-    }, [])
+        startDisplayPassedAway();
+    }, [passedAwayArray, isLoading]);
 
-    useEffect(() => {
-        setDisplayPassedAway(passedAwayArray);
-    }, [passedAwayArray])
 
-    const handeleSearch = (searchValue) => {
-        const searchResult = passedAwayArray.filter(passed => passed.name.toLowerCase().includes(searchValue.toLowerCase()));
+    const handleSearch = (searchValue) => {
+        const searchResult = displayPassedAway.filter(passed => passed.name.toLowerCase().includes(searchValue.toLowerCase()));
         setDisplayPassedAway(searchResult);
     }
 
-    const handeleSelect = (selectValue) => {
+    const handleSelectType = (selectValue) => {
         if (selectValue === "") {
             setDisplayPassedAway(passedAwayArray);
             return;
         }
+
         if (selectValue === "Yahrzeit") {
             // צריך להמיר את התאריך לתאריך עברי
             const HEtoday = new Hebcal.HDate();
@@ -62,11 +55,12 @@ function Home() {
             // לבדוק שוב אחרי שאני בונה שרת
             // תלוי בשיטת התאריך בדאטה בייס
         }
+
         const selectResult = passedAwayArray.filter(passed => passed[selectValue]);
         setDisplayPassedAway(selectResult);
     }
-    const handeleSort = (selectValue) => {
-        let newSort = passedAwayArray.map(obj => ({ ...obj }));
+    const handleSort = (selectValue) => {
+        let newSort = displayPassedAway.map(obj => ({ ...obj }));
         let compareFunction;
         switch (selectValue) {
 
@@ -92,14 +86,18 @@ function Home() {
 
     return (
         <>
-            <Header />
-            <Filters
-                passedAwayNames={passedAwayArray.map(passed => passed.name)}
-                handeleSearch={handeleSearch}
-                handeleSelect={handeleSelect}
-                handeleSort={handeleSort}
-            />
-            <PassedAwayCards passedAwayArray={displayPassedAway} />
+            < HeaderNav />
+            {passedAwayArray ? <>
+                <Filters
+                    passedAwayNames={displayPassedAway.map(passed => passed.name)}
+                    handleSearch={handleSearch}
+                    handleSelectType={handleSelectType}
+                    handleSort={handleSort}
+                />
+                <PassedAwayCards passedAwayArray={displayPassedAway} />
+            </> :
+                <Spinner size={150} color={"Wheat"} />}
+
         </>
     );
 }

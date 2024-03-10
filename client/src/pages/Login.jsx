@@ -1,10 +1,10 @@
 import "./css/login.css"
 import { useState } from "react"
-import Header from "../components/navigtion/Header";
 import LoginUi from "../components/ui/LoginUi/LoginUi";
 import { useNavigate } from "react-router-dom";
 import { fetchLogin } from "../function/fetchFunction";
 import { loginSchema } from "../JoiSchema/loginSchema";
+import HeaderNav from "../components/navigtion/HeaderNav";
 
 function Login({ type }) {
     const [login, setLogin] = useState({ email: "", password: "" });
@@ -55,7 +55,7 @@ function Login({ type }) {
 
     return (
         <>
-            <Header />
+            < HeaderNav />
             <LoginUi
                 message={message}
                 user={login}

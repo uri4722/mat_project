@@ -1,12 +1,13 @@
 import GridLoader from "react-spinners/GridLoader";
 import "./spinner.css";
 
-export function Spinner(size, color) {
+export function Spinner({ size, color }) {
+    console.log(size, color);
     return (
         <div className="spinner">
             <GridLoader
-                color="#000000"
-                size={45} />
+                color={color ? color : "black"}
+                size={size} />
         </div>
     );
 }

@@ -2,40 +2,36 @@ import { useState } from "react";
 import Hebcal from "hebcal";
 import "./css/landingPageContent.css"
 import { NavLink } from "react-router-dom";
+import { calculateHowManyYearsPassed } from "../../../function/calculateFunction/calculateHowManyYearsPassed";
 
 function LandingPageContent({ yahrzeitList }) {
-    const heToday = new Hebcal.HDate();
-    const [index, setIndex] = useState(0);
+    const currentHebrewDate = new Hebcal.HDate().toString('h');
+    const [current, setCurrent] = useState(0);
 
-    const calcYearToPassed = () => {
-        if (yahrzeitList.length > 0) {
-            const yearDeath = yahrzeitList[index]?.year_death;
-            const courantYear = heToday.getFullYear();
-            return courantYear - yearDeath;
-        }
-        return "";
+    const switchYahrzeit = (index) => {
+        setCurrent(Math.abs(index) % yahrzeitList.length);
     }
 
     return (
         <div className="landingPageContent">
             <div className="todayDate">
-                היום {heToday.toString('h')} חל יום הפטירה
+                היום {currentHebrewDate} חל יום הפטירה
             </div>
             {yahrzeitList.length > 0 ?
                 <>
                     <div className="contentContainer">
-                        <button onClick={() => setIndex(Math.abs((index - 1) % yahrzeitList.length))}>
+                        <button onClick={() => switchYahrzeit(current - 1)}>
                             {"<"}
                         </button>
                         <div className="landingPageContentText">
-                            <h2>{yahrzeitList[index]?.name} זצ"ל</h2>
-                            <h3>יום השנה ה {calcYearToPassed()} לפטירתו</h3>
+                            <h2>{yahrzeitList[current].name} זצ"ל</h2>
+                            <h3>יום השנה ה {calculateHowManyYearsPassed(yahrzeitList[current].year_death)} לפטירתו</h3>
                         </div>
-                        <button onClick={() => setIndex((index + 1) % yahrzeitList.length)}>
+                        <button onClick={() => switchYahrzeit(current + 1)}>
                             {">"}
                         </button>
                     </div>
-                    < NavLink to={`/memorialProfile/${yahrzeitList[index]?.passed_away_id}`}  >
+                    < NavLink to={`/memorialProfile/${yahrzeitList[current]?.passed_away_id}`}  >
                         <button className="takeBtn">לקבלת משניות לעלוי נשמתו</button>
                     </NavLink>
                 </> :

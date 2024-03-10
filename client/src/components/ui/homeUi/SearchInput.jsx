@@ -3,7 +3,7 @@ import FormControl from '@mui/joy/FormControl';
 import Stack from '@mui/joy/Stack';
 import Autocomplete from '@mui/joy/Autocomplete';
 
-export default function SearchInput({ names, handeleSearch }) {
+export default function SearchInput({ names, handleSearch }) {
 
     return (
         <Stack spacing={2} sx={{ width: 160, margin: "0 10px", }}>
@@ -16,7 +16,7 @@ export default function SearchInput({ names, handeleSearch }) {
                     disableClearable
                     options={names}
                     onChange={(event, value) => console.log(value)}
-                    onInputChange={(event, value) => handeleSearch(value)}
+                    onInputChange={(event, value) => handleSearch(value)}
                 />
             </FormControl>
         </Stack>

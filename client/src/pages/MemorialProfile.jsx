@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import Header from '../components/navigtion/Header';
 import MemorialProfileUi from '../components/ui/MemorialProfileUi/MemorialProfileUi';
 import { createMemorialProfileApi, deleteStoryApi, fetchLogin, getPassedAwayApi } from '../function/fetchFunction';
 
 import { memorialProfileSchema } from '../JoiSchema/memorialProfileSchema';
 import isUser from '../function/isUser';
 import getUser from '../function/getUser';
+import HeaderNav from '../components/navigtion/HeaderNav';
 
 
 
@@ -142,7 +142,7 @@ function MemorialProfile() {
 
 
     return (<>
-        <Header />
+        < HeaderNav />
         {passedAway && <div>
             <MemorialProfileUi
                 profile={passedAway}

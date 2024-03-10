@@ -9,9 +9,9 @@ export default function ErrorPage() {
                 <div className="monkey">🙊</div>
                 <h1> אנו מצטערים על אי הנוחות</h1>
                 <p>
-                    כנראה ישנה בעיה בשרתים שלנו
-                    אנחנו עובדים במרץ בכדי לטפל בבעיה בהקדם אתה מוזמן לנסות שוב בקרוב,
-                    תודה על ההבנה בברכה צוות האתר
+                    כנראה ישנה בעיה בשרתים שלנו <br />
+                    אנחנו עובדים במרץ בכדי לטפל בבעיה בהקדם אתה מוזמן לנסות שוב בקרוב<br />
+                    .תודה על ההבנה בברכה צוות האתר
                 </p>
             </div>
         </>

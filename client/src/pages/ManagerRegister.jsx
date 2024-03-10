@@ -1,10 +1,10 @@
 import "./css/managerRegister.css";
 import { useState } from "react";
-import Header from "../components/navigtion/Header";
 import ManagerRegisterUi from "../components/ui/LoginUi/ManagerRegisterUi";
 import { useNavigate } from "react-router-dom";
 import { createManager } from "../function/fetchFunction";
 import { managerRegisterSchema } from "../JoiSchema/managerRegisterSchema";
+import HeaderNav from "../components/navigtion/HeaderNav";
 
 
 export default function ManagerRegister() {
@@ -56,7 +56,7 @@ export default function ManagerRegister() {
 
 
     return (<>
-        <Header />
+        < HeaderNav />
         <ManagerRegisterUi
             user={user}
             handleChange={handleChange}
