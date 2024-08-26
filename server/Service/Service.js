@@ -231,21 +231,21 @@ async function newManagerService({ name, password, email, phone }) {
 
 }
 
-async function loginManagerService({ email, password }) {
-    const [manager] = await getManager(email);
-    console.log(manager);
-    if (!manager) {
-        throw { message: 'מייל לא קיים במערכת' }
-    } else {
-        console.log(password + " != " + manager.password);
-        if (!validate(password, manager.password)) {
-            throw { message: 'סיסמא לא נכונה' };
-        }
-        else {
-            return manager;
-        }
-    }
-}
+// async function loginManagerService({ email, password }) {
+//     const [manager] = await getManager(email);
+//     console.log(manager);
+//     if (!manager) {
+//         throw { message: 'מייל לא קיים במערכת' }
+//     } else {
+//         console.log(password + " != " + manager.password);
+//         if (!validate(password, manager.password)) {
+//             throw { message: 'סיסמא לא נכונה' };
+//         }
+//         else {
+//             return manager;
+//         }
+//     }
+// }
 
 async function loginUserService({ email, password }) {
     try {
@@ -257,6 +257,18 @@ async function loginUserService({ email, password }) {
     }
 
 
+}
+
+async function userAuth(email, password) {
+    const errorsMessages = `מייל או סיסמא לא נכונים`;
+    const [user] = await getUser(email);
+    if (!user) {
+        throw { message: errorsMessages };
+    } else if (!validate(password, user.password)) {
+        throw { message: errorsMessages };
+    } else {
+        return user;
+    }
 }
 
 async function getStoresService(id) {
@@ -274,14 +286,7 @@ async function getManagerPassedAwayService(id) {
     return passedAwayList;
 }
 
-async function userAuth(email, password) {
-    const [user] = await getUser(email);
-    if (password !== user.password) {
-        throw 'password is incorrect';
-    } else {
-        return user;
-    }
-}
+
 async function updateManagerService(body, id) {
     const { name, oldPassword, newPassword, email, phone } = body;
     let encryptedPassword = null;
@@ -354,7 +359,7 @@ module.exports = {
     newMemorialProfileService,
     newUserService,
     newManagerService,
-    loginManagerService,
+    // loginManagerService,
     loginUserService,
     getManagerPassedAwayService,
     updateManagerService,
