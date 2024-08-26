@@ -26,6 +26,9 @@ function hash(password) {
  * @returns {boolean}
  */
 function validate(password, hashedPassword) {
+    console.log(`Password: ${password}`)
+    console.log(`hashedPassword: ${hashedPassword}`);
+    
     const [hash, salt] = hashedPassword.split(".");
     return hash === crypto.scryptSync(password, salt, 32, { cost, blockSize, maxmem }).toString("base64")
 }

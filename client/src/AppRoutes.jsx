@@ -23,7 +23,7 @@ function AppRoutes() {
     return (
         <Routes>
             <Route index element={<LandingPage />} />
-            < Route path='login' element={< Login type='manager' />} />
+            < Route path='login' element={< Login/>} />
             < Route path='logout' element={< Logout />} />
             < Route path='home' element={<Home />} />
             < Route path='managerRegister' element={<ManagerRegister />} />
@@ -32,7 +32,7 @@ function AppRoutes() {
             < Route path='createPassedAway' element={<CreatePassedAway heDates={getHeDates()} />} />
             < Route path='MyAccount' element={<MyAccount />} />
             < Route path='MyCommitments' element={<MyCommitments />} />
-            < Route path='userLogin' element={<Login type='user' />} />
+            < Route path='userLogin' element={<Login/>} />
             < Route path='error' element={<ErrorPage />} />
             <Route path="*" element={<NoPage />} />
 

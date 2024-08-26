@@ -84,8 +84,8 @@ export const createManager = async (user) => {
 
 }
 
-export const fetchLogin = async (type, user) => {
-    const URL = `${BASEURL}${type}/login`;
+export const fetchLogin = async (user) => {
+    const URL = `${BASEURL}user/login`;
     const ans = postRequst(user, URL);
     return ans;
 }
