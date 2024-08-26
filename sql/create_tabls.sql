@@ -18,11 +18,10 @@ CREATE TABLE `passed_away`(
     `age` INT NULL
 );
 
+-- it's in a different table because we want to have a option to take payments from managers
 CREATE TABLE `managers`(
     `manager_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `name` VARCHAR(255) NOT NULL,
-    `email` VARCHAR(255) NOT NULL UNIQUE,
-    `password` VARCHAR(255) NOT NULL,
+    `user_id` INT UNSIGNED NOT NULL,
     `phone` VARCHAR(255) NULL
 );
 
@@ -30,7 +29,8 @@ CREATE TABLE `users`(
     `user_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `name` VARCHAR(255) NOT NULL,
     `email` VARCHAR(255) NOT NULL UNIQUE,
-    `password` VARCHAR(255) NOT NULL
+    `password` VARCHAR(255) NOT NULL,
+    `role` VARCHAR(255) NOT NULL DEFAULT 'user'
 );
 
 CREATE TABLE `stores`(
@@ -67,5 +67,6 @@ ALTER TABLE `commitments`
 ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`),
 ADD FOREIGN KEY (`passed_away_id`) REFERENCES `passed_away`(`passed_away_id`);
 
-
+ALTER TABLE `managers`
+ADD FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`);
 
