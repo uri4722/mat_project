@@ -1,6 +1,6 @@
-function getUser(type) {
-    return sessionStorage.getItem(type) ?
-        JSON.parse(sessionStorage.getItem(type)) :
-        JSON.parse(localStorage.getItem(type));
+function getUser() {
+    return sessionStorage.getItem('user') ?
+        JSON.parse(sessionStorage.getItem('user')) :
+        JSON.parse(localStorage.getItem('user'));
 }
 export default getUser;

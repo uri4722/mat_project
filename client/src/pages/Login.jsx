@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { fetchLogin } from "../function/fetchFunction";
 import { loginSchema } from "../JoiSchema/loginSchema";
 import HeaderNav from "../components/navigtion/HeaderNav";
+console.log('user role manager uri4722@gamil.com password uri12345');
 
 function Login() {
     const [login, setLogin] = useState({ email: "", password: "" });
     const [rememberMe, setRememberMe] = useState(false);
     const [message, setMessage] = useState({ body: "", type: "" });
     const navigate = useNavigate();
-    console.log('user role manager uri4722@gamil.com password uri12345');
 
     const handleChange = ({ target }) => {
         setLogin({ ...login, [target.name]: target.value });

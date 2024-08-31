@@ -5,11 +5,15 @@ import getUser from "./getUser";
 
 function usePermission(type) {
     const navigate = useNavigate();
+    const user = getUser();
 
     useEffect(() => {
-        if (!isUser(type)) navigate(type === "manager" ? "/Login" : "/userLogin")
-    }, [navigate])
+        if (user === null || (user.role !== type)) {
+            console.log('not permission');
+            navigate(type === "manager" ? "/Login" : "/userLogin")
+        }
+    }, [navigate, type, user])
 
-    return getUser(type);
+    return getUser();
 }
 export default usePermission

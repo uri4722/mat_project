@@ -37,5 +37,8 @@ export const managerUpdateSchema = Joi.object({
             .message("סיסמא חייבת להכיל אותיות באנגלית ומספרים בלבד")
             .allow(null)
             .allow(''),
-
+    role:
+        Joi.string()
+            .valid('manager', 'user')
+            .required(),
 });
