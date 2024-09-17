@@ -17,7 +17,7 @@ const {
     getMyCommitments,
     getPassedAwayByDate
 } = require('../dataAccess/dataAccess');
-const { tishreiToNissan, arrangeSqlDate } = require('./function');
+const { tishreiToNissan, arrangeSqlDate } = require('./handleHebrewDates');
 const { hash, validate } = require('./authentication');
 
 
