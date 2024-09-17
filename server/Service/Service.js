@@ -288,6 +288,7 @@ async function getManagerPassedAwayService(id) {
 
 
 async function updateManagerService(body, id) {
+    // Uri need to be changed to new table /user/
     const { name, oldPassword, newPassword, email, phone } = body;
     let encryptedPassword = null;
     console.log("I");

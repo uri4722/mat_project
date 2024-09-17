@@ -55,15 +55,20 @@ function FormUi({ newPassed, handleChange, handleSubmit, message, heDates }) {
                     />
 
                 </div>
-                <input
-                    className='imageInput'
-                    type="file"
-                    accept="image/*"
-                    onChange={handleChange}
-                    name="image"
-                />
-                <SelectHeDates handleChange={handleChange} heDates={heDates} yearSelected={newPassed.year_death}/>
-
+             
+                <SelectHeDates handleChange={handleChange} heDates={heDates} yearSelected={newPassed.year_death} />
+                <label htmlFor="imageInput" className="custom-file-label">
+                    העלאת תמונה
+                    </label>
+                    <input
+                        className='imageInput'
+                        id="imageInput"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleChange}
+                        name="image"
+                    />
+                
 
                 <div className='checkboxContiner'>
                     <label htmlFor="lonely">גלמוד</label>

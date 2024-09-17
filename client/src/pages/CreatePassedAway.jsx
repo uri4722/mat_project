@@ -11,8 +11,9 @@ import HeaderNav from "../components/navigtion/HeaderNav";
 
 
 function CreatePassedAway({ heDates }) {
+    
     const manager = useManagerPermission('manager');
-
+    
     const navigate = useNavigate();
 
 
@@ -28,7 +29,8 @@ function CreatePassedAway({ heDates }) {
         lonely: false,
         soldier: false,
         rabbi: false,
-        manager_id: manager?.manager_id
+        manager_id: manager?.user_id
+        
 
     });
     const [message, setMessage] = useState({ type: "", body: "" });
