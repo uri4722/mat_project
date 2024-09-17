@@ -52,7 +52,19 @@
     padding: 5px 8px;
     font-size: 18px;
     cursor: pointer;
+    /* display: none; */
 }
+
+.custom-file-label {
+    cursor: pointer;
+}
+
+.custom-file-label:hover,
+.formUi .imageInput:hover {
+    font-weight: bold;
+}
+
+;
 
 
 

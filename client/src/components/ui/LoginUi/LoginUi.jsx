@@ -1,16 +1,11 @@
 import { NavLink } from "react-router-dom";
 
-function LoginUi({ user, handleChange, handleSubmit, handleCheck, message, type }) {
-    console.log(type);
-    return <div className={type === "user" ? " userForm loginForm" : "loginForm"}>
+function LoginUi({ user, handleChange, handleSubmit, handleCheck, message }) {
+    return <div className="loginForm">
         <form onSubmit={handleSubmit}>
             <h1>התחברות</h1>
-            <p
-                className="p-login-type">{
-                    type === "user" ?
-                        "התחבר כדי לראות את המשניות שקיבלת על עצמך" :
-                        "התחבר כדי לנהל את הדפים שלך"
-                }
+            <p className="p-login-type">
+                התחבר על מנת לעבור לאזור האישי שלך
             </p>
             {
                 message.body ?
@@ -26,6 +21,7 @@ function LoginUi({ user, handleChange, handleSubmit, handleCheck, message, type 
                 <label>זכור אותי</label>
             </div>
             <button>התחבר</button>
+            {/* uri */}
             <NavLink to={"/managerRegister"} >יצירת חשבון</NavLink>
         </form>
     </div >

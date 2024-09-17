@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { fetchLogin } from "../function/fetchFunction";
 import { loginSchema } from "../JoiSchema/loginSchema";
 import HeaderNav from "../components/navigtion/HeaderNav";
+console.log('user role manager uri4722@gamil.com password uri12345');
 
-function Login({ type }) {
+function Login() {
     const [login, setLogin] = useState({ email: "", password: "" });
     const [rememberMe, setRememberMe] = useState(false);
     const [message, setMessage] = useState({ body: "", type: "" });
     const navigate = useNavigate();
-
 
     const handleChange = ({ target }) => {
         setLogin({ ...login, [target.name]: target.value });
@@ -33,16 +33,16 @@ function Login({ type }) {
         }
         else {
             try {
-                const user = await fetchLogin(type, login);
-
+                const user = await fetchLogin(login);
+                console.log('role', user.role);
                 rememberMe ?
-                    localStorage.setItem(type, JSON.stringify(user)) :
-                    sessionStorage.setItem(type, JSON.stringify(user));
+                    localStorage.setItem('user', JSON.stringify(user)) :
+                    sessionStorage.setItem('user', JSON.stringify(user));
 
                 setMessage({ body: "התחברת בהצלחה", type: "success" });
                 setLogin({ email: "", password: "" });
                 setTimeout(() => {
-                    navigate(type === 'manager' ? "/MyAccount" : "/MyCommitments");
+                    navigate(user.role === 'manager' ? "/MyAccount" : "/MyCommitments");
                 }, 1400)
             } catch (error) {
                 setMessage({ body: error.message, type: "error" });
@@ -62,7 +62,6 @@ function Login({ type }) {
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
                 handleCheck={handleCheck}
-                type={type}
             />
         </>
     )

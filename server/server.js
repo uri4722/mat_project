@@ -7,7 +7,7 @@ const router = require('./routes/baseRoutes');
 
 
 const corsOptions = {
-    origin: process.env.CLIENT_URL,
+    // origin: process.env.CLIENT_URL,
     credentials: true,
 };
 app.use(cors(corsOptions));

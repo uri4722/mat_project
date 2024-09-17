@@ -29,17 +29,17 @@ router.post('/register', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 })
-router.post('/login', async (req, res) => {
-    console.log("post manager login");
-    const { body } = req;
+// router.post('/login', async (req, res) => {
+//     console.log("post manager login");
+//     const { body } = req;
 
-    try {
-        const response = await loginManagerService(body);
-        res.status(200).json(response);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-})
+//     try {
+//         const response = await loginManagerService(body);
+//         res.status(200).json(response);
+//     } catch (error) {
+//         res.status(500).json({ message: error.message });
+//     }
+// })
 
 router.put('/:id', async (req, res) => {
     console.log("put manager");

@@ -6,16 +6,18 @@ import MyAccountUi from "../components/ui/MyAccountUi/MyAccountUi";
 import { managerUpdateSchema } from "../JoiSchema/managerUpdateSchema";
 
 function MyAccount() {
+    
     let manager = usePermission('manager');
     if (!manager) {
         manager = {};
     }
 
-    const { manager_id, ...managerFields } = manager;
+    const { user_id, ...managerFields } = manager;
     const [managerInputs, setManagerInputs] = useState({
         name: managerFields.name,
         email: managerFields.email,
         phone: managerFields.phone,
+        role: managerFields.role,
         newPassword: "",
         oldPassword: ""
 
@@ -42,10 +44,10 @@ function MyAccount() {
 
         if (!error) {
             try {
-                await updateManager(managerInputs, manager_id);
-                sessionStorage.getItem("manager") ?
-                    sessionStorage.setItem("manager", JSON.stringify({ ...managerInputs, manager_id: manager_id })) :
-                    localStorage.setItem("manager", JSON.stringify({ ...managerInputs, manager_id: manager_id }));
+                await updateManager(managerInputs, user_id);
+                sessionStorage.getItem("user") ?
+                    sessionStorage.setItem("user", JSON.stringify({ ...managerInputs, user_id: user_id })) :
+                    localStorage.setItem("user", JSON.stringify({ ...managerInputs, user_id: user_id }));
                 // setManagerInputs({ ...managerInputs });
                 setMessage({ body: "העידכון בוצע בהצלחה", type: "success" });
 
@@ -64,7 +66,7 @@ function MyAccount() {
 
     useEffect(() => {
         // setManagerInputs({ ...manager });
-        getPassedAwayArray(manager_id);
+        getPassedAwayArray(user_id);
     }, [])
 
 
@@ -73,7 +75,7 @@ function MyAccount() {
     return (
         <>
             <HeaderNav />
-            {manager_id && <>
+            {user_id && <>
                 <MyAccountUi
                     manager={managerInputs}
                     handleChange={handleChange}
