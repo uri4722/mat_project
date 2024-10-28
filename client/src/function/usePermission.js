@@ -11,7 +11,7 @@ console.log(user);
     useEffect(() => {
         if (user === null || ((user.role !== type) && (user.role !== "manager"))) {
             console.log('not permission');
-            navigate(type === "manager" ? "/Login" : "/userLogin")
+            navigate("/Login")
         }
     }, [navigate, type, user])
 

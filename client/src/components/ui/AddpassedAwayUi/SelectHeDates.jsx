@@ -6,7 +6,8 @@ import './css/selectHeDates.css';
 function SelectHeDates({ handleChange, heDates, yearSelected }) {
     // console.log(HDate.isLeapYear(5784));
     // console.log(yearSelected);
-    const { yearOptions, monthOptions, dayOptions } = heDates
+    
+    const { yearOptions, monthsOptions, dayOptions } = heDates
 
 
     return (<>
@@ -21,7 +22,7 @@ function SelectHeDates({ handleChange, heDates, yearSelected }) {
             </select>
 
             <select name="month_death" className='month_death' onChange={handleChange}>
-                {monthOptions.map((month, index) => {
+                {monthsOptions.map((month, index) => {
                     return <option key={index} value={convertTishreiToNissan(index) + 1}>{month}</option>
                 })}
             </select>
