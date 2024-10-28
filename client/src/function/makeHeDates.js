@@ -5,7 +5,7 @@ function makeHeDates() {
     const currentYear = new HDate().getFullYear();
     const yearOptions = [];
     const monthsOptions = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיון", "תמוז", "אב", "אלול"];
-    const monthsLapYearOptions = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר", "ניסן", "אייר", "סיון", "תמוז", "אב", "אלול"];
+    const monthsLapYearOptions = ["תשרי", "חשוון", "כסלו", "טבת", "שבט", "אדר א","אדר ב", "ניסן", "אייר", "סיון", "תמוז", "אב", "אלול"];
     const dayOptions = [];
 
     for (let i = currentYear; i > 0; i--) {
