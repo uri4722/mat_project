@@ -5,16 +5,16 @@ import isUser from "../../function/isUser";
 import Logo from "./Logo";
 
 function HeaderNav() {
-    const userConect = isUser('manager') || isUser('user');
-
+    const userConect =  isUser('user');
+    const managerConect = isUser('manager');
 
     return (
         <div className="header-nav">
             <nav className="loginNav">
-                <NavLink to={userConect ? '/logout' : '/login'}> {userConect ? 'התנתקות' : 'התחברות'} </NavLink>
+                <NavLink to={userConect ? '/logout' : '/login'}> {userConect || managerConect ? 'התנתקות' : 'התחברות'} </NavLink>
             </nav>
             <nav className="navBtn">
-                <NavLink to={"/MyAccount"}>לאזור האישי</NavLink>
+                {managerConect ? <NavLink to={"/MyAccount"}>לאזור האישי</NavLink>: null}
                 <NavLink to={"/MyCommitments"}>המשניות שלי</NavLink>
                 <NavLink to={"/createPassedAway"}>להוספת נפטר</NavLink>
                 <NavLink to={"/home"}>לרשימת הנפטרים</NavLink>
