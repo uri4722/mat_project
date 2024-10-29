@@ -3,7 +3,6 @@ import Input from "@mui/joy/Input";
 
 import './css/userFormUi.css'
 import { Link } from "@mui/joy";
-import isUser from "../../../function/isUser";
 
 function UserFormUi({ user, isUserConnected, handleChangeInput, handleSubmit, message, setRegisterDisplay }) {
     return <div className="formContiner">

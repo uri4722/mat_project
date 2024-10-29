@@ -1,20 +1,20 @@
 import { NavLink } from "react-router-dom";
 import "./css/HeaderNav.css"
-import { useEffect, useState } from "react";
 import isUser from "../../function/isUser";
 import Logo from "./Logo";
+import getUser from "../../function/getUser";
 
 function HeaderNav() {
-    const userConect =  isUser('user');
-    const managerConect = isUser('manager');
-
+    const isUserConnected =  getUser();
+    const isMengerConnected = isUser("manager");
+    
     return (
         <div className="header-nav">
             <nav className="loginNav">
-                <NavLink to={userConect || managerConect ? '/logout' : '/login'}> {userConect || managerConect ? 'התנתקות' : 'התחברות'} </NavLink>
+                <NavLink to={isUserConnected  ? '/logout' : '/login'}> {isUserConnected  ? 'התנתקות' : 'התחברות'} </NavLink>
             </nav>
             <nav className="navBtn">
-                {managerConect ? <NavLink to={"/MyAccount"}>לאזור האישי</NavLink>: null}
+                {isMengerConnected ? <NavLink to={"/MyAccount"}>לאזור האישי</NavLink>: null}
                 <NavLink to={"/MyCommitments"}>המשניות שלי</NavLink>
                 <NavLink to={"/createPassedAway"}>להוספת נפטר</NavLink>
                 <NavLink to={"/home"}>לרשימת הנפטרים</NavLink>

@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import isUser from "./isUser";
 import getUser from "./getUser";
 
 function usePermission(level) {
