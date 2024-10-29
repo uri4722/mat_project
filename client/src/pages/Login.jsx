@@ -47,7 +47,10 @@ function Login() {
                 setIsLoading(false);
                 navigate(user.role === 'manager' ? "/MyAccount" : "/MyCommitments");
             } catch (error) {
-                setMessage({ body: error.message, type: "error" });
+                console.log(error);
+                
+                setIsLoading(false);
+                setMessage({ body: "ההתחברות נכשלה כנראה אחד מהנתונים שגויים", type: "error" });
             }
 
         }
