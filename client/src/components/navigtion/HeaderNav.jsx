@@ -11,7 +11,7 @@ function HeaderNav() {
     return (
         <div className="header-nav">
             <nav className="loginNav">
-                <NavLink to={userConect ? '/logout' : '/login'}> {userConect || managerConect ? 'התנתקות' : 'התחברות'} </NavLink>
+                <NavLink to={userConect || managerConect ? '/logout' : '/login'}> {userConect || managerConect ? 'התנתקות' : 'התחברות'} </NavLink>
             </nav>
             <nav className="navBtn">
                 {managerConect ? <NavLink to={"/MyAccount"}>לאזור האישי</NavLink>: null}
