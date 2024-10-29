@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchLogin } from "../function/fetchFunction";
 import { loginSchema } from "../JoiSchema/loginSchema";
 import HeaderNav from "../components/navigtion/HeaderNav";
+import { Spinner } from "../components/ui/spinner/Spinner";
 console.log('user role manager uri4722@gamil.com password uri12345');
 
 function Login() {
@@ -12,6 +13,7 @@ function Login() {
     const [rememberMe, setRememberMe] = useState(false);
     const [message, setMessage] = useState({ body: "", type: "" });
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleChange = ({ target }) => {
         setLogin({ ...login, [target.name]: target.value });
@@ -33,6 +35,7 @@ function Login() {
         }
         else {
             try {
+                setIsLoading(true);
                 const user = await fetchLogin(login);
                 console.log('role', user.role);
                 rememberMe ?
@@ -41,9 +44,8 @@ function Login() {
 
                 setMessage({ body: "התחברת בהצלחה", type: "success" });
                 setLogin({ email: "", password: "" });
-                setTimeout(() => {
-                    navigate(user.role === 'manager' ? "/MyAccount" : "/MyCommitments");
-                }, 1400)
+                setIsLoading(false);
+                navigate(user.role === 'manager' ? "/MyAccount" : "/MyCommitments");
             } catch (error) {
                 setMessage({ body: error.message, type: "error" });
             }
@@ -56,13 +58,18 @@ function Login() {
     return (
         <>
             < HeaderNav />
-            <LoginUi
-                message={message}
-                user={login}
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                handleCheck={handleCheck}
-            />
+            {!isLoading ?
+                <LoginUi
+                    message={message}
+                    user={login}
+                    handleChange={handleChange}
+                    handleSubmit={handleSubmit}
+                    handleCheck={handleCheck}
+                />
+                : <Spinner size={150}/>
+            }
+
+
         </>
     )
 }

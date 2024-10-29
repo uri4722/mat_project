@@ -96,7 +96,7 @@ function Home() {
                 />
                 <PassedAwayCards passedAwayArray={displayPassedAway} />
             </> :
-                <Spinner size={150} color={"Wheat"} />}
+                <Spinner size={200} color={"Wheat"} />}
 
         </>
     );

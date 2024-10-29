@@ -1,5 +1,10 @@
 .spinner {
-    width: 50px;
+    /* width: 50px;
     margin: auto;
-    margin-top: 20px;
+    margin-top: 20px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+
 }

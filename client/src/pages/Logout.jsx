@@ -7,7 +7,7 @@ function Logout() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        setTimeout(() => navigate("/"), 2000);
+        setTimeout(() => navigate("/"), 1200);
         // remove user from local storage to log user out
         localStorage.removeItem('manager');
         sessionStorage.removeItem('manager');
