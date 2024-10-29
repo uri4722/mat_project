@@ -3,17 +3,19 @@ import { useNavigate } from "react-router-dom";
 import isUser from "./isUser";
 import getUser from "./getUser";
 
-function usePermission(type) {
+function usePermission(level) {
+    const LEVELS = ["user","manager" ,"admin"];
     const navigate = useNavigate();
     const user = getUser();
-console.log(user);
+
+
 
     useEffect(() => {
-        if (user === null || ((user.role !== type) && ( user.role !== "admin"))) {
+        if (user === null || ((LEVELS.indexOf(user.role) < LEVELS.indexOf(level) ))) {
             console.log('not permission');
             navigate("/Login")
         }
-    }, [navigate, type, user])
+    }, [navigate, level, user])
 
     return getUser();
 }

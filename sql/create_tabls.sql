@@ -22,7 +22,8 @@ CREATE TABLE `passed_away`(
 CREATE TABLE `managers`(
     `manager_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` INT UNSIGNED NOT NULL,
-    `phone` VARCHAR(255) NULL
+    `phone` VARCHAR(255) NULL,
+    `state` VARCHAR(255) NOT NULL,
 );
 
 CREATE TABLE `users`(
