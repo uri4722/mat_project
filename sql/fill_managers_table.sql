@@ -1,7 +1,9 @@
-INSERT INTO `managers` (`manager_id`,`user_id`)
+INSERT INTO `managers` (`manager_id`,`user_id`,`state`)
 VALUES 
-(1,1),
-(2,10);
+(1,1,"approved"),
+(2,10,"approved"),
+(3,14,"approved");
+
 
 
 -- VALUES 

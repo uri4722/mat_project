@@ -9,7 +9,7 @@ function usePermission(type) {
 console.log(user);
 
     useEffect(() => {
-        if (user === null || ((user.role !== type) && (user.role !== "manager"))) {
+        if (user === null || ((user.role !== type) && ( user.role !== "admin"))) {
             console.log('not permission');
             navigate("/Login")
         }

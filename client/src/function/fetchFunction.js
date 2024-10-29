@@ -92,7 +92,7 @@ export const fetchLogin = async (user) => {
 export const updateManager = async (manager, id) => {
     // need to change to new URL to everyone are users
     const URL = `${BASEURL}manager/${id}`;
-    console.log(URL);
+    // console.log(URL);
     const ans = await putRequst(manager, URL);
     return ans;
 }

@@ -2,6 +2,9 @@ INSERT INTO `users` (`name`, `email`, `password`, `role`, `user_id`)
 VALUES 
 ('אורי שניידר', 'uri4722@gmail.com', 'Y6sw3/bE6AL3kj9/U+6MBpXP602mPWEREocFglT/f/U=.Uxe/mNyDCixa4CxiIgppY+K8OalIdrct4Lw2h55gJBY=', 'manager', 1),
 -- password uri12345
+('אורי שניידר', 'admin@gmail.com', 'Y6sw3/bE6AL3kj9/U+6MBpXP602mPWEREocFglT/f/U=.Uxe/mNyDCixa4CxiIgppY+K8OalIdrct4Lw2h55gJBY=', 'admin', 14),
+-- password uri12345
+
 ('מנחם מנדל שטרן', 'mendy@example.com', 'abc123', DEFAULT, DEFAULT),
 ('יוסף ישראל כהן', 'yossi@example.com', 'QpO7NKy8pyuzzkG+VJMsYMWTaMdpvVHdeWGAYlo+2Xk=.ZNabnayq/UijL1ks6P2m3IOMVfw7sRrd+4TuH9pTEhM=', DEFAULT, DEFAULT), 
 -- password 123yossi  

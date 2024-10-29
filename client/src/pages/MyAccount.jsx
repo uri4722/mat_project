@@ -8,11 +8,9 @@ import { managerUpdateSchema } from "../JoiSchema/managerUpdateSchema";
 function MyAccount() {
     
     let manager = usePermission('manager');
-    if (!manager) {
-        manager = {};
-    }
+console.log(manager);
 
-    const { user_id, ...managerFields } = manager;
+    const { user_id, ...managerFields } = manager || {};
     const [managerInputs, setManagerInputs] = useState({
         name: managerFields.name,
         email: managerFields.email,
@@ -24,9 +22,7 @@ function MyAccount() {
     });
     const [message, setMessage] = useState({ body: "", type: "" });
     const [passedAwayArray, setPassedAwayArray] = useState([]);
-    useEffect(() => {
-        console.log(managerInputs);
-    }, [managerInputs])
+ 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -52,10 +48,11 @@ function MyAccount() {
                 setMessage({ body: "העידכון בוצע בהצלחה", type: "success" });
 
             } catch (error) {
-                setMessage({ body: error.message, type: "error" });
+                console.log("error :",error.message);
+                
+                setMessage({ body: "העדכון נכשל. אנא בדוק את המידע ונסה שוב.", type: "error" });
             }
         }
-        console.log(managerInputs);
     }
 
 
