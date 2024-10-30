@@ -38,6 +38,9 @@ function Login() {
                 setIsLoading(true);
                 const user = await fetchLogin(login);
                 console.log('role', user.role);
+                console.log('token', user.token);
+                console.log(document.cookie);
+                
                 rememberMe ?
                     localStorage.setItem('user', JSON.stringify(user)) :
                     sessionStorage.setItem('user', JSON.stringify(user));

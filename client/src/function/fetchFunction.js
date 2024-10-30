@@ -110,7 +110,7 @@ export const getMyCommitmentsApi = async (id) => {
 
 const postRequst = async (body, path) => {
     try {
-        const res = await axios.post(path, body);
+        const res = await axios.post(path, body, { withCredentials: true } );
         const { data } = res;
         return data;
     } catch (error) {

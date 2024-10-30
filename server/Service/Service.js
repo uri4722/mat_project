@@ -19,6 +19,7 @@ const {
 } = require('../dataAccess/dataAccess');
 const { tishreiToNissan, arrangeSqlDate } = require('./function');
 const { hash, validate } = require('./authentication');
+const jwt = require('jsonwebtoken');
 
 
 const gematriyaStrToNum = require('@hebcal/core').gematriyaStrToNum;
@@ -247,16 +248,27 @@ async function newManagerService({ name, password, email, phone }) {
 //     }
 // }
 
-async function loginUserService({ email, password }) {
+async function loginUserService({ email, password },res) {
+    const TOKEN_EXPIRATION_TIME = 3600;
     try {
         user = await userAuth(email, password);
+        const token = jwt.sign(
+            { id: user.user_id, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: TOKEN_EXPIRATION_TIME + 's' }
+        );
+        user.token = token;
+
+           res.cookie('token', token, {
+            // httpOnly: true,
+            maxAge: TOKEN_EXPIRATION_TIME * 1000,
+            sameSite: 'strict',
+        });
         return user;
     }
     catch (error) {
         throw error;
     }
-
-
 }
 
 async function userAuth(email, password) {

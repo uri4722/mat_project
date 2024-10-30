@@ -7,6 +7,9 @@ const router = require('./routes/baseRoutes');
 
 
 const corsOptions = {
+    // in development mode 
+    origin:'http://localhost:3000',   
+    // but in production mode it will be the client url
     // origin: process.env.CLIENT_URL,
     credentials: true,
 };
