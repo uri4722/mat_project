@@ -1,0 +1,24 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Flow Diagram" id="flowDiagram">
+    <mxGraphModel dx="823" dy="505" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" parent="1" />
+        <mxCell id="1" value="שכבת ניתוב" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9f9f9;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="220" y="40" width="150" height="60" />
+        </mxCell>
+        <mxCell id="2" value="שכבת לוגיקה" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9f9f9;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="220" y="140" width="150" height="60" />
+        </mxCell>
+        <mxCell id="3" value="שכבת גישה לדאטה בייס" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f9f9f9;strokeColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="220" y="240" width="150" height="60" />
+        </mxCell>
+        <mxCell id="4" edge="1" parent="1" source="1" target="2" style="endArrow=blockThin;strokeColor=#000000;strokeWidth=2;">
+          <mxGeometry relative="1" />
+        </mxCell>
+        <mxCell id="5" edge="1" parent="1" source="2" target="3" style="endArrow=blockThin;strokeColor=#000000;strokeWidth=2;">
+          <mxGeometry relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
