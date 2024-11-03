@@ -5,7 +5,9 @@ import "./css/MishnaiotUi.css"
 import Switch from '@mui/joy/Switch';
 
 
-function MishnaiotUi({ mishnaiot, handleChangeMasechtot}) {
+function MishnaiotUi({ mishnaiot, handleChangeMasechtot, masechtot }) {
+
+    
 
     const [display, setDisplay] = useState(false);
 
