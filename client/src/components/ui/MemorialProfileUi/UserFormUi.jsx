@@ -38,7 +38,7 @@ function UserFormUi({ user, isUserConnected, handleChangeInput, handleSubmit, me
                     onChange={handleChangeInput}
                 /></>
             }
-            <Button onClick={handleSubmit} color="success" size="sm">לאישור</Button>
+            <Button onClick={handleSubmit} color="success" size="sm">{!isUserConnected?"התחברות":"לאישור"}</Button>
         </div>
         <Link color="success" onClick={() => setRegisterDisplay(true)}>לא רשום עדין</Link>
     </div>

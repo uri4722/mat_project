@@ -80,32 +80,39 @@ function MemorialProfile() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        if (!isUserConnected) {
         const { error } = schema.validate(takeCommitmentInput);
         if (error) {
             setMessage({ body: error.details[0].message, type: "error" });
             return;
         }
-        if (!error) {
-            try {
-                const user = await fetchLogin("user", takeCommitmentInput);
-                sessionStorage.setItem("user", JSON.stringify(user));
-                setIsUserConnected(true);
-                const ans = await createMemorialProfileApi(id, takeCommitmentInput);
-                console.log(ans);
-
-                setPassedAway({ ...passedAway, stores: [...passedAway.stores, ans.stores] });
-                setPassedAway({ ...passedAway, mishnaiot: updateMishnioat(passedAway.mishnaiot, ans.masechtot) });
-                setMessage({ body: " תודה רבה ", type: "success" });
-                setTimeout(() => {
-                    setTakeCommitmentInput({ ...takeCommitmentInput, masechtot: [], story: { title: "", story: "" } });
-                }, 2000)
-            } catch (error) {
+        try {
+            const user = await fetchLogin({ email: takeCommitmentInput.email, password: takeCommitmentInput.password });
+            sessionStorage.setItem("user", JSON.stringify(user));
+            setIsUserConnected(true);
+        } catch (error) {
                 console.log(error);
                 setMessage({ body: error.message, type: "error" });
 
             }
-        }
+            return;
+        }else{
+            // it's not working because its before I made token and its send password and email need to improve this
+            try {
+                const ans = await createMemorialProfileApi(id, takeCommitmentInput);
+                console.log(ans);
+                setPassedAway({ ...passedAway, stores: [...passedAway.stores, ans.stores] });
+                        setPassedAway({ ...passedAway, mishnaiot: updateMishnioat(passedAway.mishnaiot, ans.masechtot) });
+                        setMessage({ body: " תודה רבה ", type: "success" });
+                        setTimeout(() => {
+                            setTakeCommitmentInput({ ...takeCommitmentInput, masechtot: [], story: { title: "", story: "" } });
+                        }, 2000)
+                    } catch (error) {
+                        console.log(error.message);
+                        setMessage({ body: "הפעולה נכשלה אנא נסה שנית", type: "error" });
+        
+                    }
+                }
     }
 
     const schema = memorialProfileSchema;
