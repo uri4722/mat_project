@@ -41,7 +41,7 @@ function MemorialProfileUi({
             </div>
             <div className='mishnaiot-grid'>
                 <MishnaiotUi
-                    user={user}
+                    masechtot={user.masechtot}
                     mishnaiot={profile.mishnaiot}
                     handleChangeMasechtot={handleChangeMasechtot}
                 />

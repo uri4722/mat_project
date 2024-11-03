@@ -27,7 +27,7 @@ function MishnaiotUi({ mishnaiot, handleChangeMasechtot}) {
                 {mishnaiot && display && mishnaiot.map((seder, index) => {
                     return (
                         <div className="seder" key={index}>
-                            <SederUi seder={seder} name={sedriMishna[index]} handleChangeMasechtot={handleChangeMasechtot} />
+                            <SederUi seder={seder} name={sedriMishna[index]} handleChangeMasechtot={handleChangeMasechtot} masechtot={masechtot} />
                         </div>
                     )
                 })}

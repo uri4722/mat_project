@@ -30,7 +30,7 @@ function StorisUi({ stores, handleChangeStores, newStory, manager,handleDeleteSt
                     </div>
                 )
             })}
-            <h4>{display ? 'לסגירה' : 'להוספת סיפור'}</h4>
+            <h4>{display ? 'לסגירה' : 'להוספת זיכרון'}</h4>
             <Switch
                 color={display ? "success" : "neutral"}
                 checked={display}
