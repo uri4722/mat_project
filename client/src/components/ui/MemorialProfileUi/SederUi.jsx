@@ -1,6 +1,8 @@
 import Checkbox from '@mui/joy/Checkbox';
 
-function SederUi({ seder, name, handleChangeMasechtot }) {
+function SederUi({ seder, name, handleChangeMasechtot, masechtot }) {
+
+        
     return <>
         <h2>{name}</h2>
         {seder.map((masechet, index) => {
@@ -20,6 +22,6 @@ function SederUi({ seder, name, handleChangeMasechtot }) {
             )
         })}
     </>
-
 }
+
 export default SederUi;
