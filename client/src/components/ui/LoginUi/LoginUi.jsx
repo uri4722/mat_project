@@ -22,7 +22,8 @@ function LoginUi({ user, handleChange, handleSubmit, handleCheck, message }) {
             </div>
             <button>התחבר</button>
             {/* uri */}
-            <NavLink to={"/managerRegister"} >יצירת חשבון</NavLink>
+            <NavLink to={"/userRegister"} >להרשמה לאתר</NavLink>
+            <NavLink to={"/managerRegister"} >ליצירת חשבון מנהל</NavLink>
         </form>
     </div >
 }

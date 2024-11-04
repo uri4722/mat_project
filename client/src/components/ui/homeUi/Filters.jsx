@@ -3,7 +3,7 @@ import SelectIndicator from "./SelectIndicator";
 import "./css/Filters.css"
 
 function Filters({ passedAwayNames, handleSearch, handleSelectType, handleSort }) {
-    console.log("sort = ", handleSort, "selectType = ", handleSelectType, "search = ", handleSearch);
+    // console.log("sort = ", handleSort, "selectType = ", handleSelectType, "search = ", handleSearch);
 
     return (
         <div className="FiltersContiner">

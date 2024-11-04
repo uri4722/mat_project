@@ -1,6 +1,6 @@
 const express = require('express');
 const { newPassedAwayService, getPassedAwayService, getPassedAwayByYahrzeitService } = require('../service/service');
-
+const {authUser, authRole} = require('../Service/authorization');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
@@ -36,7 +36,7 @@ router.get('/:id', async (req, res) => {
 
 
 
-router.post('/', async (req, res) => {
+router.post('/',authRole("manager"), async (req, res) => {
     console.log("post passed away");
     const { body } = req;
 

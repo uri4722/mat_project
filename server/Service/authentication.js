@@ -1,8 +1,11 @@
 const crypto = require("crypto")
+const jwt = require('jsonwebtoken');
+const { TOKEN_EXPIRATION_TIME } = require("../constants");
 
 const cost = Math.pow(2, 20)
 const blockSize = 8
 const maxmem = 129 * cost * blockSize
+
 
 /**
  * 
@@ -33,7 +36,17 @@ function validate(password, hashedPassword) {
     return hash === crypto.scryptSync(password, salt, 32, { cost, blockSize, maxmem }).toString("base64")
 }
 
-module.exports = { hash, validate};
+function generateToken(user) {
+        
+    const token = jwt.sign(
+        { id: user.user_id, role: user.role,stateManager:user.stateManager ? user.stateManager:null },
+        process.env.JWT_SECRET,
+        { expiresIn: TOKEN_EXPIRATION_TIME + 's' }
+    );
+    return token;
+}
+
+module.exports = { hash, validate,generateToken};
 
 // const db = [{ email: "uri12@gmail.com", password: hash("uri123") }];
 // router.post("/signIn", (req, res) => {

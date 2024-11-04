@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 require('dotenv').config();
+const cookieParser = require('cookie-parser');
 
 const router = require('./routes/baseRoutes');
 
@@ -14,7 +15,7 @@ const corsOptions = {
     credentials: true,
 };
 app.use(cors(corsOptions));
-
+app.use(cookieParser());
 app.use(express.json());
 app.use("/api", router);
 

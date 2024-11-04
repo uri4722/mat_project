@@ -6,11 +6,12 @@ const {
     getCommitments,
     getStores,
     getUser,
+    getUsers,
     newCommitment,
     newStory,
     newUser,
     newManager,
-    getManager,
+    getManagerByUserId,
     getManagerPassedAway,
     updateManager,
     deleteStory,
@@ -18,8 +19,8 @@ const {
     getPassedAwayByDate
 } = require('../dataAccess/dataAccess');
 const { tishreiToNissan, arrangeSqlDate } = require('./function');
-const { hash, validate } = require('./authentication');
-const jwt = require('jsonwebtoken');
+const { hash, validate, generateToken } = require('./authentication');
+const { TOKEN_EXPIRATION_TIME, ROLE_LEVELS } = require('../constants');
 
 
 const gematriyaStrToNum = require('@hebcal/core').gematriyaStrToNum;
@@ -43,6 +44,11 @@ async function getPassedAwayService(id) {
     // console.log(passedAway);
     return passedAway;
 }
+async function getUsersService() {
+    const users = await getUsers();
+    return users;
+}
+
 async function getPassedAwayByYahrzeitService() {
 
     const { dd, mm } = new HDate();
@@ -215,20 +221,20 @@ async function newUserService({ name, password, email }) {
 }
 
 async function newManagerService({ name, password, email, phone }) {
-    // authenticate manager
+//     // authenticate manager
 
-    const user = await getManager(email);
-    if (user.length > 0) {
-        throw { message: 'המשתמש כבר קיים במערכת' };
-    } else {
-        const encryptedPassword = hash(password);
-        console.log(encryptedPassword);
-        const keys = ['name', 'password', 'email', 'phone'];
-        const values = [name, encryptedPassword, email, phone];
-        const ans = await newManager(keys, values);
-        console.log(ans);
-        return ans;
-    }
+//     const user = await getManager(email);
+//     if (user.length > 0) {
+//         throw { message: 'המשתמש כבר קיים במערכת' };
+//     } else {
+//         const encryptedPassword = hash(password);
+//         console.log(encryptedPassword);
+//         const keys = ['name', 'password', 'email', 'phone'];
+//         const values = [name, encryptedPassword, email, phone];
+//         const ans = await newManager(keys, values);
+//         console.log(ans);
+//         return ans;
+//     }
 
 }
 
@@ -249,20 +255,27 @@ async function newManagerService({ name, password, email, phone }) {
 // }
 
 async function loginUserService({ email, password },res) {
-    const TOKEN_EXPIRATION_TIME = 3600;
     try {
         user = await userAuth(email, password);
-        const token = jwt.sign(
-            { id: user.user_id, role: user.role },
-            process.env.JWT_SECRET,
-            { expiresIn: TOKEN_EXPIRATION_TIME + 's' }
-        );
+        
+        // Add state manager to user for the token
+        if (ROLE_LEVELS[user.role] > ROLE_LEVELS.user) {
+
+            const [{state}] = await getManagerByUserId(user.user_id);
+            console.log("state",state);
+            
+            user.stateManager = state ;        
+        }
+
+
+        const token = generateToken(user);
+      
         user.token = token;
 
            res.cookie('token', token, {
             // httpOnly: true,
             maxAge: TOKEN_EXPIRATION_TIME * 1000,
-            sameSite: 'strict',
+            // sameSite: 'strict',
         });
         return user;
     }
@@ -270,6 +283,7 @@ async function loginUserService({ email, password },res) {
         throw error;
     }
 }
+
 
 async function userAuth(email, password) {
     const errorsMessages = `מייל או סיסמא לא נכונים`;
@@ -372,6 +386,7 @@ module.exports = {
     newMemorialProfileService,
     newUserService,
     newManagerService,
+    getUsersService,
     // loginManagerService,
     loginUserService,
     getManagerPassedAwayService,

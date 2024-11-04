@@ -37,9 +37,7 @@ function Login() {
             try {
                 setIsLoading(true);
                 const user = await fetchLogin(login);
-                console.log('role', user.role);
-                console.log('token', user.token);
-                console.log(document.cookie);
+
                 
                 rememberMe ?
                     localStorage.setItem('user', JSON.stringify(user)) :
@@ -48,7 +46,7 @@ function Login() {
                 setMessage({ body: "התחברת בהצלחה", type: "success" });
                 setLogin({ email: "", password: "" });
                 setIsLoading(false);
-                navigate(user.role === 'manager' ? "/MyAccount" : "/MyCommitments");
+                navigate(whereToContinue(user.role));
             } catch (error) {
                 console.log(error);
                 
@@ -59,6 +57,22 @@ function Login() {
         }
 
     }
+const whereToContinue = (role) => {
+    let path = "";
+switch (role) {
+    case "admin":
+        path = "/admin";
+        break;
+    case "manager":
+        path = "/MyAccount";
+    break;
+
+    default:
+        path = "/MyCommitments";
+        break;
+}
+return path;
+}
 
 
     return (

@@ -61,7 +61,9 @@ function CreatePassedAway({ heDates }) {
 
         } catch (error) {
             console.log(error);
-            setMessage({ type: "error", body: "הזכרון לא נוצר" });
+           const errorMessage = error.message === "Access denied. You need approved first."? "אתה צריך לחכות לאישור החשבון שלך" : "הזכרון לא נוצר";
+            if(error.message === "Access denied. You need approved first.")
+            setMessage({ type: "error", body: errorMessage });
         }
     }
 
