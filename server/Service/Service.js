@@ -269,6 +269,7 @@ async function loginUserService({ email, password },res) {
 
 
         const token = generateToken(user);
+    //   console.log("token",token);
       
         user.token = token;
 

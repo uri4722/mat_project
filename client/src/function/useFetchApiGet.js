@@ -12,7 +12,7 @@ export const useFetchApiGet = (url) => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const { data } = await axios.get(BASEURL + url);
+                const { data } = await axios.get(BASEURL + url,{ withCredentials: true });
                 setData(data);
             } catch (error) {
                 console.log(error);

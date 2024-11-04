@@ -25,7 +25,11 @@ function authUser(req, res, next) {
 function authRole(requiredRole) {
 
   return (req, res, next) => {
+    console.log("req",req);
+    
     const token = req.cookies.token;
+    console.log("token",token);
+    
     if (!token) {
       return res.status(401).json({ message: "Access denied. No token provided." });
     }
