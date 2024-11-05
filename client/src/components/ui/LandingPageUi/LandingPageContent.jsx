@@ -1,33 +1,39 @@
-import { useState } from "react";
+import {  useState } from "react";
 import Hebcal from "hebcal";
 import "./css/landingPageContent.css"
 import { NavLink } from "react-router-dom";
-import { calculateHowManyYearsPassed } from "../../../function/calculateFunction/calculateHowManyYearsPassed";
+import { calculateHowManyYearsPassed, numToYahrzeitStr } from "../../../function/calculateFunction/calculateHowManyYearsPassed";
+
 
 function LandingPageContent({ yahrzeitList }) {
     const currentHebrewDate = new Hebcal.HDate().toString('h');
     const [current, setCurrent] = useState(0);
 
-    const switchYahrzeit = (index) => {
-        setCurrent(Math.abs(index) % yahrzeitList.length);
+    const changeYahrzeitIndex = (index) => {
+        index = index < 0 ? yahrzeitList.length - 1 : index;
+        setCurrent(index % yahrzeitList.length);
+        
     }
+
+    
 
     return (
         <div className="landingPageContent">
             <div className="todayDate">
-                היום {currentHebrewDate} חל יום הפטירה
+                היום {currentHebrewDate} {yahrzeitList.length > 0 && 'חל יום הפטירה'}
             </div>
             {yahrzeitList.length > 0 ?
                 <>
                     <div className="contentContainer">
-                        <button onClick={() => switchYahrzeit(current - 1)}>
+                        <button onClick={() => changeYahrzeitIndex(current - 1)}>
                             {"<"}
                         </button>
                         <div className="landingPageContentText">
                             <h2>{yahrzeitList[current].name} זצ"ל</h2>
-                            <h3>יום השנה ה {calculateHowManyYearsPassed(yahrzeitList[current].year_death)} לפטירתו</h3>
+                            {<h3>{calculateHowManyYearsPassed(yahrzeitList[current].year_death) === 0 ?"היום הוא נפטר ":"יום השנה " + numToYahrzeitStr(calculateHowManyYearsPassed(yahrzeitList[current].year_death)) + " לפטירתו"} </h3>}
+                            
                         </div>
-                        <button onClick={() => switchYahrzeit(current + 1)}>
+                        <button onClick={() => changeYahrzeitIndex(current + 1)}>
                             {">"}
                         </button>
                     </div>
