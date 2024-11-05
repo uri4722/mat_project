@@ -7,6 +7,7 @@ import { memorialProfileSchema } from '../JoiSchema/memorialProfileSchema';
 import isUser from '../function/isUser';
 import getUser from '../function/getUser';
 import HeaderNav from '../components/navigtion/HeaderNav';
+import { useFetchApiGet } from '../function/useFetchApiGet';
 
 
 
@@ -16,8 +17,8 @@ function MemorialProfile() {
     const manager = state?.manager;
     const [isUserConnected, setIsUserConnected] = useState(isUser("user"));
 
-
     const [passedAway, setPassedAway] = useState();
+    const [statistics, setStatistics] = useState();
     const [message, setMessage] = useState({ body: "", type: "" });
     const [takeCommitmentInput, setTakeCommitmentInput] = useState({
         email: "",
@@ -30,6 +31,8 @@ function MemorialProfile() {
         }
     });
 
+    const [mishnaiot_calc, isLoading, error] = useFetchApiGet(`passedAway/${id}/mishnaiot_calc`);
+
     const getPassedAway = async (id) => {
         try {
             const data = await getPassedAwayApi(id);
@@ -38,12 +41,22 @@ function MemorialProfile() {
             console.log(error);
         }
     };
+ 
     useEffect(() => {
         if (isUserConnected) {
             const user = getUser("user");
             setTakeCommitmentInput({ ...takeCommitmentInput, email: user.email, password: user.password });
         }
     }, [isUserConnected])
+
+    useEffect(() => {
+        if (mishnaiot_calc) {
+            console.log(mishnaiot_calc);
+            
+            setStatistics(mishnaiot_calc);
+        }
+    }, [mishnaiot_calc])
+
 
     useEffect(() => {
         // get passed away from the API 
@@ -97,7 +110,6 @@ function MemorialProfile() {
             }
             return;
         }else{
-            // it's not working because its before I made token and its send password and email need to improve this
             try {
                 const ans = await createMemorialProfileApi(id, takeCommitmentInput);
                 console.log(ans);
@@ -131,29 +143,12 @@ function MemorialProfile() {
 
 
 
-    const countMishnaiot = (sedriMishna) => {
-        let count = { learn: 0, masechet: 0 };
-
-        sedriMishna.forEach((seder) => {
-            let isSederLearn = false;
-            seder.forEach((masechet) => {
-                if (masechet.alreadyTaken) {
-                    isSederLearn = true;
-                    count.learn++
-                }
-            })
-            count.masechet = isSederLearn ? count.masechet + 1 : count.masechet;
-        })
-        return count
-    }
-
-
     return (<>
         < HeaderNav />
         {passedAway && <div>
             <MemorialProfileUi
                 profile={passedAway}
-                countMishnaiot={countMishnaiot}
+                countMishnaiot={statistics}
                 user={takeCommitmentInput}
                 isUserConnected={isUserConnected}
                 handleChangeMasechtot={handleChangeMasechtot}

@@ -20,7 +20,7 @@ const {
 } = require('../dataAccess/dataAccess');
 const { tishreiToNissan, arrangeSqlDate } = require('./function');
 const { hash, validate, generateToken } = require('./authentication');
-const { TOKEN_EXPIRATION_TIME, ROLE_LEVELS } = require('../constants');
+const { TOKEN_EXPIRATION_TIME, ROLE_LEVELS, MASECHTOT_EPISODES, SDARIM } = require('../constants');
 
 
 const gematriyaStrToNum = require('@hebcal/core').gematriyaStrToNum;
@@ -59,7 +59,6 @@ async function getPassedAwayByYahrzeitService() {
     passedAway.forEach(passed => {
         arrangeSqlDate(passed);
     });
-    console.log(passedAway);
     return passedAway;
 }
 
@@ -176,17 +175,20 @@ async function getStoresService(id) {
     return stores;
 }
 
-async function newMemorialProfileService(id, memorialProfile) {
+async function newMemorialProfileService(id, memorialProfile,res) {
     const { email, password, masechtot, story } = memorialProfile;
-    let user;
-    try {
-        user = await userAuth(email, password);
+    let [user] = await getUser(email);
+    console.log("user = ",user);
+    console.log(user.id);
+    
+    
+    if (user.length === 0) {
+        return res.status(400).json({ message: "user does not exist" });
     }
-    catch (error) {
-        throw error;
-    }
+
     if (!masechtot && !story) {
-        throw "no memorial profile to add"
+        return res.status(400).json({ message: "no memorial profile to add" });
+       
     }
 
     if (masechtot && masechtot.length > 0) {
@@ -379,6 +381,32 @@ async function myCommitmentsService(id) {
 
 }
 
+async function getNumMmishnaiotService(id) {
+    const commitments = await getCommitments(id);
+    cal = { numEps: 0, masechtot: 0, sdarim: 0}
+    const sdarimTemp =[];
+    commitments.forEach(commitment => {
+        maschet = commitment.maschet;
+        if (!sdarimTemp.includes(findSeder(maschet))) {
+            sdarimTemp.push(findSeder(maschet));
+            cal.sdarim++;
+        }
+        cal.masechtot++;
+        cal.numEps += MASECHTOT_EPISODES[maschet];
+
+    });
+    // console.log(cal);
+
+   return cal;
+}
+function findSeder(masechet) {
+    for (const seder in SDARIM) {
+        if (SDARIM[seder].includes(masechet)) {
+            return seder;
+        }
+    }
+    return null;
+}
 module.exports = {
     getPassedAwayService,
     newPassedAwayService,
@@ -394,6 +422,7 @@ module.exports = {
     updateManagerService,
     deleteStoryService,
     myCommitmentsService,
-    getPassedAwayByYahrzeitService
+    getPassedAwayByYahrzeitService,
+    getNumMmishnaiotService
 
 }
