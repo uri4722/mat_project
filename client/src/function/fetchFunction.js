@@ -89,9 +89,9 @@ export const fetchLogin = async (user) => {
     const ans = postRequst(user, URL);
     return ans;
 }
-export const updateManager = async (manager, id) => {
+export const updateUser = async (manager, id) => {
     // need to change to new URL to everyone are users
-    const URL = `${BASEURL}manager/${id}`;
+    const URL = `${BASEURL}user/${id}`;
     // console.log(URL);
     const ans = await putRequst(manager, URL);
     return ans;

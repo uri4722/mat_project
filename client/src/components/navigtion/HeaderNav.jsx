@@ -6,7 +6,6 @@ import getUser from "../../function/getUser";
 
 function HeaderNav() {
     const isUserConnected =  getUser();
-    const isMengerConnected = isUser("manager");
     
     return (
         <div className="header-nav">
@@ -14,7 +13,7 @@ function HeaderNav() {
                 <NavLink to={isUserConnected  ? '/logout' : '/login'}> {isUserConnected  ? 'התנתקות' : 'התחברות'} </NavLink>
             </nav>
             <nav className="navBtn">
-                {isMengerConnected ? <NavLink to={"/MyAccount"}>לאזור האישי</NavLink>: null}
+                <NavLink to={"/MyAccount"}>לאזור האישי</NavLink>
                 <NavLink to={"/MyCommitments"}>המשניות שלי</NavLink>
                 <NavLink to={"/createPassedAway"}>להוספת נפטר</NavLink>
                 <NavLink to={"/home"}>לרשימת הנפטרים</NavLink>

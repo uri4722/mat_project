@@ -7,6 +7,9 @@ import { useNavigate } from "react-router-dom";
 
 import './css/createPassedAway.css'
 import HeaderNav from "../components/navigtion/HeaderNav";
+import  BG_img from '../assets/img/Trees-background.png';
+import BackgroundImg from "../components/ui/BackgroundImg/BackgroundImg";
+
 
 
 
@@ -71,6 +74,7 @@ function CreatePassedAway({ heDates }) {
     return (
         <>
             < HeaderNav />
+            <BackgroundImg src={BG_img} />
             {heDates && manager &&
                 <FormUi
                     handleChange={handleChange}

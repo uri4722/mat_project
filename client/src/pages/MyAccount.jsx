@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import HeaderNav from "../components/navigtion/HeaderNav";
 import usePermission from "../function/usePermission";
-import { getManagerPassedAwayApi, updateManager } from "../function/fetchFunction";
+import { getManagerPassedAwayApi, updateUser } from "../function/fetchFunction";
 import MyAccountUi from "../components/ui/MyAccountUi/MyAccountUi";
 import { managerUpdateSchema } from "../JoiSchema/managerUpdateSchema";
 
 function MyAccount() {
     
-    let manager = usePermission('manager');
+    let manager = usePermission('user');
 console.log(manager);
 
     const { user_id, ...managerFields } = manager || {};
@@ -40,7 +40,7 @@ console.log(manager);
 
         if (!error) {
             try {
-                await updateManager(managerInputs, user_id);
+                await updateUser(managerInputs, user_id);
                 sessionStorage.getItem("user") ?
                     sessionStorage.setItem("user", JSON.stringify({ ...managerInputs, user_id: user_id })) :
                     localStorage.setItem("user", JSON.stringify({ ...managerInputs, user_id: user_id }));

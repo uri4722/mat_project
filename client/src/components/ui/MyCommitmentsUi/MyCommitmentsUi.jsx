@@ -1,5 +1,7 @@
 import Divider from "@mui/joy/Divider";
 import "./css/myCommitmentsUi.css"
+import BackgroundImg from "../BackgroundImg/BackgroundImg";
+
 
 function MyCommitmentsUi({ commitments, getMishnayot }) {
     return (

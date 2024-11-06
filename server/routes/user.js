@@ -1,5 +1,5 @@
 const express = require('express');
-const { newUserService,loginUserService } = require("../service/service");
+const { newUserService,loginUserService, updateUserService } = require("../service/service");
 
 const router = express.Router();
 
@@ -27,6 +27,19 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         console.log(error);
         
+        res.status(500).json({ message: error.message });
+    }
+})
+
+router.put('/:id', async (req, res) => {
+    console.log("put user");
+    const { body } = req;
+    const { id } = req.params;
+
+    try {
+        const response = await updateUserService(body, id);
+        res.status(200).json(response);
+    } catch (error) {
         res.status(500).json({ message: error.message });
     }
 })

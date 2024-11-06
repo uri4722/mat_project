@@ -13,7 +13,7 @@ const {
     newManager,
     getManagerByUserId,
     getManagerPassedAway,
-    updateManager,
+    updateUser,
     deleteStory,
     getMyCommitments,
     getPassedAwayByDate
@@ -316,29 +316,27 @@ async function getManagerPassedAwayService(id) {
 }
 
 
-async function updateManagerService(body, id) {
+async function updateUserService(body, id) {
     // Uri need to be changed to new table /user/
-    const { name, oldPassword, newPassword, email, phone } = body;
+    const { name, oldPassword, newPassword, email } = body;
     let encryptedPassword = null;
-    console.log("I");
     console.log(oldPassword, newPassword);
     if (newPassword) {
-        const [manager] = await getManager(email);
-        // console.log(manager);
-        if (!validate(oldPassword, manager.password)) {
+        const [user] = await getUser(email);
+
+        if (!validate(oldPassword, user.password)) {
             throw { message: 'הסיסמא לא נכונה' };
         } else {
             encryptedPassword = hash(newPassword);
-            console.log(encryptedPassword);
         }
     }
-    const keys = ['name', 'email', 'phone'];
-    const values = [name, email, phone];
+    const keys = ['name', 'email'];
+    const values = [name, email];
     if (encryptedPassword) {
         keys.push('password');
         values.push(encryptedPassword);
     }
-    const ans = await updateManager(keys, values, id);
+    const ans = await updateUser(keys, values, id);
     console.log(ans);
     return ans;
 
@@ -419,7 +417,7 @@ module.exports = {
     // loginManagerService,
     loginUserService,
     getManagerPassedAwayService,
-    updateManagerService,
+    updateUserService,
     deleteStoryService,
     myCommitmentsService,
     getPassedAwayByYahrzeitService,

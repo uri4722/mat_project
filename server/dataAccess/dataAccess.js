@@ -15,6 +15,10 @@ async function getUsers() {
     return await getRecordsSql('users');
 }
 
+async function updateUser(columns, values, id) {
+    return await updateRowSql('users', "user_id", columns, values, id);
+}
+
 
 async function newPassedAway(keys, values) {
     return await insertRowSql('passed_away', keys, values);
@@ -57,9 +61,7 @@ async function getManagerByUserId(id) {
 async function getManagerPassedAway(id) {
     return await getRecordsSql('passed_away', 'manager_id', id);
 }
-async function updateManager(columns, values, id) {
-    return await updateRowSql('managers', "manager_id", columns, values, id);
-}
+
 
 async function deleteStory(id) {
     return await deleteRawSql('stores', 'story_id', id);
@@ -85,7 +87,7 @@ module.exports = {
     newManager,
     getManagerByUserId,
     getManagerPassedAway,
-    updateManager,
+    updateUser,
     deleteStory,
     getMyCommitments,
     getPassedAwayByDate
