@@ -2,7 +2,7 @@ import { Button, Input } from "@mui/joy";
 import Xcompnent from "../Xcomponent";
 import "./css/UserRegisterUi.css";
 
-function UserRegisterUi({ user, handleChangeInput, handleSubmit, setRegisterDisplay, message }) {
+function UserRegisterUi({ user, handleChangeInput, handleSubmit, setRegisterDisplay, message, theme }) {
     return (
         <div className="form-register">
             <Xcompnent setRegisterDisplay={setRegisterDisplay} />
@@ -12,7 +12,7 @@ function UserRegisterUi({ user, handleChangeInput, handleSubmit, setRegisterDisp
                     type="email"
                     className="input"
                     placeholder="הכנס אימייל"
-                    color="success"
+                    color={theme}
                     name="email"
                     value={user.email}
                     onChange={handleChangeInput}
@@ -21,7 +21,7 @@ function UserRegisterUi({ user, handleChangeInput, handleSubmit, setRegisterDisp
                     type="password"
                     className="input"
                     placeholder="הכנס סיסמא"
-                    color="success"
+                    color={theme}
                     name="password"
                     value={user.password}
                     onChange={handleChangeInput}
@@ -30,12 +30,12 @@ function UserRegisterUi({ user, handleChangeInput, handleSubmit, setRegisterDisp
                     className="input"
                     type="text"
                     placeholder="שם משתמש"
-                    color="success"
+                    color={theme}
                     name="name"
                     value={user.name}
                     onChange={handleChangeInput}
                 />
-                <Button onClick={handleSubmit} color="success" size="sm" sx={{ width: "280px" }}>לאישור</Button>
+                <Button onClick={handleSubmit} color={theme} size="sm" sx={{ width: "280px" }}>להרשמה</Button>
             </form>
         </div>
 

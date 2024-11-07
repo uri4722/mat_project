@@ -99,3 +99,8 @@
 .userForm form{
     box-shadow: 0 0 10px rgba(85, 112, 36, 0.413);
 }
+.register-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+
+}

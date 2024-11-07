@@ -58,9 +58,7 @@ function MemorialProfileUi({
                     /> : null}
             </div>
         </div >
-        {registerDisplay && <div className="popup-continer">
-            <UserRegister setRegisterDisplay={setRegisterDisplay} />
-        </div>}
+        {registerDisplay && <UserRegister setRegisterDisplay={setRegisterDisplay} theme='success'/>}
     </>
     )
 }

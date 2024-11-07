@@ -1,19 +1,30 @@
 import "./css/login.css"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import LoginUi from "../components/ui/LoginUi/LoginUi";
 import { useNavigate } from "react-router-dom";
 import { fetchLogin } from "../function/fetchFunction";
 import { loginSchema } from "../JoiSchema/loginSchema";
 import HeaderNav from "../components/navigtion/HeaderNav";
 import { Spinner } from "../components/ui/spinner/Spinner";
+import UserRegister from "./UserRegister";
+import getUser from "../function/getUser";
 console.log('user role manager uri4722@gamil.com password uri12345');
 
 function Login() {
+    const [isUserConnected, setIsUserConnected] = useState(getUser()?true:false);
+    const navigate = useNavigate();
+
+useEffect(() => {
+    setIsUserConnected(getUser()?true:false);
+    if(isUserConnected){
+        navigate("/MyAccount");
+    }} , [isUserConnected])
+
     const [login, setLogin] = useState({ email: "", password: "" });
     const [rememberMe, setRememberMe] = useState(false);
     const [message, setMessage] = useState({ body: "", type: "" });
-    const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+    const [registerDisplay, setRegisterDisplay] = useState(false);
 
     const handleChange = ({ target }) => {
         setLogin({ ...login, [target.name]: target.value });
@@ -78,14 +89,17 @@ return path;
     return (
         <>
             < HeaderNav />
-            {!isLoading ?
+            {!isLoading ?<>
                 <LoginUi
                     message={message}
                     user={login}
                     handleChange={handleChange}
                     handleSubmit={handleSubmit}
                     handleCheck={handleCheck}
+                    setRegisterDisplay={setRegisterDisplay}
                 />
+                {registerDisplay && <UserRegister setRegisterDisplay={setRegisterDisplay} setIsUserConnected={setIsUserConnected}/>}
+                </>
                 : <Spinner size={150}/>
             }
 

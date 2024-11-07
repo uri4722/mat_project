@@ -19,7 +19,7 @@ const {
     getPassedAwayByDate
 } = require('../dataAccess/dataAccess');
 const { tishreiToNissan, arrangeSqlDate } = require('./function');
-const { hash, validate, generateToken } = require('./authentication');
+const { hash, validate, generateToken, isEmailValid } = require('./authentication');
 const { TOKEN_EXPIRATION_TIME, ROLE_LEVELS, MASECHTOT_EPISODES, SDARIM } = require('../constants');
 
 
@@ -211,15 +211,35 @@ async function newMemorialProfileService(id, memorialProfile,res) {
     return "success";
 }
 
-async function newUserService({ name, password, email }) {
-    // authenticate user
+async function newUserService({ name, password, email },res) {
+    if (!name || !password || !email) {
+      return res.status(400).json({ message: 'Name, password, and email are required' });
+    }
+    // check if user already exists
+    const [user] = await getUser(email);
+    if (user) {
+        return  res.status(400).json({ message: "user already exists" });
+    }
+    // check if email is valid
+    if (!isEmailValid(email)) {
+        return  res.status(400).json({ message: 'Invalid email' });
+    }
+    if (password.length < 6) {
+        return res.status(400).json({ message: 'Password must be at least 6 characters' });
+    }
+    // encrypt password
+    const encryptedPassword = hash(password);
+
     const keys = ['name', 'password', 'email'];
-    const values = [name, password, email];
-    const ans = await newUser(keys, values);
-    console.log(ans);
-    return ans;
-
-
+    const values = [name, encryptedPassword, email];
+    try {
+        const ans = await newUser(keys, values);
+        const [userCreated] = await getUser(email);
+        userCreated.token = generateToken(userCreated);
+        return res.status(200).json(userCreated);
+    } catch (error) {
+        throw error;
+    }
 }
 
 async function newManagerService({ name, password, email, phone }) {

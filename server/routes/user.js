@@ -10,8 +10,7 @@ router.post('/register', async (req, res) => {
     const { body } = req;
 
     try {
-        const response = await newUserService(body);
-        res.status(200).json(response);
+        return response = await newUserService(body,res);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

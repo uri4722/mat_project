@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-function LoginUi({ user, handleChange, handleSubmit, handleCheck, message }) {
+function LoginUi({ user, handleChange, handleSubmit, handleCheck, message,setRegisterDisplay }) {
     return <div className="loginForm">
         <form onSubmit={handleSubmit}>
             <h1>התחברות</h1>
@@ -22,7 +22,7 @@ function LoginUi({ user, handleChange, handleSubmit, handleCheck, message }) {
             </div>
             <button>התחבר</button>
             {/* uri */}
-            <NavLink to={"/userRegister"} >להרשמה לאתר</NavLink>
+            <div className="register-link" onClick={()=> setRegisterDisplay(true)} >להרשמה לאתר</div>
             <NavLink to={"/managerRegister"} >ליצירת חשבון מנהל</NavLink>
         </form>
     </div >

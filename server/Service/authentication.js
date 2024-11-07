@@ -46,7 +46,12 @@ function generateToken(user) {
     return token;
 }
 
-module.exports = { hash, validate,generateToken};
+function isEmailValid(email) {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return emailRegex.test(email);
+}
+
+module.exports = { hash, validate,generateToken,isEmailValid};
 
 // const db = [{ email: "uri12@gmail.com", password: hash("uri123") }];
 // router.post("/signIn", (req, res) => {
