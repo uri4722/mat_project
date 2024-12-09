@@ -10,7 +10,13 @@ router.post('/register', async (req, res) => {
     const { body } = req;
 
     try {
-        return response = await newUserService(body,res);
+     userCreated = await newUserService(body,res);
+     console.log('userCreated',userCreated);
+     
+    if (!res.headersSent) {
+        return res.status(200).json(userCreated);
+    }
+
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

@@ -1,4 +1,4 @@
-const { insertRowSql, getRecordsSql, updateRowSql, deleteRawSql } = require("./basicFunction");
+const { insertRowSql, getRecordsSql, updateRowSql, deleteRawSql, insertManager } = require("./basicFunction");
 
 async function getPassedAway(id) {
     if (id) {
@@ -45,8 +45,8 @@ async function newStory(keys, values) {
 async function newUser(keys, values) {
     return await insertRowSql('users', keys, values);
 }
-async function newManager(keys, values) {
-    return await insertRowSql('managers', keys, values);
+async function newManager(valuesUser,valuesMangaer) {
+    return await insertManager(valuesUser,valuesMangaer);
 }
 
 // async function getManager(email) {

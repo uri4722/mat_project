@@ -15,9 +15,10 @@ function Login() {
     const navigate = useNavigate();
 
 useEffect(() => {
-    setIsUserConnected(getUser()?true:false);
+    let user = getUser();
+    setIsUserConnected(user ? true : false);
     if(isUserConnected){
-        navigate("/MyAccount");
+        navigate(whereToContinue(user.role));
     }} , [isUserConnected])
 
     const [login, setLogin] = useState({ email: "", password: "" });
@@ -48,7 +49,8 @@ useEffect(() => {
             try {
                 setIsLoading(true);
                 const user = await fetchLogin(login);
-
+                console.log(user);
+                
                 
                 rememberMe ?
                     localStorage.setItem('user', JSON.stringify(user)) :

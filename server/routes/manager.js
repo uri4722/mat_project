@@ -22,12 +22,7 @@ router.post('/register', async (req, res) => {
     console.log("post manager register");
     const { body } = req;
 
-    try {
-        const response = await newManagerService(body);
-        res.status(200).json(response);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+       return await newManagerService(body,res);
 })
 // router.post('/login', async (req, res) => {
 //     console.log("post manager login");

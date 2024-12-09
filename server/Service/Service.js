@@ -63,11 +63,13 @@ async function getPassedAwayByYahrzeitService() {
 }
 
 
-async function newPassedAwayService({ manager_id, name, year_death, month_death, day_death, about, age, lonely, soldier, rabbi, image }) {
+async function newPassedAwayService({ name, year_death, month_death, day_death, about, age, lonely, soldier, rabbi, image },userId) {
     const thousands = gematriyaStrToNum(year_death.slice(0, 1)) * 1000;
     const rest = gematriyaStrToNum(year_death.slice(1));
 
     year_death = thousands + rest;
+
+    const [{manager_id}] = await getManagerByUserId(userId);
 
     const keys = ['manager_id', 'name', 'year_death', 'month_death', 'day_death', 'about', 'age', 'lonely', 'soldier', 'rabbi', "img"];
     const values = [manager_id, name, year_death, month_death, day_death, about, age, lonely, soldier, rabbi, image];
@@ -236,27 +238,56 @@ async function newUserService({ name, password, email },res) {
         const ans = await newUser(keys, values);
         const [userCreated] = await getUser(email);
         userCreated.token = generateToken(userCreated);
-        return res.status(200).json(userCreated);
+        res.cookie('token', userCreated.token, {
+            // httpOnly: true,
+            maxAge: TOKEN_EXPIRATION_TIME * 1000,
+            // sameSite: 'strict',
+        });        
+        return userCreated;
     } catch (error) {
         throw error;
     }
 }
 
-async function newManagerService({ name, password, email, phone }) {
-//     // authenticate manager
+async function newManagerService({ name, password, email, phone },res) {
+    // authenticate manager
 
-//     const user = await getManager(email);
-//     if (user.length > 0) {
-//         throw { message: 'המשתמש כבר קיים במערכת' };
-//     } else {
-//         const encryptedPassword = hash(password);
-//         console.log(encryptedPassword);
-//         const keys = ['name', 'password', 'email', 'phone'];
-//         const values = [name, encryptedPassword, email, phone];
-//         const ans = await newManager(keys, values);
-//         console.log(ans);
-//         return ans;
-//     }
+    const [user] = await getUser(email);
+    console.log(user);
+    
+    if (user?.role === 'manager') {
+        return res.status(400).json({ message:  'המשתמש כבר מנהל' });
+    }else if (user) {
+        return res.status(400).json({ message: 'המייל כבר קיים במערכת' });
+    } 
+    else {
+        if (!isEmailValid(email)) {
+            return  res.status(400).json({ message: 'Invalid email' });
+        }
+        if (password.length < 6) {
+            return res.status(400).json({ message: 'Password must be at least 6 characters' });
+        }
+    
+        const encryptedPassword = hash(password);
+        const role = 'manager';
+        // in the future the first state will be 'pending'
+        const state = 'approved';
+        const valuesForUserT = [name, encryptedPassword, email, role];
+        const valuesForManagerT = [phone, state];
+        try {
+            await newManager(valuesForUserT, valuesForManagerT);
+            const [userCreated] = await getUser(email);
+            userCreated.token = generateToken(userCreated);      
+            res.cookie('token', userCreated.token, {
+                // httpOnly: true,
+                maxAge: TOKEN_EXPIRATION_TIME * 1000,
+                // sameSite: 'strict',
+            });                 
+            return res.status(200).json(userCreated);
+        } catch (error) {
+            return res.status(500).json({ message: error.message });
+        }
+    }
 
 }
 
@@ -290,11 +321,8 @@ async function loginUserService({ email, password },res) {
         }
 
 
-        const token = generateToken(user);
-    //   console.log("token",token);
-      
+        const token = generateToken(user,res);
         user.token = token;
-
            res.cookie('token', token, {
             // httpOnly: true,
             maxAge: TOKEN_EXPIRATION_TIME * 1000,
@@ -425,6 +453,8 @@ function findSeder(masechet) {
     }
     return null;
 }
+
+
 module.exports = {
     getPassedAwayService,
     newPassedAwayService,

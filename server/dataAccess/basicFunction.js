@@ -36,7 +36,28 @@ async function insertRowSql(table, columns, values) {
     }
     return row;
 }
+async function insertManager(userValues,managerValues) {
 
+    // transctions
+    const connection = await pool.getConnection();
+    connection.beginTransaction();
+    try {
+       const usersKeys = ['name','password','email', 'role'];
+       const newUser = await insertRowSql('users',usersKeys, userValues);
+       console.log(newUser);
+       
+       const managerKeys = ['user_id','phone', 'state'];
+       await insertRowSql('managers',managerKeys, [newUser.id,...managerValues]);
+       connection.commit();
+        
+    } catch (error) {
+        connection.rollback();
+        throw error;
+    } finally {
+        connection.release();
+    }
+return;
+}
 async function updateRowSql(table, pkName, columns, values, id) {
     const sql = `UPDATE ${table}
     SET ${columns.map((column) => `${column} = ?`).join(',')}
@@ -52,6 +73,8 @@ async function deleteRawSql(table, pkName, id) {
 
     return res;
 }
+
+
 
 // async function updateRaw(table, pkName, id, keyChange, valueChange) {
 //     const sql = `UPDATE ${table}
@@ -87,4 +110,4 @@ async function deleteRawSql(table, pkName, id) {
 
 // module.exports = { addRow, search, deleteRaw, updateRaw, userAuth }
 
-module.exports = { insertRowSql, getRecordsSql, updateRowSql, deleteRawSql }
+module.exports = { insertRowSql, getRecordsSql, updateRowSql, deleteRawSql,insertManager }

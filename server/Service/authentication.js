@@ -13,11 +13,11 @@ const maxmem = 129 * cost * blockSize
  * @returns {string} - hashed password with salt
  */
 function hash(password) {
-    console.log(`Password: ${password}`)
+    // console.log(`Password: ${password}`)
     const salt = crypto.randomBytes(32).toString("base64")
-    console.log(`salt: ${salt}`)
+    // console.log(`salt: ${salt}`)
     const hash = crypto.scryptSync(password, salt, 32, { cost, blockSize, maxmem }).toString("base64")
-    console.log(`hash: ${hash}`)
+    // console.log(`hash: ${hash}`)
     return `${hash}.${salt}`
 }
 
@@ -29,8 +29,8 @@ function hash(password) {
  * @returns {boolean}
  */
 function validate(password, hashedPassword) {
-    console.log(`Password: ${password}`)
-    console.log(`hashedPassword: ${hashedPassword}`);
+    // console.log(`Password: ${password}`)
+    // console.log(`hashedPassword: ${hashedPassword}`);
     
     const [hash, salt] = hashedPassword.split(".");
     return hash === crypto.scryptSync(password, salt, 32, { cost, blockSize, maxmem }).toString("base64")
@@ -39,10 +39,11 @@ function validate(password, hashedPassword) {
 function generateToken(user) {
         
     const token = jwt.sign(
-        { id: user.user_id, role: user.role,stateManager:user.stateManager ? user.stateManager:null },
+        { id: user.user_id, role: user.role,stateManager:user.stateManager ? user.stateManager:'approved' },
         process.env.JWT_SECRET,
         { expiresIn: TOKEN_EXPIRATION_TIME + 's' }
     );
+    
     return token;
 }
 

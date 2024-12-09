@@ -39,7 +39,7 @@ CREATE TABLE `stores`(
     `user_id` INT UNSIGNED NOT NULL,
     `passed_away_id` INT UNSIGNED NOT NULL,
     `title` VARCHAR(255) NOT NULL,
-    `story` VARCHAR(255) NOT NULL
+    `story` TEXT NOT NULL
 );
 
 

@@ -29,16 +29,16 @@ function ProfileCard({ profile, countMishnaiot }) {
 
         <div className='grid-item3'>
             <h5> סך המסכתות שנלמדו </h5>
-            <p>{mishnaiot && countMishnaiot.masechtot}</p>
+            <p>{mishnaiot && countMishnaiot && countMishnaiot.masechtot}</p>
         </div>
         <div className='grid-item3'>
             <h5> מתוך</h5>
-            <p>{mishnaiot && countMishnaiot.sdarim}</p>
+            <p>{mishnaiot && countMishnaiot && countMishnaiot.sdarim}</p>
             <h5>סדרים</h5>
         </div>
         <div className='grid-item3'>
             <h5> סך הפרקים שנלמדו </h5>
-            <p>{mishnaiot && countMishnaiot.numEps}</p>
+            <p>{mishnaiot && countMishnaiot && countMishnaiot.numEps}</p>
         </div>
     </div>
         <Divider orientation="horizontal" sx={{ width: "80%" }} />

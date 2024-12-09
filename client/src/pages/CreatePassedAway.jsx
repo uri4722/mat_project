@@ -32,7 +32,7 @@ function CreatePassedAway({ heDates }) {
         lonely: false,
         soldier: false,
         rabbi: false,
-        manager_id: manager?.user_id
+        // manager_id: manager?.user_id
         
 
     });
