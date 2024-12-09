@@ -11,8 +11,8 @@ export default function SelectIndicator({ handleSelect, op, opValues, placeholde
                 width: 160,
                 margin: "0 10px",
             }}
-
             onChange={(event, value) => handleSelect(value)}
+            // onClose	={(event, value) => handleSelect(value)}
         >
             {op.map((option, index) => (
                 <Option key={option} value={opValues[index]}>

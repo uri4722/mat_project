@@ -57,8 +57,14 @@ console.log(manager);
 
 
     const getPassedAwayArray = async (id) => {
-        const data = await getManagerPassedAwayApi(id);
-        setPassedAwayArray(data);
+        try {
+            const data = await getManagerPassedAwayApi(id);
+            setPassedAwayArray(data);
+            
+        } catch (error) {
+            console.log("error :",error);
+            
+        }
     }
 
     useEffect(() => {

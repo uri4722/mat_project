@@ -29,7 +29,9 @@ function Home() {
 
 
     const handleSearch = (searchValue) => {
-        const searchResult = displayPassedAway.filter(passed => passed.name.toLowerCase().includes(searchValue.toLowerCase()));
+        console.log('searchValue = ', searchValue);
+        
+        const searchResult = passedAwayArray.filter(passed => passed.name.toLowerCase().includes(searchValue.toLowerCase()));
         setDisplayPassedAway(searchResult);
     }
 
@@ -60,6 +62,10 @@ function Home() {
         setDisplayPassedAway(selectResult);
     }
     const handleSort = (selectValue) => {
+        console.log(selectValue);
+        
+        console.log("handleSort");
+        
         let newSort = displayPassedAway.map(obj => ({ ...obj }));
         let compareFunction;
         switch (selectValue) {
@@ -68,8 +74,9 @@ function Home() {
                 compareFunction = (a, b) => a.name.localeCompare(b.name);
                 break;
             case "Random":
-                compareFunction = () => Math.random() - 0.5;
-                break;
+                newSort = newSort.map(obj => ({ ...obj, randomKey: Math.random() }));
+                compareFunction = (a, b) => a.randomKey - b.randomKey;
+                break;                
             case "youngest":
                 compareFunction = (a, b) => a.age - b.age;
                 break;

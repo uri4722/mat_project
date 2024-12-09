@@ -114,11 +114,15 @@ function MemorialProfile() {
             try {
                 const ans = await createMemorialProfileApi(id, takeCommitmentInput);
                 console.log(ans);
-                setPassedAway({ ...passedAway, stores: [...passedAway.stores, ans.stores] });
-                        setPassedAway({ ...passedAway, mishnaiot: updateMishnioat(passedAway.mishnaiot, ans.masechtot) });
+                setPassedAway({ 
+                    ...passedAway, 
+                    stores: [...passedAway.stores, ans.story],
+                    mishnaiot: updateMishnioat(passedAway.mishnaiot, ans.masechtot) 
+                });
                         setMessage({ body: " תודה רבה ", type: "success" });
                         setTimeout(() => {
                             setTakeCommitmentInput({ ...takeCommitmentInput, masechtot: [], story: { title: "", story: "" } });
+                            setMessage({ body: "", type: "" });
                         }, 2000)
                     } catch (error) {
                         console.log(error.message);

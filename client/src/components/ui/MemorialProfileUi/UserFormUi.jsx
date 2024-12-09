@@ -5,6 +5,8 @@ import './css/userFormUi.css'
 import { Link } from "@mui/joy";
 
 function UserFormUi({ user, isUserConnected, handleChangeInput, handleSubmit, message, setRegisterDisplay }) {
+    console.log(message);
+    
     return <div className="formContiner">
 
         <div className="form-send">
@@ -38,9 +40,9 @@ function UserFormUi({ user, isUserConnected, handleChangeInput, handleSubmit, me
                     onChange={handleChangeInput}
                 /></>
             }
-            <Button onClick={handleSubmit} color="success" size="sm">{!isUserConnected?"התחברות":"לאישור"}</Button>
+           {(!isUserConnected || (isUserConnected && !message.body)) && <Button onClick={handleSubmit} color="success" size="sm">{!isUserConnected?"התחברות":"לאישור"}</Button>}
         </div>
-        <Link color="success" onClick={() => setRegisterDisplay(true)}>לא רשום עדין</Link>
+        {!isUserConnected && <Link color="success" onClick={() => setRegisterDisplay(true)}>לא רשום עדין</Link>}
     </div>
 }
 export default UserFormUi;
