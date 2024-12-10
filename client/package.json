@@ -7,6 +7,7 @@
     "@emotion/styled": "^11.11.0",
     "@fontsource/inter": "^5.0.15",
     "@hebcal/core": "^5.0.4",
+    "@hebcal/hdate": "^0.12.0",
     "@mui/joy": "^5.0.0-beta.17",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",

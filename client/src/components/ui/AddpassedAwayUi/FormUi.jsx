@@ -1,17 +1,4 @@
-// CREATE TABLE `passed_away`(
-//     `passed_away_id` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-//     `manager_id` INT NOT NULL,
-//     `name` VARCHAR(255) NOT NULL,
-//     `year_death` INT NOT NULL,
-//     `month_death` INT NOT NULL,
-//     `day_death` INT NOT NULL,
-//     `about` VARCHAR(255) NULL,
-//     `img` VARCHAR(255)  NULL,
-//     `lonely` TINYINT(1) NULL DEFAULT 0,
-//     `soldier` TINYINT(1) NULL DEFAULT 0,
-//     `rabbi` TINYINT(1) NULL DEFAULT 0,
-//     `age` INT NULL
-// );
+
 import SelectHeDates from './SelectHeDates';
 import './css/formUi.css';
 

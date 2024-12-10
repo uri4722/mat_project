@@ -1,14 +1,19 @@
 
 import convertTishreiToNissan from '../../../function/convertTishreiToNissan';
 import './css/selectHeDates.css';
+// import { HDate } from '@hebcal/core';
+
+import {HDate} from '@hebcal/hdate';
 
 
 function SelectHeDates({ handleChange, heDates, yearSelected }) {
-    // console.log(HDate.isLeapYear(5784));
-    // console.log(yearSelected);
     
-    const { yearOptions, monthsOptions, dayOptions } = heDates
+   const yearToNum = HDate.fromGematriyaString('א אלול ' + yearSelected.substring(1)).yy;
+   const isLeapYear = HDate.isLeapYear(yearToNum);
 
+    
+    const { yearOptions, monthsOptions, dayOptions ,monthsLapYearOptions} = heDates
+    const month = isLeapYear ? monthsLapYearOptions : monthsOptions;
 
     return (<>
         <div className='dateContiner'>
@@ -22,7 +27,7 @@ function SelectHeDates({ handleChange, heDates, yearSelected }) {
             </select>
 
             <select name="month_death" className='month_death' onChange={handleChange}>
-                {monthsOptions.map((month, index) => {
+                {month.map((month, index) => {
                     return <option key={index} value={convertTishreiToNissan(index) + 1}>{month}</option>
                 })}
             </select>
